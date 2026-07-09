@@ -206,6 +206,8 @@ kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-b
 .feat h3 .chip-ic{width:36px;height:36px;border-radius:11px}
 .feat h3 .chip-ic svg{width:18px;height:18px}
 .feat p{color:var(--muted);font-size:15.5px;max-width:28em}
+/* 避免正文末行孤字（如「关掉。」单独一行）：均衡分配各行长度 */
+.hero-sub,.sec-sub,.feat p,.priv-card p,.cta-final p{text-wrap:balance}
 .feat ul{list-style:none;margin-top:16px;display:grid;gap:9px}
 .feat li{display:flex;gap:9px;align-items:baseline;font-size:14.5px;color:var(--muted)}
 .feat li::before{content:"·";font-weight:900;color:var(--accent)}
