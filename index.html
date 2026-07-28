@@ -155,42 +155,16 @@ h1 .hero-accent{color:var(--accent)}
 
 /* 产品窗口 mock（navigation.html 真实界面缩影） */
 .hero-shot{position:relative}
-.win{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+.win{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;
   box-shadow:0 44px 90px -34px rgba(21,27,43,.42),0 14px 34px -14px rgba(21,27,43,.18)}
 .win-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:var(--wash);border-bottom:1px solid var(--line)}
 .win-bar .wd{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 .wd.r{background:#ff5f57}.wd.y{background:#febc2e}.wd.g{background:#28c840}
 .win-url{margin-left:10px;flex:1;min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.win-body{display:grid;grid-template-columns:170px 1fr;min-height:344px}
-.win-side{background:var(--paper);border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:2px}
-.side-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;color:var(--ink);padding:4px 8px 12px}
-.side-brand .logo-mark{width:22px;height:22px;border-radius:6px;box-shadow:none}
-.side-brand .logo-mark svg{width:11px;height:11px}
-.side-item{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:9px;font-size:12px;color:var(--sub)}
-.side-item .chip-ic{width:22px;height:22px;border-radius:6px}
-.side-item .chip-ic svg{width:12px;height:12px}
-.side-item .lbl{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.side-item .ct{font-family:var(--mono);font-size:10.5px;color:var(--faint);flex-shrink:0}
-.side-item.active{background:rgba(46,123,255,.12);color:var(--accent);font-weight:600}
-.side-item.active .ct{color:var(--accent)}
-.win-main{position:relative;background:var(--wash);padding:16px}
-.win-search{display:flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:12px;color:var(--faint);margin-bottom:13px}
-.win-search svg{width:14px;height:14px;flex-shrink:0}
-.shot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
-.scard{background:var(--paper);border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:0 4px 14px -6px rgba(21,27,43,.12)}
-.scard .prev{height:54px}
-.scard .meta{display:flex;align-items:center;gap:8px;padding:8px 10px}
-.scard .fav{width:15px;height:15px;border-radius:4px;flex-shrink:0}
-.scard .t{font-weight:700;font-size:11.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.scard .d{font-size:9.5px;color:var(--faint)}
-/* 「刚收藏 Midjourney，已自动归类」浮层：压在首行卡片的预览区上，不遮标题 */
-.shot-tip{position:absolute;left:26px;top:66px;display:flex;align-items:center;gap:8px;background:var(--paper);
-  border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:11.5px;font-weight:600;color:var(--ink);
-  box-shadow:0 12px 30px -8px rgba(21,27,43,.28);z-index:3;animation:tipFloat 3.4s ease-in-out infinite}
-.shot-tip .fav{width:14px;height:14px;border-radius:4px;flex-shrink:0}
-.shot-tip .tag{font-family:var(--mono);font-size:9.5px;font-weight:600;color:#0a7a5f;background:rgba(16,163,127,.14);border-radius:6px;padding:2px 7px}
-@keyframes tipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
+/* 真实截图：窗口比列更宽、向右延伸出画面（右侧本来就是留白），
+   这样同样的清晰度能多露一列多卡片；高度切在第三行卡片下沿 */
+.win{width:780px;max-height:444px}
+.win-shot{width:100%;height:auto;display:block}
 /* 首屏元素依次升起 */
 .rise{opacity:0;transform:translateY(26px);animation:rise .9s cubic-bezier(.16,1,.3,1) forwards;animation-delay:var(--d,0s)}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -283,11 +257,11 @@ h2{font-size:clamp(30px,3.9vw,46px);line-height:1.16;font-weight:700;letter-spac
 @keyframes dtIn{from{opacity:0;transform:translateY(22px) scale(.94)}to{opacity:1;transform:none}}
 
 /* 预览图 = 迷你网页骨架：浅品牌色底 + 白色页面 + 骨架线，读作真实截图 */
-.dtile .prev,.scard .prev,.mcard-prev{position:relative;overflow:hidden;
+.dtile .prev,.mcard-prev{position:relative;overflow:hidden;
   background:linear-gradient(150deg,color-mix(in srgb,var(--b,#8AB4F8) 26%,#fff),color-mix(in srgb,var(--b,#8AB4F8) 9%,#fff))}
-.dtile .prev::before,.scard .prev::before,.mcard-prev::before{content:"";position:absolute;left:12px;right:12px;top:11px;bottom:-6px;
+.dtile .prev::before,.mcard-prev::before{content:"";position:absolute;left:12px;right:12px;top:11px;bottom:-6px;
   background:#fff;border-radius:5px 5px 0 0;box-shadow:0 3px 14px rgba(15,23,42,.12)}
-.dtile .prev::after,.scard .prev::after,.mcard-prev::after{content:"";position:absolute;left:22px;right:22px;top:20px;bottom:0;
+.dtile .prev::after,.mcard-prev::after{content:"";position:absolute;left:22px;right:22px;top:20px;bottom:0;
   background:
     linear-gradient(color-mix(in srgb,var(--b,#8AB4F8) 78%,#fff) 0 0) no-repeat 0 0/24% 5px,
     linear-gradient(#E8ECF3 0 0) no-repeat 0 13px/94% 4px,
@@ -490,6 +464,7 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
   /* minmax(0,1fr)：否则产品 mock 的 min-content 会把网格轨道撑到超出视口，右侧内容被裁 */
   .hero-in{grid-template-columns:minmax(0,1fr);gap:40px}
   .hero-copy,.hero-shot{min-width:0}
+  .win{width:auto}
   .hero-copy{max-width:600px}
   .hero-sub{max-width:none}
   .dwall{grid-template-columns:repeat(3,1fr)}
@@ -509,12 +484,9 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
   .lang-btn{padding:5px 10px}
   .all-grid{grid-template-columns:1fr}
   .mcard-grid{grid-template-columns:1fr 1fr}
-  /* 手机上侧栏只剩「所…」「常用…」这种截断标签，不如去掉，把宽度让给卡片 */
-  .win-body{grid-template-columns:1fr;min-height:0}
-  .win-side{display:none}
   .win-url{font-size:9.5px}
-  .shot-grid{grid-template-columns:repeat(2,1fr)}
-  .shot-tip{left:14px;top:58px;font-size:10.5px;padding:6px 10px;white-space:nowrap}
+  .win{max-height:320px}
+  .win-shot{width:260%}
   .dwall{grid-template-columns:1fr 1fr}
   .hero{padding:52px 0 60px}
   .section{padding:72px 0}
@@ -522,8 +494,7 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .rise{opacity:1;transform:none;animation:none}
-  .side-item,.mcard{opacity:1;transform:none;transition:none}
-  .shot-tip{animation:none}
+  .mcard{opacity:1;transform:none;transition:none}
   .reveal{opacity:1;transform:none;transition:none}
   .caret{animation:none}
   .omni-star-wrap::after{animation:none;opacity:0}
@@ -574,41 +545,20 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
       </div>
     </div>
 
-    <!-- 产品窗口：navigation.html 真实界面缩影 -->
-    <div class="hero-shot rise" style="--d:.24s" aria-hidden="true">
+    <!-- 产品窗口：navigation.html 的真实截图（源图 og-src/shot-ai-tools.png，裁左侧 1200px） -->
+    <div class="hero-shot rise" style="--d:.24s">
       <div class="win">
-        <div class="win-bar">
+        <div class="win-bar" aria-hidden="true">
           <span class="wd r"></span><span class="wd y"></span><span class="wd g"></span>
           <div class="win-url">chrome-extension://bookmark-manager/navigation.html</div>
         </div>
-        <div class="win-body">
-          <aside class="win-side">
-            <div class="side-brand"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12a2 2 0 0 1 2 2v18l-8-5-8 5V4a2 2 0 0 1 2-2z"/></svg></span><span data-i18n="brand">书签管理器</span></div>
-            <div class="side-item active"><span class="chip-ic" style="background:rgba(46,123,255,.14);color:#2e7bff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></span><span class="lbl" data-i18n="m_all">所有书签</span><span class="ct">646</span></div>
-            <div class="side-item"><span class="chip-ic" style="background:rgba(245,165,36,.16);color:#d97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span class="lbl" data-i18n="m_freq">常用书签</span><span class="ct">12</span></div>
-            <div class="side-item"><span class="chip-ic" style="background:rgba(236,72,153,.13);color:#ec4899"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></span><span class="lbl" data-i18n="m_design">设计资源</span><span class="ct">37</span></div>
-            <div class="side-item"><span class="chip-ic" style="background:rgba(6,182,212,.14);color:#06b6d4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></span><span class="lbl" data-i18n="m_ai">AI 工具</span><span class="ct">82</span></div>
-            <div class="side-item"><span class="chip-ic" style="background:rgba(249,115,22,.14);color:#f97316"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="lbl" data-i18n="m_biz">商务外贸</span><span class="ct">118</span></div>
-            <div class="side-item"><span class="chip-ic" style="background:rgba(99,102,241,.14);color:#6366f1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></svg></span><span class="lbl" data-i18n="m_code">编程开发</span><span class="ct">169</span></div>
-            <div class="side-item"><span class="chip-ic" style="background:rgba(136,145,166,.16);color:#8891a6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span class="lbl" data-i18n="m_unc">未分类</span><span class="ct">3</span></div>
-          </aside>
-          <main class="win-main">
-            <div class="win-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span data-i18n="m_search">搜索所有书签…</span></div>
-            <div class="shot-grid">
-              <div class="scard"><div class="prev" style="--b:#4285f4"></div><div class="meta"><span class="fav" style="background:#4285f4"></span><div style="min-width:0"><div class="t">Figma</div><div class="d">figma.com</div></div></div></div>
-              <div class="scard"><div class="prev" style="--b:#3b4252"></div><div class="meta"><span class="fav" style="background:#0d1117"></span><div style="min-width:0"><div class="t">GitHub</div><div class="d">github.com</div></div></div></div>
-              <div class="scard"><div class="prev" style="--b:#10a37f"></div><div class="meta"><span class="fav" style="background:#10a37f"></span><div style="min-width:0"><div class="t">ChatGPT</div><div class="d">chatgpt.com</div></div></div></div>
-              <div class="scard"><div class="prev" style="--b:#ff6a00"></div><div class="meta"><span class="fav" style="background:#ff6a00"></span><div style="min-width:0"><div class="t">Alibaba</div><div class="d">alibaba.com</div></div></div></div>
-              <div class="scard"><div class="prev" style="--b:#7c4dff"></div><div class="meta"><span class="fav" style="background:#7c4dff"></span><div style="min-width:0"><div class="t">Claude</div><div class="d">claude.ai</div></div></div></div>
-              <div class="scard"><div class="prev" style="--b:#ea4c89"></div><div class="meta"><span class="fav" style="background:#ea4c89"></span><div style="min-width:0"><div class="t">Dribbble</div><div class="d">dribbble.com</div></div></div></div>
-            </div>
-            <div class="shot-tip"><span class="fav" style="background:#10a37f"></span><span data-i18n="shot_tip">Midjourney 已收藏</span><span class="tag" data-i18n="shot_tag">AI 工具</span></div>
-          </main>
-        </div>
+        <img class="win-shot" src="hero-shot.jpg" width="1200" height="700" fetchpriority="high" decoding="async"
+             alt="书签管理器的导航页：左侧是自动分好的分类，「AI 工具」下有 47 个书签，右侧是带网页预览的书签网格">
       </div>
     </div>
   </div>
 </header>
+
 
 <!-- ══ 信任条 ═══════════════════════════════════════════════════════ -->
 <div class="trust-strip">
@@ -1066,10 +1016,8 @@ const EN = {
   hero_eyebrow:'CHROME EXTENSION · FREE',
   hero_h1:'Your bookmarks,<br><span class="hero-accent">organized for you</span>',
   hero_sub:'Chrome’s bookmark menu has no search, and new saves sink to the bottom. This adds it: type a keyword to find any bookmark, auto-sorted, with one-click cleanup.',
-  shot_tip:'Midjourney saved', shot_tag:'AI Tools',
   hero_cta:'Add to Chrome, free', hero_cta2:'See how it looks',
   trust1:'All data stays local', trust2:'No account needed', trust3:'English & Chinese', trust4:'Zero learning curve',
-  m_brand:'Bookmarks', m_all:'All Bookmarks', m_freq:'Frequent', m_design:'Design', m_ai:'AI Tools', m_biz:'Business', m_code:'Code', m_unc:'Uncategorized', m_search:'Search all bookmarks…',
   why_h2:'Still <span class="hl">digging through</span> Chrome’s bookmark menu every day?',
   cm_title:'Chrome › Bookmarks',
   cm1:'Frontend framework docs',
