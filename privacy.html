@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>隐私政策 · Privacy Policy — 书签管理器 Pro</title>
-<meta name="description" content="书签管理器 Pro 隐私政策：数据全部本地存储，无账号、无追踪、不上传。Privacy policy for Bookmark Manager Pro.">
+<meta name="description" content="书签管理器 Pro 隐私政策：核心数据本地存储、无账号、无追踪；网页预览截图为唯一外部请求，可一键关闭。Privacy policy for Bookmark Manager Pro.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234285f4'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3Cpath d='M8 5h8a1 1 0 0 1 1 1v13l-5-3-5 3V6a1 1 0 0 1 1-1z' fill='%23fff'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -52,21 +52,21 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
 
 <header class="page wrap">
   <h1>隐私政策</h1>
-  <div class="date">生效日期：2026-07-03 · Effective date: July 3, 2026</div>
+  <div class="date">生效日期：2026-07-30 · Effective date: July 30, 2026</div>
   <p class="lang-jump">中文在前，<a href="#en">English version below ↓</a></p>
 </header>
 
 <!-- ══ 中文 ══════════════════════════════════════════════════════════ -->
 <section class="wrap">
   <span class="tag">简体中文</span>
-  <p><b>一句话总结：书签管理器 Pro（下称"本扩展"）是一个纯本地工具。我们没有服务器、没有账号系统，不收集、不上传、不出售你的任何数据。</b></p>
+  <p><b>一句话总结：书签管理器 Pro（下称"本扩展"）是一个本地优先工具。开发者没有后端服务器、账号系统或分析服务；唯一的外部请求是生成网页预览截图（可一键关闭），以及你主动点击"检测失效链接"时的检测请求。</b></p>
 
-  <h2>1. 我们收集哪些数据</h2>
-  <p>不收集。本扩展没有任何后端服务器，开发者无法接触到你的任何数据。以下信息仅保存在<b>你自己浏览器的本地存储</b>（chrome.storage.local）中，用于实现功能：</p>
+  <h2>1. 本地保存的数据</h2>
+  <p>开发者不收集这些数据。本扩展没有后端服务器，开发者无法读取以下仅保存在<b>你自己浏览器本地存储</b>（chrome.storage.local）中的信息：</p>
   <ul>
     <li>你手动设置的书签分类；</li>
     <li>在本扩展中打开书签的次数与时间（用于"常用书签"排序）；</li>
-    <li>界面偏好：主题、显示密度、排序方式、是否显示网页预览。</li>
+    <li>界面偏好：主题、显示密度、排序方式、网页预览开关、新标签页接管开关。</li>
   </ul>
   <p>书签本身由 Chrome 浏览器管理，本扩展只是读取和（在你操作时）修改它们。卸载本扩展后，上述本地数据会被 Chrome 自动清除，你的书签不受影响。</p>
 
@@ -74,23 +74,25 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   <table>
     <tr><th>权限</th><th>用途</th></tr>
     <tr><td>bookmarks</td><td>读取和管理你的 Chrome 书签——这是本扩展的核心功能（展示、搜索、移动、编辑、删除、排序）。</td></tr>
-    <tr><td>storage</td><td>在本地保存你的分类和界面偏好（见第 1 条）。</td></tr>
-    <tr><td>history</td><td>读取最近 30 天的访问次数，在本地计算"常用书签"排序。历史记录不会离开你的浏览器。</td></tr>
+    <tr><td>storage</td><td>在本地保存你的分类、扩展内点击记录和界面偏好（见第 1 条）。</td></tr>
     <tr><td>favicon</td><td>从 Chrome 本地的图标缓存读取网站图标用于展示，零网络请求。</td></tr>
-    <tr><td>s0.wp.com</td><td>获取网页预览截图（见第 3 条），可关闭。</td></tr>
-    <tr><td>可选：所有网站</td><td>仅当你主动点击"检测失效链接"时，扩展会请求此权限，用于逐个访问你的书签网址以检查其是否仍然有效。不点击该功能，此权限不会被申请。</td></tr>
+    <tr><td>s0.wp.com</td><td>获取网页预览截图（见第 3 条），可在导航页顶栏一键关闭。</td></tr>
+    <tr><td>chrome_url_overrides（新标签页）</td><td>把新标签页替换为书签导航页，默认开启，可在导航页顶栏一键关闭（关闭后新标签页显示 Google 首页）。</td></tr>
+    <tr><td>可选：所有网站</td><td>仅当你主动点击"检测失效链接"时申请，用于逐个访问当前范围内的书签网址。不点击该功能，此权限不会被申请。</td></tr>
   </table>
 
   <h2>3. 第三方服务：网页预览截图</h2>
-  <p>预览网格中的网站截图由 WordPress.com 的公开截图服务（mShots，域名 s0.wp.com，由 Automattic 公司运营）生成。启用该功能时，<b>你的书签网址</b>会被发送给该服务以生成对应截图；截图结果缓存在你的浏览器本地。该服务受 <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic 隐私政策</a>约束。</p>
-  <p>如果你不希望发送任何书签网址：在导航页「更多」菜单中点击<b>「隐藏网页预览」</b>即可完全关闭此功能，此后本扩展不会发出任何外部网络请求。</p>
+  <p>网页预览<b>默认开启</b>。当书签卡片接近可视区域时，<b>对应书签网址</b>会发送给 WordPress.com 的公开截图服务 mShots（域名 s0.wp.com，由 Automattic 运营）以生成截图；结果缓存在你的浏览器本地。该服务受 <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic 隐私政策</a>约束。</p>
+  <p>如果你不希望发送任何书签网址：在导航页顶栏点击<b>「预览：开」</b>把它切换为「预览：关」即可完全停用，卡片变为纯文字。之后只有你另行主动启动"检测失效链接"时，扩展才会访问书签网址。</p>
 
   <h2>4. 我们不做的事</h2>
   <ul>
-    <li>不收集、不上传、不出售、不共享任何个人数据；</li>
+    <li>开发者不接收、不出售、不共享你的书签、分类或点击记录；</li>
     <li>不接入任何统计 / 分析 / 广告 SDK；</li>
-    <li>不要求注册账号，不设置任何跟踪标识。</li>
+    <li>不要求注册账号，不设置任何跟踪标识；</li>
+    <li>不会将 Chrome API 数据用于广告、信用评估或与核心功能无关的用途。</li>
   </ul>
+  <p>本扩展对从 Chrome API 获得的信息的使用遵守 <a href="https://developer.chrome.com/docs/webstore/program-policies/user-data-faq" target="_blank" rel="noopener">Chrome 网上应用店用户数据政策</a>，包括 Limited Use（有限使用）要求。</p>
 
   <h2>5. 数据删除</h2>
   <p>卸载本扩展即删除其全部本地数据（Chrome 自动完成）。你的书签是 Chrome 的数据，不会因卸载本扩展而改变。</p>
@@ -104,14 +106,14 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
 <!-- ══ English ═══════════════════════════════════════════════════════ -->
 <section class="wrap">
   <span class="tag">ENGLISH</span>
-  <p><b>In one sentence: Bookmark Manager Pro ("the Extension") is a local-only tool. There are no servers and no accounts; we do not collect, transmit, or sell any of your data.</b></p>
+  <p><b>In one sentence: Bookmark Manager Pro ("the Extension") is local-first. The developer has no backend, account system, or analytics service. The only external requests are preview screenshots (which you can switch off with one click) and the checks you start yourself with "Check dead links".</b></p>
 
-  <h2>1. What data we collect</h2>
-  <p>None. The Extension has no backend, and the developer has no access to your data. The following is stored <b>only in your own browser's local storage</b> (chrome.storage.local) to make features work:</p>
+  <h2>1. Data stored locally</h2>
+  <p>The developer does not collect this data. The Extension has no backend, so the developer cannot access the following information stored <b>only in your browser's local storage</b> (chrome.storage.local):</p>
   <ul>
     <li>Categories you assign to bookmarks manually;</li>
     <li>How often and when you open bookmarks through the Extension (powers "Frequent" sorting);</li>
-    <li>Interface preferences: theme, display density, sort order, preview on/off.</li>
+    <li>Interface preferences: theme, display density, sort order, preview on/off, new-tab takeover on/off.</li>
   </ul>
   <p>Your bookmarks themselves are managed by Chrome; the Extension only reads them and modifies them when you act. Uninstalling the Extension removes all of the local data above (handled by Chrome); your bookmarks are unaffected.</p>
 
@@ -119,23 +121,25 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   <table>
     <tr><th>Permission</th><th>Why it's needed</th></tr>
     <tr><td>bookmarks</td><td>Read and manage your Chrome bookmarks — the core purpose of the Extension (display, search, move, edit, delete, reorder).</td></tr>
-    <tr><td>storage</td><td>Save your categories and preferences locally (see section 1).</td></tr>
-    <tr><td>history</td><td>Read visit counts from the last 30 days to rank "Frequent" bookmarks, computed locally. Your history never leaves your browser.</td></tr>
+    <tr><td>storage</td><td>Save categories, clicks recorded inside the Extension, and preferences locally (see section 1).</td></tr>
     <tr><td>favicon</td><td>Show site icons from Chrome's local favicon cache — zero network requests.</td></tr>
-    <tr><td>s0.wp.com</td><td>Fetch preview screenshots (see section 3). Can be turned off.</td></tr>
+    <tr><td>s0.wp.com</td><td>Fetch preview screenshots (see section 3); switchable off in the grid header.</td></tr>
+    <tr><td>chrome_url_overrides (new tab)</td><td>Replace the new tab page with the bookmark navigation page. On by default; one click in the grid header turns it off (new tabs then open the Google homepage).</td></tr>
     <tr><td>Optional: all sites</td><td>Requested only when you click "Check dead links", so the Extension can request each bookmarked URL to verify it still works. If you never use that feature, this permission is never requested.</td></tr>
   </table>
 
   <h2>3. Third-party service: preview screenshots</h2>
-  <p>Website screenshots in the preview grid are generated by WordPress.com's public screenshot service (mShots, domain s0.wp.com, operated by Automattic). When this feature is on, <b>your bookmark URLs</b> are sent to that service to generate screenshots; results are cached locally in your browser. The service is governed by <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic's privacy policy</a>.</p>
-  <p>If you prefer not to send any bookmark URLs: choose <b>"Hide Page Previews"</b> in the "More" menu. After that, the Extension makes no external network requests at all.</p>
+  <p>Page previews are <b>on by default</b>. As a bookmark card approaches the visible area, its <b>URL</b> is sent to WordPress.com's public mShots screenshot service (s0.wp.com, operated by Automattic) to generate the screenshot; the result is cached locally in your browser. The service is governed by <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic's privacy policy</a>.</p>
+  <p>If you'd rather send no bookmark URLs at all, click <b>"Preview: On"</b> in the grid header to switch it to "Preview: Off" — screenshot requests stop entirely and cards become text-only. The Extension will then contact bookmarked sites only if you separately start a dead-link scan.</p>
 
   <h2>4. What we never do</h2>
   <ul>
-    <li>No collecting, uploading, selling, or sharing of personal data;</li>
+    <li>The developer does not receive, sell, or share your bookmarks, categories, or click records;</li>
     <li>No analytics, telemetry, or advertising SDKs;</li>
-    <li>No accounts, no tracking identifiers.</li>
+    <li>No accounts or tracking identifiers;</li>
+    <li>No use of Chrome API data for advertising, credit assessment, or purposes unrelated to the Extension's core features.</li>
   </ul>
+  <p>The Extension's use of information received from Chrome APIs adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/user-data-faq" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a>, including the Limited Use requirements.</p>
 
   <h2>5. Data deletion</h2>
   <p>Uninstalling the Extension deletes all of its local data (Chrome handles this automatically). Your bookmarks belong to Chrome and are not affected.</p>
