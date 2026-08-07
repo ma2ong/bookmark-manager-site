@@ -52,7 +52,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
 
 <header class="page wrap">
   <h1>隐私政策</h1>
-  <div class="date">生效日期：2026-07-30 · Effective date: July 30, 2026</div>
+  <div class="date">生效日期：2026-08-07 · Effective date: August 7, 2026</div>
   <p class="lang-jump">中文在前，<a href="#en">English version below ↓</a></p>
 </header>
 
@@ -65,7 +65,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   <p>开发者不收集这些数据。本扩展没有后端服务器，开发者无法读取以下仅保存在<b>你自己浏览器本地存储</b>（chrome.storage.local）中的信息：</p>
   <ul>
     <li>你手动设置的书签分类；</li>
-    <li>在本扩展中打开书签的次数与时间（用于"常用书签"排序）；</li>
+    <li>打开书签的次数与时间（用于"常用书签"排序）；</li>
     <li>界面偏好：主题、显示密度、排序方式、网页预览开关、新标签页接管开关。</li>
   </ul>
   <p>书签本身由 Chrome 浏览器管理，本扩展只是读取和（在你操作时）修改它们。卸载本扩展后，上述本地数据会被 Chrome 自动清除，你的书签不受影响。</p>
@@ -74,8 +74,9 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   <table>
     <tr><th>权限</th><th>用途</th></tr>
     <tr><td>bookmarks</td><td>读取和管理你的 Chrome 书签——这是本扩展的核心功能（展示、搜索、移动、编辑、删除、排序）。</td></tr>
-    <tr><td>storage</td><td>在本地保存你的分类、扩展内点击记录和界面偏好（见第 1 条）。</td></tr>
+    <tr><td>storage</td><td>在本地保存你的分类、书签打开次数和界面偏好（见第 1 条）。</td></tr>
     <tr><td>favicon</td><td>从 Chrome 本地的图标缓存读取网站图标用于展示，零网络请求。</td></tr>
+    <tr><td>webNavigation</td><td>识别你从 Chrome 书签栏或地址栏打开了哪条书签，用于"常用书签"排序。本扩展只读取导航的<b>目标网址和来源类型</b>，且只在网址与你已收藏的书签匹配时把该书签的计数 +1；其余网址一律丢弃，不作任何记录。<b>不读取浏览历史，不读取网页内容，不发送到任何服务器</b>。</td></tr>
     <tr><td>s0.wp.com</td><td>获取网页预览截图（见第 3 条），可在导航页顶栏一键关闭。</td></tr>
     <tr><td>chrome_url_overrides（新标签页）</td><td>把新标签页替换为书签导航页，默认开启，可在导航页顶栏一键关闭（关闭后新标签页显示 Google 首页）。</td></tr>
     <tr><td>可选：所有网站</td><td>仅当你主动点击"检测失效链接"时申请，用于逐个访问当前范围内的书签网址。不点击该功能，此权限不会被申请。</td></tr>
@@ -112,7 +113,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   <p>The developer does not collect this data. The Extension has no backend, so the developer cannot access the following information stored <b>only in your browser's local storage</b> (chrome.storage.local):</p>
   <ul>
     <li>Categories you assign to bookmarks manually;</li>
-    <li>How often and when you open bookmarks through the Extension (powers "Frequent" sorting);</li>
+    <li>How often and when you open your bookmarks (powers "Frequent" sorting);</li>
     <li>Interface preferences: theme, display density, sort order, preview on/off, new-tab takeover on/off.</li>
   </ul>
   <p>Your bookmarks themselves are managed by Chrome; the Extension only reads them and modifies them when you act. Uninstalling the Extension removes all of the local data above (handled by Chrome); your bookmarks are unaffected.</p>
@@ -121,8 +122,9 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   <table>
     <tr><th>Permission</th><th>Why it's needed</th></tr>
     <tr><td>bookmarks</td><td>Read and manage your Chrome bookmarks — the core purpose of the Extension (display, search, move, edit, delete, reorder).</td></tr>
-    <tr><td>storage</td><td>Save categories, clicks recorded inside the Extension, and preferences locally (see section 1).</td></tr>
+    <tr><td>storage</td><td>Save categories, bookmark open counts, and preferences locally (see section 1).</td></tr>
     <tr><td>favicon</td><td>Show site icons from Chrome's local favicon cache — zero network requests.</td></tr>
+    <tr><td>webNavigation</td><td>Tell which bookmark you opened from Chrome's bookmarks bar or address bar, so "Frequent" can rank them. The Extension reads only the <b>destination URL and the navigation's origin type</b>, and increments a counter only when that URL matches a bookmark you already saved; every other URL is discarded and never recorded. It <b>does not read your browsing history or any page content, and sends nothing to any server</b>.</td></tr>
     <tr><td>s0.wp.com</td><td>Fetch preview screenshots (see section 3); switchable off in the grid header.</td></tr>
     <tr><td>chrome_url_overrides (new tab)</td><td>Replace the new tab page with the bookmark navigation page. On by default; one click in the grid header turns it off (new tabs then open the Google homepage).</td></tr>
     <tr><td>Optional: all sites</td><td>Requested only when you click "Check dead links", so the Extension can request each bookmarked URL to verify it still works. If you never use that feature, this permission is never requested.</td></tr>
