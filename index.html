@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>书签管理器 Pro：书签，终于不用自己整理了</title>
-<meta name="description" content="Chrome 书签管理扩展：秒级搜索、自动分类、网页预览网格、新标签页书签导航 + Google 搜索栏、失效链接检测、重复清理、可撤销的批量整理。免费，无账号，核心数据保存在本地。">
+<meta name="description" content="Chrome 书签管理扩展：秒级搜索、自动分类、网页预览网格、新标签页书签导航 + 网页搜索栏、失效链接检测、重复清理、可撤销的批量整理。免费，无账号，核心数据保存在本地。">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href="https://ma2ong.github.io/bookmark-manager-site/">
 
@@ -800,7 +800,7 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
   <div class="darksec-in">
     <div class="eyebrow reveal"><span class="dot"></span><span data-i18n="nt_eyebrow">新标签页接管</span></div>
     <h2 class="reveal" data-i18n="nt_h">打开新标签页，就是你的<span class="hl">书签墙</span></h2>
-    <p class="darksec-sub reveal" data-i18n="nt_p">新标签页不再是一片空白：书签导航加上正中间的 Google 搜索栏，查资料、开常用网站，都从这一页出发。不喜欢？顶栏一键关掉。</p>
+    <p class="darksec-sub reveal" data-i18n="nt_p">新标签页不再是一片空白：书签导航加上正中间的网页搜索栏（用你自己的默认搜索引擎），查资料、开常用网站，都从这一页出发。不喜欢？顶栏一键关掉。</p>
     <div class="darksec-list reveal">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="nt_c1">装上即生效</span></span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="nt_c2">顶栏一键<b>开 / 关</b></span></span>
@@ -813,7 +813,7 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
           <div class="win-url" data-i18n="nt_url">新标签页</div>
         </div>
         <img class="win-shot" src="newtab-shot.jpg" width="1920" height="600" loading="lazy" decoding="async"
-             alt="新标签页显示书签导航：正中间是 Google 搜索栏，下方是带网页预览的书签网格，顶栏有「新标签页：开」开关">
+             alt="新标签页显示书签导航：正中间是网页搜索栏，下方是带网页预览的书签网格，顶栏有「新标签页：开」开关">
       </div>
     </div>
     <div class="mid-cta reveal">
@@ -897,7 +897,7 @@ footer{background:var(--wash);border-top:1px solid var(--line);padding:34px 0;fo
       </details>
       <details>
         <summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary>
-        <div class="a" data-i18n="a7">会，默认开启：打开新标签页直接看到书签导航和 Google 搜索栏。不想要的话，在导航页顶栏点「新标签页：关」即可，之后新标签页会显示 Google 首页。（Chrome 的限制：扩展接管新标签页后，无法再显示 Chrome 原生新标签页。）</div>
+        <div class="a" data-i18n="a7">会，默认开启：打开新标签页直接看到书签导航和网页搜索栏。不想要的话，在导航页顶栏点「新标签页：关」即可，之后新标签页会打开你在 Chrome 里设置的默认搜索引擎的首页。（Chrome 的限制：扩展接管新标签页后，无法再显示 Chrome 原生新标签页。）</div>
       </details>
     </div>
   </div>
@@ -984,7 +984,7 @@ const ZH = {
   af10:'主题、密度、双语', af10d:'深浅色 / 舒适紧凑 / 中英界面',
   af11:'导入导出', af11d:'HTML / JSON 导出，分类数据可迁移',
   af12:'零学习成本', af12d:'用 Chrome 原生 ★ 收藏，无迁移、完全互通',
-  af13:'新标签页导航', af13d:'新标签页即书签导航 + Google 搜索栏，可一键关闭',
+  af13:'新标签页导航', af13d:'新标签页即书签导航 + 网页搜索栏，可一键关闭',
   af14:'四种排序', af14d:'默认、最近添加、名称 A-Z、点击热度',
   af15:'键盘快捷键', af15d:'/ 聚焦搜索、Esc 逐级退出、Alt+B 打开导航页'
 };
@@ -1080,7 +1080,7 @@ const EN = {
   af10:'Themes, density, language', af10d:'Dark/light, comfortable/compact, EN/中文',
   af11:'Import & export', af11d:'HTML / JSON export, category data portable',
   af12:'Zero learning curve', af12d:'Save with Chrome’s native ★. No migration, fully interoperable',
-  af13:'New-tab dashboard', af13d:'Every new tab opens your grid plus a Google search bar; one click to turn off',
+  af13:'New-tab dashboard', af13d:'Every new tab opens your grid plus a web search bar (your default engine); one click to turn off',
   af14:'Four sort orders', af14d:'Default, recently added, name A-Z, click frequency',
   af15:'Keyboard shortcuts', af15d:'/ to focus search, Esc to back out, Alt+B for the grid view',
   p_h2:'Your bookmarks <span class="hl">belong to you</span>',
@@ -1103,10 +1103,10 @@ const EN = {
   q6:'I have thousands of bookmarks. Will it lag?',
   a6:'Lists render progressively, and previews load and cache only near the visible area. It stays smooth with several thousand bookmarks.',
   q7:'Does it replace my new tab page? How do I turn that off?',
-  a7:'Yes, on by default: new tabs open your bookmark grid with a Google search bar. If you’d rather not, click “New Tab: Off” in the grid header; new tabs will then open the Google homepage. (A Chrome limitation: once an extension overrides the new tab page, the native Chrome new tab can no longer be shown.)',
+  a7:'Yes, on by default: new tabs open your bookmark grid with a web search bar. If you’d rather not, click “New Tab: Off” in the grid header; new tabs will then open your default search engine's homepage. (A Chrome limitation: once an extension overrides the new tab page, the native Chrome new tab can no longer be shown.)',
   nt_eyebrow:'New tab takeover',
   nt_h:'Every new tab opens to your <span class="hl">bookmark wall</span>',
-  nt_p:'A new tab is no longer a blank page: your bookmark grid, with a Google search bar front and center. Research or revisit, everything starts here. Not your thing? Turn it off with one click in the header.',
+  nt_p:'A new tab is no longer a blank page: your bookmark grid, with a web search bar (your default engine) front and center. Research or revisit, everything starts here. Not your thing? Turn it off with one click in the header.',
   nt_c1:'Live right after install', nt_c2:'Toggle <b>on / off</b> in the header', nt_c3:'Preview, categories and search all work',
   nt_url:'New Tab',
   mid_cta_note:'Free · No sign-up · Installed in 30 seconds',
