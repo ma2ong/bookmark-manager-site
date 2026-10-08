@@ -79,7 +79,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
     <tr><td>history</td><td>读取最近 30 天的访问次数，用于"常用书签"排序——这样不论你从 Chrome 书签栏、地址栏还是本扩展打开书签，都会计入；另外从最近的搜索记录识别你在 Chrome 里设置的默认搜索引擎，用于在搜索栏显示它的图标、打开它的首页。查询在你本机完成，<b>只用于上述两件事，不存储、不上传、不发送到任何服务器</b>（本扩展没有服务器）。</td></tr>
     <tr><td>search</td><td>把你在导航页网页搜索栏里输入的内容交给你在 Chrome 中设置的默认搜索引擎（与在地址栏搜索相同）。本扩展不读取、不保存搜索内容。</td></tr>
     <tr><td>chrome_url_overrides（新标签页）</td><td>把新标签页替换为书签导航页，默认开启，可在导航页顶栏一键关闭（关闭后新标签页打开默认搜索引擎的首页）。</td></tr>
-    <tr><td>可选：所有网站</td><td>仅当你主动点击"检测失效链接"时申请，用于逐个访问当前范围内的书签网址。不点击该功能，此权限不会被申请。</td></tr>
+    <tr><td>可选：所有网站</td><td>仅当你主动点击"检测失效链接"时申请，用于逐个访问当前范围内的书签网址。申请前会先说明用途；检测结束后立即收回。不点击该功能，此权限不会被申请。</td></tr>
   </table>
 
   <h2>3. 第三方服务：网页预览截图</h2>
@@ -127,7 +127,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
     <tr><td>history</td><td>Read visit counts from the last 30 days to rank "Frequent" bookmarks — so opens from Chrome's bookmarks bar, the address bar, or this extension all count; and to recognize the default search engine you set in Chrome from your recent searches, so the search bar can show its icon and open its homepage. The query runs locally on your machine and is <b>used only for these two things: nothing is stored, uploaded, or sent to any server</b> (the Extension has no server).</td></tr>
     <tr><td>search</td><td>Send what you type into the grid's web search bar to the default search engine you set in Chrome (same as searching from the address bar). The Extension does not read or keep your searches.</td></tr>
     <tr><td>chrome_url_overrides (new tab)</td><td>Replace the new tab page with the bookmark navigation page. On by default; one click in the grid header turns it off (new tabs then open your default search engine's homepage).</td></tr>
-    <tr><td>Optional: all sites</td><td>Requested only when you click "Check dead links", so the Extension can request each bookmarked URL to verify it still works. If you never use that feature, this permission is never requested.</td></tr>
+    <tr><td>Optional: all sites</td><td>Requested only when you click "Check dead links", so the Extension can request each bookmarked URL to verify it still works. The Extension explains why before asking, and removes the permission as soon as the check ends. If you never use that feature, this permission is never requested.</td></tr>
   </table>
 
   <h2>3. Third-party service: preview screenshots</h2>
