@@ -47,6 +47,8 @@
   --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
   --num:"Plus Jakarta Sans",var(--sans);
 }
+/* 英文标题不用中文衬线：中文字体会把 ’ “ ” 排成全角，出现 won’ t 这样的空隙 */
+html[lang="en"]{--serif:Georgia,"Times New Roman",serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -249,6 +251,17 @@ mark{background:var(--hl);color:inherit;border-radius:3px}
 footer{margin-top:32px;padding-bottom:48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--subtle)}
 footer nav{display:flex;gap:20px}
 footer a{color:var(--subtle)}
+
+/* 回到顶部：滚动一屏后出现，外圈进度随阅读画满 */
+.to-top{position:fixed;right:26px;bottom:28px;z-index:30;width:52px;height:52px;border-radius:50%;border:1px solid var(--div);background:var(--card);color:var(--acc);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px -10px rgba(31,36,48,.3);opacity:0;transform:translateY(18px) scale(.9);pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .2s ease}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{transform:translateY(-3px);box-shadow:0 16px 38px -10px rgba(26,115,232,.45)}
+.to-top:active{transform:scale(.94)}
+.to-top .ring{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg);pointer-events:none}
+.to-top .ring circle{fill:none;stroke:var(--btn);stroke-width:3;stroke-linecap:round}
+.to-top>svg:last-child{position:relative}
+@media (max-width:640px){.to-top{right:16px;bottom:18px;width:46px;height:46px}}
+@media (prefers-reduced-motion:reduce){.to-top{transition:none}}
 
 /* 滚动渐入：只在 JS 正常运行时隐藏，脚本出错也不会留下空白页 */
 .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
@@ -578,6 +591,11 @@ footer a{color:var(--subtle)}
 </section>
 </main>
 
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">
+  <svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle id="ttBar" cx="26" cy="26" r="24"/></svg>
+  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
+
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    Chrome Web Store 链接：上架通过后，把下面这一行替换成你的商店页地址
@@ -776,6 +794,7 @@ function setLang(l, persist) {
     ? 'Bookmark Manager Pro: bookmarks, organized for you'
     : '书签管理器 Pro：书签，终于不用自己整理了';
   langBtn.textContent = l === 'en' ? '中' : 'EN';
+  document.getElementById('toTop').setAttribute('aria-label', l === 'en' ? 'Back to top' : '回到顶部');
   if (persist) { try { localStorage.setItem('bmpro-lang', l); } catch (e) {} }
   renderDemo();
 }
@@ -824,9 +843,27 @@ demoInput.addEventListener('input', renderDemo);
 
 setLang(lang, false);
 
-/* ── 顶栏滚动后加分隔线 ───────────────────────────────────────────── */
+/* ── 顶栏分隔线 + 回到顶部（环形进度随阅读画满） ─────────────────── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8), { passive: true });
+const toTop = document.getElementById('toTop');
+const ttBar = document.getElementById('ttBar');
+const TTC = 2 * Math.PI * 24;
+ttBar.style.strokeDasharray = TTC;
+ttBar.style.strokeDashoffset = TTC;
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    ttBar.style.strokeDashoffset = TTC * (1 - p);
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    toTop.classList.toggle('show', window.scrollY > window.innerHeight * .8);
+    ticking = false;
+  });
+}, { passive: true });
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
 
 /* ── 滚动渐入 ─────────────────────────────────────────────────────── */
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
