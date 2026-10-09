@@ -338,7 +338,7 @@ footer a{color:var(--subtle)}
     <ul class="trust">
       <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust1">核心数据本地保存</span></li>
       <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust2">无需注册账号</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust3">中英双语</span></li>
+      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust3">简繁中文 + 英文</span></li>
       <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust4">零学习成本</span></li>
     </ul>
   </div>
@@ -571,7 +571,7 @@ footer a{color:var(--subtle)}
     <details><summary data-i18n="q2">我的书签数据会被上传吗？</summary><p data-i18n="a2">开发者没有后端服务器，书签和分类不会上传给我们。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在导航页顶栏点「预览：关」即可停用。</p></details>
     <details><summary data-i18n="q3">自动分类分错了怎么办？</summary><p data-i18n="a3">右键书签 →「移动到分类」手动指定即可，手动分类永久生效、优先于自动规则。也可以多选后批量设置分类。</p></details>
     <details><summary data-i18n="q4">删错了能恢复吗？</summary><p data-i18n="a4">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
-    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。为 Chrome 设计，商店页面上线后，Edge 等 Chromium 内核浏览器通常也能安装使用。界面支持中文和英文，跟随浏览器语言自动切换。</p></details>
+    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。为 Chrome 设计，商店页面上线后，Edge 等 Chromium 内核浏览器通常也能安装使用。界面支持简体中文、繁体中文和英文，跟随浏览器语言自动切换。</p></details>
     <details><summary data-i18n="q6">书签特别多（几千个）会卡吗？</summary><p data-i18n="a6">不会。5 万个书签实测，每按一个键 20 毫秒内出结果；预览图只在接近可视区域时按需加载并缓存。</p></details>
     <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到书签导航和网页搜索栏。不想要的话，在导航页顶栏点「新标签页：关」即可，之后新标签页会打开你在 Chrome 里设置的默认搜索引擎的首页。（Chrome 的限制：扩展接管新标签页后，无法再显示 Chrome 原生新标签页。）</p></details>
   </div>
@@ -625,7 +625,7 @@ const ZH = {
   af7:'删除可撤销', af7d:'单个和批量删除都能一键原位恢复',
   af8:'书签编辑', af8d:'右键改标题、改网址、置顶',
   af9:'秒级搜索', af9d:'标题、网址、文件夹一起检索，多个关键词，命中高亮',
-  af10:'主题、密度、双语', af10d:'深浅色 / 舒适紧凑 / 中英界面',
+  af10:'主题、密度、多语言', af10d:'深浅色 / 舒适紧凑 / 简繁中文和英文界面',
   af11:'导入导出', af11d:'HTML / JSON 导出，分类数据可迁移',
   af12:'零学习成本', af12d:'用 Chrome 原生 ★ 收藏，无迁移、完全互通',
   af13:'新标签页导航', af13d:'新标签页即书签导航 + 网页搜索栏，可一键关闭',
@@ -640,7 +640,7 @@ const EN = {
   hero_h1:'Your bookmarks,<br><span class="hl">organized for you</span>',
   hero_sub:'Chrome’s bookmark menu has no search, and new saves sink to the bottom. This adds it: type a keyword to find any bookmark, auto-sorted, with one-click cleanup of dead links and duplicates.',
   hero_cta:'Chrome Store coming soon', hero_cta2:'See how it looks',
-  trust1:'Core data stays local', trust2:'No account needed', trust3:'English & Chinese', trust4:'Zero learning curve',
+  trust1:'Core data stays local', trust2:'No account needed', trust3:'English + Chinese (Simplified & Traditional)', trust4:'Zero learning curve',
   win_url:'New Tab · Bookmark grid',
   hero_alt:'The Bookmark Manager grid: auto-sorted categories on the left, a grid of bookmarks with website previews on the right',
   float_b:'Auto-filed under “AI Tools”', float_s:'No folders to build, nothing to drag',
@@ -726,7 +726,7 @@ const EN = {
   af7:'Undoable deletes', af7d:'Single and bulk deletes restore in place',
   af8:'Bookmark editing', af8d:'Rename, change URL, pin to top from the context menu',
   af9:'Instant search', af9d:'Titles, URLs and folders together, multiple keywords, highlighted hits',
-  af10:'Themes, density, language', af10d:'Dark/light, comfortable/compact, EN/中文',
+  af10:'Themes, density, language', af10d:'Dark/light, comfortable/compact, English / Simplified & Traditional Chinese',
   af11:'Import & export', af11d:'HTML / JSON export, category data portable',
   af12:'Zero learning curve', af12d:'Save with Chrome’s native ★. No migration, fully interoperable',
   af13:'New-tab dashboard', af13d:'Every new tab opens your grid plus a web search bar; one click to turn off',
@@ -748,7 +748,7 @@ const EN = {
   q4:'Can I recover something I deleted by mistake?',
   a4:'Yes. Every delete (including bulk delete, dedupe and dead-link cleanup) shows an “Undo” button that restores everything to its original place, manual categories included.',
   q5:'Which browsers? Is it free?',
-  a5:'Completely free. Built for Chrome; once the store listing is live, Chromium-based browsers like Edge can usually install it too. The interface follows your browser language in English or Chinese.',
+  a5:'Completely free. Built for Chrome; once the store listing is live, Chromium-based browsers like Edge can usually install it too. The interface follows your browser language: English, Simplified Chinese or Traditional Chinese.',
   q6:'I have tens of thousands of bookmarks. Will it lag?',
   a6:'No. Tested with 50,000 bookmarks, results update within 20 ms of each keystroke; previews load and cache only near the visible area.',
   q7:'Does it replace my new tab page? How do I turn that off?',
