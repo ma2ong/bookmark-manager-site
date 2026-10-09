@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>书签管理器 Pro：书签，终于不用自己整理了</title>
 <meta name="description" content="Chrome 书签管理扩展：秒级搜索、自动分类、网页预览网格、新标签页书签导航 + 网页搜索栏、失效链接检测、重复清理、可撤销的批量整理。免费，无账号，核心数据保存在本地。">
-<meta name="theme-color" content="#F4F2EC">
+<meta name="theme-color" content="#F6F8FC">
 <link rel="canonical" href="https://ma2ong.github.io/bookmark-manager-site/">
 
 <!-- 分享预览（微信 / X / Telegram 抓的就是这几行）。图由 og-src/og-zh.html 导出，见 og-src/README.md。 -->
@@ -33,10 +33,10 @@
 <script>document.documentElement.classList.add('js');</script>
 <style>
 /* ── Tokens ─────────────────────────────────────────────────────────────
-   纸感暖底 + 插件同款蓝（#1A73E8 / #1967D2）+ 插件同款琥珀高亮。
+   浅蓝灰底 + 插件同款蓝（#1A73E8 / #1967D2）+ 插件同款琥珀高亮。
    大色块用深藏青，和插件蓝同色系。标题用衬线（Noto Serif SC）。 */
 :root{
-  --bg:#F4F2EC; --card:#FCFBF7; --panel2:#EBE8DF; --div:#DEDAD0;
+  --bg:#F6F8FC; --card:#FFFFFF; --panel2:#F0F4F9; --div:#E3E8EF;
   --ink:#1F2430; --muted:#3D4350; --subtle:#666C78;
   --btn:#1A73E8; --acc:#1967D2;
   --tint:#E8EEFD; --tint-ink:#0B2A5B; --tint-muted:#3D4A66; --line:#BCCDEB;
@@ -73,7 +73,7 @@ kbd{font-family:var(--num);font-size:.9em;font-weight:700;border:1px solid var(-
 .btn-primary.is-disabled:hover{background:var(--btn)}
 
 /* 顶栏 */
-.nav{position:sticky;top:0;z-index:20;background:rgba(244,242,236,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.nav{position:sticky;top:0;z-index:20;background:rgba(246,248,252,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
 .nav.scrolled{border-bottom-color:var(--div)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;white-space:nowrap}
