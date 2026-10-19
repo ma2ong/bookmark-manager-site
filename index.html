@@ -319,7 +319,7 @@ footer a{color:var(--subtle)}
     </nav>
     <div class="nav-right">
       <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">EN</button>
-      <a class="btn btn-primary" data-store data-i18n="nav_cta">Chrome 商店即将上线</a>
+      <a class="btn btn-primary" data-store data-i18n="nav_cta">免费添加到 Chrome</a>
     </div>
   </div>
 </header>
@@ -332,7 +332,7 @@ footer a{color:var(--subtle)}
     <h1 data-i18n="hero_h1">书签，终于<br><span class="hl">不用自己整理</span>了</h1>
     <p class="hero-sub" data-i18n="hero_sub">Chrome 的书签菜单不能搜索，新存的永远沉在最底下。装上它：关键词直接搜、自动分类、失效重复一键清掉。</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" data-store data-i18n="hero_cta">Chrome 商店即将上线</a>
+      <a class="btn btn-primary" data-store data-i18n="hero_cta">免费添加到 Chrome</a>
       <a class="btn btn-ghost" href="#features" data-i18n="hero_cta2">看看它长什么样</a>
     </div>
     <ul class="trust">
@@ -571,7 +571,7 @@ footer a{color:var(--subtle)}
     <details><summary data-i18n="q2">我的书签数据会被上传吗？</summary><p data-i18n="a2">开发者没有后端服务器，书签和分类不会上传给我们。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在导航页顶栏点「预览：关」即可停用。</p></details>
     <details><summary data-i18n="q3">自动分类分错了怎么办？</summary><p data-i18n="a3">右键书签 →「移动到分类」手动指定即可，手动分类永久生效、优先于自动规则。也可以多选后批量设置分类。</p></details>
     <details><summary data-i18n="q4">删错了能恢复吗？</summary><p data-i18n="a4">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
-    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。为 Chrome 设计，商店页面上线后，Edge 等 Chromium 内核浏览器通常也能安装使用。界面支持简体中文、繁体中文和英文，跟随浏览器语言自动切换。</p></details>
+    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。为 Chrome 设计，Edge 等 Chromium 内核浏览器通常也能安装使用。界面支持简体中文、繁体中文和英文，跟随浏览器语言自动切换。</p></details>
     <details><summary data-i18n="q6">书签特别多（几千个）会卡吗？</summary><p data-i18n="a6">不会。5 万个书签实测，每按一个键 20 毫秒内出结果；预览图只在接近可视区域时按需加载并缓存。</p></details>
     <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到书签导航和网页搜索栏。不想要的话，在导航页顶栏点「新标签页：关」即可，之后新标签页会打开你在 Chrome 里设置的默认搜索引擎的首页。（Chrome 的限制：扩展接管新标签页后，无法再显示 Chrome 原生新标签页。）</p></details>
   </div>
@@ -581,8 +581,8 @@ footer a{color:var(--subtle)}
 <section class="wrap" id="install" style="padding-top:60px">
   <div class="cta reveal">
     <h2 data-i18n="cta_h2">今天存下的书签，<br>三年后<span class="hl">还找得到</span></h2>
-    <a class="btn" data-store data-i18n="cta_btn">Chrome 商店即将上线</a>
-    <p class="cta-p" data-i18n="cta_p">商店页面正在准备中；审核通过后即可免费安装。</p>
+    <a class="btn" data-store data-i18n="cta_btn">免费添加到 Chrome</a>
+    <p class="cta-p" data-i18n="cta_p">已在 Chrome 应用商店上线，一键安装，完全免费。</p>
   </div>
   <footer>
     <span>© 2026 <span data-i18n="brand_full">书签管理器 Pro</span></span>
@@ -601,7 +601,7 @@ footer a{color:var(--subtle)}
    Chrome Web Store 链接：上架通过后，把下面这一行替换成你的商店页地址
    例如 https://chromewebstore.google.com/detail/xxxxxxxxxxxxxxxx
    ═══════════════════════════════════════════════════════════════════ */
-const STORE_URL = "";
+const STORE_URL = "https://chromewebstore.google.com/detail/bookmark-manager-pro/lincaijloppehjnkmaonboclmbmfhpbn";
 
 document.querySelectorAll('[data-store]').forEach(a => {
   if (STORE_URL) {
@@ -635,11 +635,11 @@ const ZH = {
 };
 const EN = {
   brand:'Bookmark Manager', brand_full:'Bookmark Manager Pro',
-  nav_features:'Features', nav_all:'All features', nav_privacy:'Privacy', nav_faq:'FAQ', nav_cta:'Chrome Store coming soon',
+  nav_features:'Features', nav_all:'All features', nav_privacy:'Privacy', nav_faq:'FAQ', nav_cta:'Add to Chrome, free',
   hero_eyebrow:'CHROME EXTENSION · FREE',
   hero_h1:'Your bookmarks,<br><span class="hl">organized for you</span>',
   hero_sub:'Chrome’s bookmark menu has no search, and new saves sink to the bottom. This adds it: type a keyword to find any bookmark, auto-sorted, with one-click cleanup of dead links and duplicates.',
-  hero_cta:'Chrome Store coming soon', hero_cta2:'See how it looks',
+  hero_cta:'Add to Chrome, free', hero_cta2:'See how it looks',
   trust1:'Core data stays local', trust2:'No account needed', trust3:'English + Chinese (Simplified & Traditional)', trust4:'Zero learning curve',
   win_url:'New Tab · Bookmark grid',
   hero_alt:'The Bookmark Manager grid: auto-sorted categories on the left, a grid of bookmarks with website previews on the right',
@@ -748,14 +748,14 @@ const EN = {
   q4:'Can I recover something I deleted by mistake?',
   a4:'Yes. Every delete (including bulk delete, dedupe and dead-link cleanup) shows an “Undo” button that restores everything to its original place, manual categories included.',
   q5:'Which browsers? Is it free?',
-  a5:'Completely free. Built for Chrome; once the store listing is live, Chromium-based browsers like Edge can usually install it too. The interface follows your browser language: English, Simplified Chinese or Traditional Chinese.',
+  a5:'Completely free. Built for Chrome; Chromium-based browsers like Edge can usually install it too. The interface follows your browser language: English, Simplified Chinese or Traditional Chinese.',
   q6:'I have tens of thousands of bookmarks. Will it lag?',
   a6:'No. Tested with 50,000 bookmarks, results update within 20 ms of each keystroke; previews load and cache only near the visible area.',
   q7:'Does it replace my new tab page? How do I turn that off?',
   a7:'Yes, on by default: new tabs open your bookmark grid with a web search bar. If you’d rather not, click “New Tab: Off” in the grid header; new tabs will then open your default search engine’s homepage. (A Chrome limitation: once an extension overrides the new tab page, the native Chrome new tab can no longer be shown.)',
   cta_h2:'The bookmark you save today,<br><span class="hl">findable</span> three years from now',
-  cta_p:'The store listing is being prepared. Installation will be free once review is complete.',
-  cta_btn:'Chrome Store coming soon',
+  cta_p:'Now on the Chrome Web Store. One click to install, completely free.',
+  cta_btn:'Add to Chrome, free',
   foot_privacy:'Privacy Policy', foot_contact:'Contact'
 };
 
