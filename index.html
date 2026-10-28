@@ -51,7 +51,7 @@
 /* 英文标题不用中文衬线：中文字体会把 ’ “ ” 排成全角，出现 won’ t 这样的空隙 */
 html[lang="en"]{--serif:Georgia,"Times New Roman",serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
 a{color:var(--acc)}
@@ -75,10 +75,11 @@ kbd{font-family:var(--num);font-size:.9em;font-weight:700;border:1px solid var(-
 .btn.is-disabled{cursor:default}
 .btn-primary.is-disabled:hover{background:var(--btn)}
 
-/* 顶栏 */
-.nav{position:sticky;top:0;z-index:20;background:rgba(246,248,252,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
-.nav.scrolled{border-bottom-color:var(--div)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
+/* 顶栏：浮起来的胶囊导航 */
+.nav{position:sticky;top:0;z-index:30;padding:12px 20px 0;background:transparent;transition:padding .25s}
+.nav.scrolled{padding-top:8px}
+.nav-in{max-width:1120px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 10px 9px 16px;border:1px solid transparent;border-radius:999px;background:transparent;transition:background .25s,border-color .25s,box-shadow .25s}
+.nav.scrolled .nav-in{background:rgba(255,255,255,.82);border-color:rgba(31,36,48,.08);box-shadow:0 18px 50px -34px rgba(31,36,48,.45);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;white-space:nowrap}
 .brand:hover{color:var(--ink)}
 .logo{width:32px;height:32px;background:var(--btn);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -90,6 +91,18 @@ kbd{font-family:var(--num);font-size:.9em;font-weight:700;border:1px solid var(-
 .lang-btn{font:inherit;font-size:14px;color:var(--muted);background:none;border:1px solid var(--div);border-radius:999px;min-height:40px;min-width:44px;padding:0 12px;cursor:pointer}
 .lang-btn:hover{background:var(--panel2);color:var(--ink)}
 .nav .btn{min-height:40px;padding:0 18px;font-size:14px;font-weight:500}
+.install-menu{position:relative}
+.install-menu summary{list-style:none}
+.install-menu summary::-webkit-details-marker{display:none}
+.install-trigger{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--btn);color:#fff;font:inherit;font-size:14px;font-weight:500;cursor:pointer;user-select:none;transition:background .2s}
+.install-trigger:hover{background:#1765CC}
+.install-trigger svg{transition:transform .2s}
+.install-menu[open] .install-trigger svg{transform:rotate(180deg)}
+.install-pop{position:absolute;right:0;top:calc(100% + 10px);width:286px;max-width:calc(100vw - 32px);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 70px -28px rgba(31,36,48,.45);padding:6px;z-index:50}
+.install-pop a{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--ink)}
+.install-pop a:hover{background:var(--panel2)}
+.install-pop b{font-size:14px;font-weight:600}
+.install-pop span{font-size:12px;color:var(--muted);line-height:1.4}
 
 /* 首屏 */
 .hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;padding-top:56px;padding-bottom:32px}
@@ -98,11 +111,22 @@ kbd{font-family:var(--num);font-size:.9em;font-weight:700;border:1px solid var(-
 .hero h1{margin-top:24px;font-size:clamp(40px,4.3vw,60px);line-height:1.16;letter-spacing:-.01em}
 .hero-sub{margin-top:24px;font-size:18px;line-height:1.8;color:var(--muted)}
 .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-more{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding-bottom:2px;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px;text-decoration:none;transition:color .2s,border-color .2s}
+.hero-more:hover{color:var(--acc);border-color:var(--acc)}
 .trust{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px;font-size:14px;color:var(--muted)}
 .trust li,.check-li{display:flex;align-items:center;gap:8px}
 .ck{width:18px;height:18px;border-radius:50%;background:var(--tint);color:var(--acc);font-size:11px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 .hero-art{position:relative;padding:0 0 40px 24px}
-.hero-art::before{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;background:var(--tint);border-radius:40px}
+.hero-tabs{display:flex;gap:4px;width:max-content;max-width:100%;margin:0 0 10px 24px;padding:4px;background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:999px;position:relative;z-index:3;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow:auto}
+.hero-tab{border:0;background:transparent;border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.hero-tab:hover:not(.active){background:var(--card);color:var(--ink)}
+.hero-tab.active{background:var(--btn);color:#fff;font-weight:500}
+.win img{transition:opacity .2s ease}
+.win img.switching{opacity:.3}
+.hero-art::before{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;background:radial-gradient(circle at 72% 18%,rgba(255,255,255,.75),transparent 45%),var(--tint);border-radius:40px}
+.hero-art::after{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;border-radius:40px;background-image:radial-gradient(rgba(26,115,232,.18) 1px,transparent 1px);background-size:12px 12px;opacity:.45;pointer-events:none;z-index:0}
+.hero-art .win,.hero-art .float-card{position:relative;z-index:1}
+.hero-art .float-card{z-index:2}
 .win{position:relative;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 1px 3px rgba(60,64,67,.2),0 24px 60px -24px rgba(26,115,232,.35)}
 .win-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--panel2)}
 .win-bar i{width:10px;height:10px;border-radius:50%}
@@ -181,7 +205,9 @@ mark{background:var(--hl);color:inherit;border-radius:3px}
 .feat h3{margin-top:10px;font-size:28px;line-height:1.35}
 .feat-p{margin-top:14px;font-size:16px;line-height:1.8;color:var(--muted)}
 .feat ul.dots{margin:16px 0 0;padding:0 0 0 18px;font-size:15px;line-height:1.9;color:var(--muted)}
-.mock{background:var(--panel2);border-radius:24px;padding:28px}
+.mock{background-color:var(--panel2);background-image:radial-gradient(rgba(31,36,48,.055) 1px,transparent 1px);background-size:12px 12px;border-radius:24px;padding:28px}
+.card.feat{transition:transform .28s ease,box-shadow .28s ease}
+@media (hover:hover){.card.feat:hover{transform:translateY(-2px);box-shadow:0 24px 60px -48px rgba(31,36,48,.45)}}
 .pill{display:inline-block;padding:5px 12px;border-radius:999px;background:var(--card);font-size:12px}
 .pill.on{background:var(--btn);color:#fff}
 .pills{display:flex;gap:6px;flex-wrap:wrap}
@@ -279,10 +305,16 @@ footer a{color:var(--subtle)}
   .wrap{padding:0 16px}
   .sec{padding-top:72px;padding-bottom:24px}
   .nav .btn{display:none}
+  .nav{padding:8px 12px 0}
+  .nav-in{padding:7px 8px 7px 13px}
+  .nav-right{gap:6px}
+  .install-trigger{min-height:36px;padding:0 12px;font-size:13px}
+  .lang-btn{min-height:36px;min-width:40px;padding:0 9px;font-size:13px}
   .hero h1{font-size:38px}
   .hero-sub{font-size:16px}
   .hero-cta .btn{flex:1 1 100%}
   .hero-art{padding:0 0 32px 0}
+  .hero-tabs{margin-left:0;margin-bottom:8px}
   .hero-art::before{left:24px;right:-16px}
   .float-card{left:8px;padding:10px 12px}
   .search-sec .card{padding:28px 20px}
@@ -320,8 +352,16 @@ footer a{color:var(--subtle)}
     </nav>
     <div class="nav-right">
       <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">EN</button>
-      <a class="btn btn-ghost nav-edge" data-edge-store data-i18n="edge_cta">Edge 加载项</a>
-      <a class="btn btn-primary" data-store data-i18n="nav_cta">免费添加至 Chrome</a>
+      <details class="install-menu">
+        <summary class="install-trigger">
+          <span data-i18n="nav_install">免费安装</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="install-pop">
+          <a data-store><b data-i18n="install_chrome">Chrome 应用商店</b><span data-i18n="install_chrome_note">Chrome / Edge 等 Chromium 浏览器</span></a>
+          <a data-edge-store><b data-i18n="install_edge">Microsoft Edge 加载项</b><span data-i18n="install_edge_note">Edge 官方加载项商店</span></a>
+        </div>
+      </details>
     </div>
   </div>
 </header>
@@ -336,8 +376,8 @@ footer a{color:var(--subtle)}
     <div class="hero-cta">
       <a class="btn btn-primary" data-store data-i18n="hero_cta">免费添加至 Chrome</a>
       <a class="btn btn-ghost" data-edge-store data-i18n="hero_edge">Edge 加载项</a>
-      <a class="btn btn-ghost" href="#features" data-i18n="hero_cta2">看看它长什么样</a>
     </div>
+    <a class="hero-more" href="#features"><span data-i18n="hero_cta2">先看看它长什么样</span><span aria-hidden="true">↓</span></a>
     <ul class="trust">
       <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust1">极简一页墙</span></li>
       <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust2">拼音 / 简繁搜索</span></li>
@@ -347,9 +387,14 @@ footer a{color:var(--subtle)}
   </div>
   <!-- 真实截图：navigation.html（源图 og-src/shot-ai-tools.png，裁左侧 1200px） -->
   <div class="hero-art">
+    <div class="hero-tabs" aria-label="产品视图">
+      <button class="hero-tab active" type="button" data-src="hero-shot.jpg" data-alt="书签管理器 Pro 的极简书签墙：搜索框、分类胶囊和带网页预览的书签卡片" aria-pressed="true" data-i18n="heroTabWall">书签墙</button>
+      <button class="hero-tab" type="button" data-src="search-shot.jpg" data-alt="书签管理器的拼音搜索：输入 khgl 命中客户管理系统" aria-pressed="false" data-i18n="heroTabSearch">拼音搜索</button>
+      <button class="hero-tab" type="button" data-src="preview-hero.jpg" data-alt="书签管理器的网页预览：三列书签卡片和网页截图" aria-pressed="false" data-i18n="heroTabPreview">网页预览</button>
+    </div>
     <div class="win">
       <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="win_url">新标签页 · 极简书签墙</span></div>
-      <img src="hero-shot.jpg" width="1200" height="700" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt"
+      <img id="heroShot" src="hero-shot.jpg" width="1200" height="700" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt"
            alt="书签管理器 Pro 的极简书签墙：搜索框、分类胶囊和带网页预览的书签卡片">
     </div>
     <div class="float-card">
@@ -666,6 +711,47 @@ Object.assign(ZH, {
   af18:'键盘导航', af18d:'↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回',
   af19:'地址栏 bm', af19d:'地址栏输入 bm + 关键词，直接搜书签'
 });
+// 安装菜单：点外面 / Esc 关闭
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.install-menu')) {
+    document.querySelectorAll('.install-menu[open]').forEach(d => { d.open = false; });
+  }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.install-menu[open]').forEach(d => { d.open = false; });
+  }
+});
+document.querySelectorAll('.install-pop a').forEach(a => {
+  a.addEventListener('click', () => {
+    const d = a.closest('details');
+    if (d) d.open = false;
+  });
+});
+
+
+const HERO_VIEWS = ['hero-shot.jpg', 'search-shot.jpg', 'preview-hero.jpg'];
+document.querySelectorAll('.hero-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const img = document.querySelector('#heroShot');
+    if (!img) return;
+    document.querySelectorAll('.hero-tab').forEach(t => {
+      const on = t === tab;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-pressed', String(on));
+    });
+    img.classList.add('switching');
+    const pre = new Image();
+    pre.onload = () => {
+      img.src = tab.dataset.src;
+      img.alt = tab.dataset.alt || img.alt;
+      requestAnimationFrame(() => img.classList.remove('switching'));
+    };
+    pre.onerror = () => img.classList.remove('switching');
+    pre.src = tab.dataset.src;
+  });
+});
+HERO_VIEWS.slice(1).forEach(src => { const i = new Image(); i.src = src; });
 
 const EN = {
   brand:'Bookmark Manager', brand_full:'Bookmark Manager Pro',
@@ -846,6 +932,15 @@ Object.assign(EN, {
   af17:'Pinyin / Chinese search', af17d:'Full pinyin, initials, mixed, fuzzy, and Simplified/Traditional readings',
   af18:'Keyboard navigation', af18d:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back',
   af19:'Address bar bm', af19d:'Type bm plus a keyword in the address bar to search bookmarks'
+});
+
+Object.assign(EN, {
+  nav_install:'Install free',
+  heroTabWall:'Wall', heroTabSearch:'Pinyin search', heroTabPreview:'Previews',
+  install_chrome:'Chrome Web Store',
+  install_chrome_note:'Chrome / Edge and other Chromium browsers',
+  install_edge:'Microsoft Edge Add-ons',
+  install_edge_note:'Official Edge add-ons store'
 });
 
 /* ── 全部功能清单 ─────────────────────────────────────────────────── */
