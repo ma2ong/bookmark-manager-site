@@ -334,6 +334,16 @@ footer a{color:var(--subtle)}
   .cta{padding:56px 22px;border-radius:28px}
   .toast{gap:18px}
 }
+
+/* 网页预览卡片：保持截图原始比例，禁止被 height 属性拉高 */
+.preview-window{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 36px -30px rgba(31,36,48,.35)}
+.preview-bar{display:flex;align-items:center;gap:5px;padding:9px 12px;background:var(--panel2);border-bottom:1px solid var(--div)}
+.preview-bar i{width:7px;height:7px;border-radius:50%;background:#F28B82}
+.preview-bar i:nth-child(2){background:#FDD663}
+.preview-bar i:nth-child(3){background:#81C995}
+.preview-bar span{margin-left:8px;font-size:10px;color:var(--subtle)}
+.preview-window img{display:block;width:100%;height:auto;object-fit:contain}
+.preview-visual .pills{margin-top:14px}
 </style>
 </head>
 <body>
