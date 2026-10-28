@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>书签管理器 Pro：书签，终于不用自己整理了</title>
-<meta name="description" content="Chrome 书签管理扩展：秒级搜索、自动分类、网页预览网格、新标签页书签导航 + 网页搜索栏、失效链接检测、重复清理、可撤销的批量整理。免费，无账号，核心数据保存在本地。">
+<title>书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页</title>
+<meta name="description" content="Chrome / Edge 书签扩展：一页极简书签墙，拼音/首字母/简繁模糊搜索、弹窗、置顶、最近添加、网页预览、查重和失效检测。免费、本地、无账号。">
 <meta name="theme-color" content="#F6F8FC">
 <meta name="google-site-verification" content="kSH0kA3LoPYsSlYA-3v17h5grOpsXaPIeVuYvYenxoY">
 <link rel="canonical" href="https://ma2ong.github.io/bookmark-manager-site/">
@@ -12,18 +12,18 @@
 <!-- 分享预览（微信 / X / Telegram 抓的就是这几行）。图由 og-src/og-zh.html 导出，见 og-src/README.md。 -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="书签管理器 Pro">
-<meta property="og:title" content="书签管理器 Pro：书签，终于不用自己整理了">
-<meta property="og:description" content="Chrome 的书签菜单不能搜索，新存的永远沉在最底下。装上它：关键词直接搜、自动分类、失效重复一键清掉。免费，核心数据保存在本地。">
+<meta property="og:title" content="书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页">
+<meta property="og:description" content="把 Chrome / Edge 书签变成一页极简书签墙：拼音搜索、弹窗置顶、Chrome 原生书签同步、新标签页开关、网页预览。免费、本地、无账号。">
 <meta property="og:url" content="https://ma2ong.github.io/bookmark-manager-site/">
 <meta property="og:image" content="https://ma2ong.github.io/bookmark-manager-site/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="书签管理器 Pro 的导航页：左侧是自动分好的分类，右侧是带网页预览的书签网格">
+<meta property="og:image:alt" content="书签管理器 Pro 的极简书签墙：顶部是搜索框，下面是分类胶囊和带网页预览的书签卡片">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="书签管理器 Pro：书签，终于不用自己整理了">
-<meta name="twitter:description" content="Chrome 的书签菜单不能搜索，新存的永远沉在最底下。装上它：关键词直接搜、自动分类、失效重复一键清掉。">
+<meta name="twitter:title" content="书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页">
+<meta name="twitter:description" content="把 Chrome / Edge 书签变成一页极简书签墙：拼音搜索、弹窗置顶、Chrome 原生书签同步、新标签页开关、网页预览。免费、本地、无账号。">
 <meta name="twitter:image" content="https://ma2ong.github.io/bookmark-manager-site/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231a73e8'/%3E%3Cpath d='M8 5h8a1 1 0 0 1 1 1v13l-5-3-5 3V6a1 1 0 0 1 1-1z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -330,31 +330,31 @@ footer a{color:var(--subtle)}
 <!-- ══ 首屏 ═════════════════════════════════════════════════════════ -->
 <section class="wrap hero" id="top">
   <div>
-    <p class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">CHROME 扩展 · 免费</span></p>
-    <h1 data-i18n="hero_h1">书签，终于<br><span class="hl">不用自己整理</span>了</h1>
-    <p class="hero-sub" data-i18n="hero_sub">Chrome 的书签菜单不能搜索，新存的永远沉在最底下。装上它：关键词直接搜、自动分类、失效重复一键清掉。</p>
+    <p class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">CHROME / EDGE 扩展 · 免费</span></p>
+    <h1 data-i18n="hero_h1">书签，终于<br><span class="hl">能搜又能看</span>了</h1>
+    <p class="hero-sub" data-i18n="hero_sub">把 Chrome / Edge 书签变成一页极简书签墙：拼音、首字母、简繁模糊都能搜；常用、最近、分类、网页预览和一键置顶，全在这一页。</p>
     <div class="hero-cta">
       <a class="btn btn-primary" data-store data-i18n="hero_cta">免费添加至 Chrome</a>
       <a class="btn btn-ghost" data-edge-store data-i18n="hero_edge">Edge 加载项</a>
       <a class="btn btn-ghost" href="#features" data-i18n="hero_cta2">看看它长什么样</a>
     </div>
     <ul class="trust">
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust1">核心数据本地保存</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust2">无需注册账号</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust3">简繁中文 + 英文</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust4">零学习成本</span></li>
+      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust1">极简一页墙</span></li>
+      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust2">拼音 / 简繁搜索</span></li>
+      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust3">Chrome / Edge 双商店</span></li>
+      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust4">本地、无账号</span></li>
     </ul>
   </div>
   <!-- 真实截图：navigation.html（源图 og-src/shot-ai-tools.png，裁左侧 1200px） -->
   <div class="hero-art">
     <div class="win">
-      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="win_url">新标签页 · 书签导航</span></div>
+      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="win_url">新标签页 · 极简书签墙</span></div>
       <img src="hero-shot.jpg" width="1200" height="700" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt"
-           alt="书签管理器的导航页：左侧是自动分好的分类，右侧是带网页预览的书签网格">
+           alt="书签管理器 Pro 的极简书签墙：搜索框、分类胶囊和带网页预览的书签卡片">
     </div>
     <div class="float-card">
-      <span class="ai" aria-hidden="true">AI</span>
-      <div><b data-i18n="float_b">已自动归入「AI 工具」</b><span data-i18n="float_s">不用建文件夹，不用拖拽</span></div>
+      <span class="ai" aria-hidden="true">拼</span>
+      <div><b data-i18n="float_b">拼音也能搜</b><span data-i18n="float_s">khgl → 客户管理系统</span></div>
     </div>
   </div>
 </section>
@@ -364,11 +364,11 @@ footer a{color:var(--subtle)}
   <div class="card split reveal">
     <div>
       <h2 class="sec-h" data-i18n="f_h2">Chrome 的书签，<br>终于<span class="hl">能搜了</span></h2>
-      <p class="sec-p" data-i18n="f6_p">点一下工具栏图标，输入关键词，回车打开：标题、网址、文件夹一起检索，命中高亮。这就是这个扩展存在的第一理由：找任何书签，三秒结束。</p>
+      <p class="sec-p" data-i18n="f6_p">极简页就是搜索框：标题、网址、文件夹、拼音一起搜。输入 khgl 也能找到「客户管理系统」；↑↓ 选、Enter 开、Cmd/Ctrl+Enter 新标签、Esc 返回。</p>
       <ul class="ticks">
-        <li><span data-i18n="f6_l1">弹窗和导航页<b>都能搜</b>，不用离开当前页面</span></li>
-        <li><span data-i18n="f6_l2">按 <b>/</b> 聚焦搜索，<b>Esc</b> 逐级退出</span></li>
-        <li><span data-i18n="f6_l3">「常用书签」按<b>访问次数</b>和最近打开时间排序</span></li>
+        <li><span data-i18n="f6_l1">极简页和弹窗<b>共用一套搜索</b>，拼音 / 首字母 / 简繁 / 模糊</span></li>
+        <li><span data-i18n="f6_l2">↑↓ 选择，<b>Enter</b> 打开，<b>Cmd/Ctrl+Enter</b> 新标签，<b>Esc</b> 返回</span></li>
+        <li><span data-i18n="f6_l3">地址栏输入 <b>bm</b> + 关键词，也能搜书签</span></li>
       </ul>
     </div>
     <div>
@@ -410,7 +410,7 @@ footer a{color:var(--subtle)}
       <div class="pain"><span class="n">01</span><p data-i18n="pain1"><b>没有搜索框</b>：几百个书签，只能靠眼睛一行行扫</p></div>
       <div class="pain"><span class="n">02</span><p data-i18n="pain2"><b>新存的书签永远在最底下</b>，偏偏刚存的才是最常用的</p></div>
       <div class="pain"><span class="n">03</span><p data-i18n="pain3"><b>下拉菜单连滚动条都没有</b>：全靠鼠标滚轮一点点往下蹭</p></div>
-      <div class="pain-good" data-i18n="pain_good">装上之后：点图标 → 输关键词 → 回车打开。三秒，结束。</div>
+      <div class="pain-good" data-i18n="pain_good">现在：新标签页就是书签墙，输入中文、拼音或首字母，三秒找到。</div>
     </div>
   </div>
   <p class="origin reveal" data-i18n="origin">这不是大厂产品：它是一个每天要在几百个书签里找东西的外贸人，被 Chrome 逼出来的作品。所以每个功能都来自真实的抓狂瞬间，而不是产品会议。</p>
@@ -422,7 +422,7 @@ footer a{color:var(--subtle)}
     <div class="split">
       <div>
         <h2 class="sec-h" data-i18n="fz_h">收藏方式，<span class="hl">一个都没变</span></h2>
-        <p class="panel-p" data-i18n="fz_p">我们特意没有另做「添加书签」：收藏还是点地址栏那颗你用了多年的星星。它直接读写 Chrome 自己的书签系统，相当于给系统书签加了个更好用的壳：不迁移、不学习、装上即会用。</p>
+        <p class="panel-p" data-i18n="fz_p">收藏还是点地址栏那颗星；书签直接写进 Chrome 原生书签，和书签栏、Chrome 管理器实时互通。不迁移、不学习；一键置顶只是把它移到书签栏第一位。</p>
       </div>
       <div class="fz-demo">
         <div class="addr">midjourney.com<svg width="20" height="20" viewBox="0 0 24 24" fill="#F2B705" stroke="#8A6A00" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.8 5.9 6.2.8-4.6 4.3 1.2 6.2L12 17.2 6.4 20.2l1.2-6.2L3 9.7l6.2-.8z"/></svg></div>
@@ -440,20 +440,20 @@ footer a{color:var(--subtle)}
 
 <!-- ══ 书签工作台：六张大卡 ═════════════════════════════════════════ -->
 <section class="wrap sec">
-  <h2 class="sec-h reveal" data-i18n="bento_h2">不止搜索，一整套<span class="hl">书签工作台</span></h2>
-  <p class="sec-p reveal" data-i18n="bento_p">弹窗管最高频的四件事，导航页管整理和体检。</p>
+  <h2 class="sec-h reveal" data-i18n="bento_h2">不止搜索，一整套<span class="hl">轻量工具</span></h2>
+  <p class="sec-p reveal" data-i18n="bento_p">弹窗管高频操作，极简页管浏览和整理；没有侧边栏，也没有多余仪表盘。</p>
   <div class="feats">
 
     <article class="card feat split reveal">
       <div>
         <div class="feat-tag" data-i18n="t0">01 · 弹窗</div>
-        <h3 data-i18n="f0_h">点开就是搜索框，没有多余的东西</h3>
-        <p class="feat-p" data-i18n="f0_p">弹窗只做最高频的四件事：搜索、一键到顶、一键到底、最近添加优先。点开光标已经在搜索框里，敲关键词、回车，第一个结果直接打开。找一个书签，全程不用碰鼠标。</p>
-        <ul class="dots"><li data-i18n="f0_l1">悬停任意书签，一键「置顶」到列表最前</li><li data-i18n="f0_l3">拖拽排序；右键打开、编辑、删除</li></ul>
+        <h3 data-i18n="f0_h">点开就能搜，常用操作都在</h3>
+        <p class="feat-p" data-i18n="f0_p">点工具栏图标：搜索、到顶部、到底部、最近添加、书签墙都在；悬停书签可一键置顶。点开光标已经在搜索框里，敲关键词、回车，第一个结果直接打开。</p>
+        <ul class="dots"><li data-i18n="f0_l1">一键置顶到 Chrome 书签栏第一位</li><li data-i18n="f0_l3">右键打开、编辑、删除</li></ul>
       </div>
       <div class="mock stack" aria-hidden="true">
-        <div class="fake-input" data-i18n="pop_search">搜索书签…</div>
-        <div class="pills"><span class="pill" data-i18n="pop_top">到顶部</span><span class="pill" data-i18n="pop_bottom">到底部</span><span class="pill on" data-i18n="pop_recent">最近添加</span><span class="pill" data-i18n="pop_nav">导航</span></div>
+        <div class="fake-input" data-i18n="pop_search">搜索书签标题/网址…</div>
+        <div class="pills"><span class="pill" data-i18n="pop_top">到顶部</span><span class="pill" data-i18n="pop_bottom">到底部</span><span class="pill on" data-i18n="pop_recent">最近添加</span><span class="pill" data-i18n="pop_nav">书签墙</span></div>
         <div class="rows">
           <div><span data-i18n="pop_r1">昨晚存的 AI 工具</span><span class="tagnew" data-i18n="pop_new">新</span></div>
           <div class="sel"><span data-i18n="pop_r2">今早存的客户官网</span><span class="tagpin" data-i18n="pop_pin">置顶</span></div>
@@ -478,8 +478,8 @@ footer a{color:var(--subtle)}
       <div>
         <div class="feat-tag" data-i18n="t2">03 · 网页预览</div>
         <h3 data-i18n="f2_h">认图比认字快</h3>
-        <p class="feat-p" data-i18n="f2_p">滚动到哪，哪里的书签就按需生成网页截图并缓存在本机。标题记不清没关系，扫一眼就知道是哪个网站。</p>
-        <ul class="dots"><li data-i18n="f2_l1">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时打开</li><li data-i18n="f2_l2">深色 / 浅色 / 跟随系统三种主题</li><li data-i18n="f2_l3">预览默认开启，顶栏「预览：开 / 关」一键切换</li></ul>
+        <p class="feat-p" data-i18n="f2_p">滚动到哪，哪里的书签就按需生成网页截图并缓存在本机。标题记不清没关系，扫一眼就知道是哪个网站；不想看图，设置里可一键关闭。</p>
+        <ul class="dots"><li data-i18n="f2_l1">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时回来</li><li data-i18n="f2_l2">深色 / 浅色 / 跟随系统三种主题</li><li data-i18n="f2_l3">设置 → 网页预览，一键关闭，卡片变纯文字</li></ul>
       </div>
       <div class="mock stack" aria-hidden="true">
         <div class="crop"></div>
@@ -505,9 +505,9 @@ footer a{color:var(--subtle)}
     <article class="card feat split reveal">
       <div>
         <div class="feat-tag" data-i18n="t4">05 · 批量整理</div>
-        <h3 data-i18n="f4_h">攒了三年的书签，十分钟理完</h3>
-        <p class="feat-p" data-i18n="f4_p">多选模式下点选、Shift 圈选一整段，然后一次性移动、归类或删除。重复收藏的同一个网页？「一键清理重复」每组只留最新的。</p>
-        <ul class="dots"><li data-i18n="f4_l1">Shift + 点击范围选择，全选当前筛选结果</li><li data-i18n="f4_l2">按 URL 归一化识别重复（带不带 www 都算同一个）</li><li data-i18n="f4_l3">拖拽排序、置顶、编辑标题和网址</li></ul>
+        <h3 data-i18n="f4_h">攒了三年的书签，几分钟理完</h3>
+        <p class="feat-p" data-i18n="f4_p">极简页多选：勾选或全选当前结果，然后一次性移动、归类或删除。重复收藏的同一个网页？「一键清理重复」每组只留最新的。</p>
+        <ul class="dots"><li data-i18n="f4_l1">勾选或全选当前筛选结果，底部批量条操作</li><li data-i18n="f4_l2">按 URL 归一化识别重复（带不带 www 都算同一个）</li><li data-i18n="f4_l3">设置分类 / 移动 / 删除；删除都能撤销</li></ul>
       </div>
       <div class="mock stack" aria-hidden="true">
         <div class="dup" data-i18n="f4_dup1">供应商目录（重复）</div>
@@ -536,11 +536,11 @@ footer a{color:var(--subtle)}
   <div class="nt reveal">
     <div class="nt-eyebrow" data-i18n="nt_eyebrow">新标签页接管</div>
     <h2 class="sec-h" data-i18n="nt_h">打开新标签页，就是你的<span class="hl">书签墙</span></h2>
-    <p class="nt-p" data-i18n="nt_p">新标签页不再是一片空白：书签导航加上正中间的网页搜索栏（用你自己的默认搜索引擎），查资料、开常用网站，都从这一页出发。不喜欢？顶栏一键关掉。</p>
-    <div class="chips"><span data-i18n="nt_c1">装上即生效</span><span data-i18n="nt_c2">顶栏一键开 / 关</span><span data-i18n="nt_c3">预览、分类、搜索全都能用</span></div>
+    <p class="nt-p" data-i18n="nt_p">没有侧边栏，没有仪表盘：搜索、分类、常用 / 最近、书签卡片都在一页。新标签页接管可在设置里开或关；预览、密度、主题也都在设置里。</p>
+    <div class="chips"><span data-i18n="nt_c1">顶上只有搜索和几个动作</span><span data-i18n="nt_c2">设置里一键开关新标签页</span><span data-i18n="nt_c3">拼音、键盘、预览、置顶全都能用</span></div>
     <div class="win">
-      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="nt_url">新标签页</span></div>
-      <img src="newtab-shot.jpg" width="1920" height="600" loading="lazy" decoding="async" data-i18n-alt="nt_alt" alt="新标签页：正中是网页搜索栏，下方是书签导航">
+      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="nt_url">新标签页 · 书签墙</span></div>
+      <img src="newtab-shot.jpg" width="1920" height="600" loading="lazy" decoding="async" data-i18n-alt="nt_alt" alt="书签管理器 Pro 的极简新标签页：搜索框、分类胶囊、常用书签墙和网页预览卡片">
     </div>
   </div>
   <p class="mid-note" data-i18n="mid_cta_note">免费 · 无需注册 · 30 秒装好</p>
@@ -556,13 +556,13 @@ footer a{color:var(--subtle)}
 <section class="wrap sec priv" id="privacy">
   <div class="reveal">
     <h2 class="sec-h" data-i18n="p_h2">你的书签，<br><span class="hl">只属于你</span></h2>
-    <p class="sec-p" data-i18n="p_sub">核心数据保存在本地；唯一的外部请求是生成网页预览截图，可一键关闭。</p>
+    <p class="sec-p" data-i18n="p_sub">核心数据保存在本地：分类、搜索学习、界面偏好都在本机；唯一的外部请求是网页预览截图，可在设置里一键关闭。</p>
     <p class="sec-p" style="font-size:15px" data-i18n="p_more">权限逐项说明与完整条款，见 <a href="privacy.html">隐私政策</a>。</p>
   </div>
   <div class="priv-cards reveal">
-    <div class="priv-card"><h3 data-i18n="p1_h">核心数据留在本地</h3><p data-i18n="p1_p">书签由 Chrome 管理；分类和界面偏好保存在本地。我们没有后端服务器，无法读取这些数据。</p></div>
+    <div class="priv-card"><h3 data-i18n="p1_h">核心数据留在本地</h3><p data-i18n="p1_p">书签由 Chrome 管理；分类、搜索学习和界面偏好保存在本地。我们没有后端服务器，无法读取这些数据。</p></div>
     <div class="priv-card"><h3 data-i18n="p2_h">无账号、无追踪</h3><p data-i18n="p2_p">不用注册，没有统计脚本，没有广告 SDK。装上就用，卸载即净。</p></div>
-    <div class="priv-card"><h3 data-i18n="p3_h">预览可随时关闭</h3><p data-i18n="p3_p">截图由第三方服务生成（会把书签网址发给它）。顶栏「预览：关」一键停用，卡片变纯文字，不再发出任何外部请求。</p></div>
+    <div class="priv-card"><h3 data-i18n="p3_h">预览可随时关闭</h3><p data-i18n="p3_p">截图由第三方服务生成（会把书签网址发给它）。设置 → 网页预览，一键关闭后卡片变纯文字，不再发出任何外部请求。</p></div>
   </div>
 </section>
 
@@ -571,12 +571,14 @@ footer a{color:var(--subtle)}
   <h2 class="sec-h reveal" data-i18n="q_h2">常见问题</h2>
   <div class="faq reveal">
     <details><summary data-i18n="q1">它会动我现有的书签吗？</summary><p data-i18n="a1">不会。它直接读写 Chrome 自带的书签，不做迁移、不建副本。你在这里做的整理（移动、删除、排序）就是对 Chrome 书签本身的操作，随 Chrome 账号正常同步；智能分类只是展示层，不改变你的文件夹结构。添加新书签也照旧：点地址栏的 ★ 星标就行，两边实时互通。</p></details>
-    <details><summary data-i18n="q2">我的书签数据会被上传吗？</summary><p data-i18n="a2">开发者没有后端服务器，书签和分类不会上传给我们。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在导航页顶栏点「预览：关」即可停用。</p></details>
-    <details><summary data-i18n="q3">自动分类分错了怎么办？</summary><p data-i18n="a3">右键书签 →「移动到分类」手动指定即可，手动分类永久生效、优先于自动规则。也可以多选后批量设置分类。</p></details>
+    <details><summary data-i18n="q2">我的书签数据会被上传吗？</summary><p data-i18n="a2">开发者没有后端服务器，书签、分类和搜索学习记录不会上传。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在设置 → 网页预览里关掉即可停用。</p></details>
+    <details><summary data-i18n="q3">自动分类分错了怎么办？</summary><p data-i18n="a3">右键书签 →「移动到分类」手动指定，手动分类永久生效、优先于自动规则；也可以在极简页多选后批量设置分类。</p></details>
     <details><summary data-i18n="q4">删错了能恢复吗？</summary><p data-i18n="a4">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
-    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。为 Chrome 设计，Edge 等 Chromium 内核浏览器通常也能安装使用。界面支持简体中文、繁体中文和英文，跟随浏览器语言自动切换。</p></details>
+    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。Chrome 应用商店和 Microsoft Edge 加载项都已上架；界面支持简体中文、繁体中文和英文，跟随浏览器语言自动切换。</p></details>
     <details><summary data-i18n="q6">书签特别多（几千个）会卡吗？</summary><p data-i18n="a6">不会。5 万个书签实测，每按一个键 20 毫秒内出结果；预览图只在接近可视区域时按需加载并缓存。</p></details>
-    <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到书签导航和网页搜索栏。不想要的话，在导航页顶栏点「新标签页：关」即可，之后新标签页会打开你在 Chrome 里设置的默认搜索引擎的首页。（Chrome 的限制：扩展接管新标签页后，无法再显示 Chrome 原生新标签页。）</p></details>
+    <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到极简书签墙。不想要的话，设置 → 新标签页接管，关掉后新标签页会打开你在浏览器里设置的默认搜索引擎首页。（Chrome 的限制：扩展接管新标签页后，无法再显示原生新标签页。）</p></details>
+    <details><summary data-i18n="q8">支持拼音搜索吗？</summary><p data-i18n="a8">支持。中文书签可以按全拼、首字母、混合拼音和模糊拼音搜索，也能用简体或繁体输入；例如「客户管理系统」输入 khgl 或 kehuguanli 都能命中。</p></details>
+    <details><summary data-i18n="q9">为什么没有侧边栏或完整书签墙页面？</summary><p data-i18n="a9">这是故意的：把书签墙直接放进新标签页，一页看完常用、所有、最近和分类；弹窗负责高频搜索和置顶，设置里放整理、查重、失效检测和预览开关，不再需要第二个完整界面。</p></details>
   </div>
 </section>
 
@@ -649,6 +651,18 @@ const ZH = {
   af15:'键盘快捷键', af15d:'/ 聚焦搜索、Esc 逐级退出、Alt+B 打开导航页',
   demo_count:'{n} 个结果', demo_empty:'这里只有 10 个示例书签。装上以后，搜的是你自己的全部书签。'
 };
+
+Object.assign(ZH, {
+  af2:'网页预览卡片', af2d:'滚动时按需加载；可在设置 → 网页预览关闭成纯文字',
+  af6:'极简页多选', af6d:'勾选 / 全选，移动、分类、删除；删除可撤销',
+  af13:'新标签页接管', af13d:'打开新标签页就是书签墙，可在设置里开或关',
+  af15:'键盘 + 地址栏', af15d:'↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回；地址栏 bm 搜书签',
+  af16:'极简书签墙', af16d:'一页看完常用、所有、最近和分类，不需要侧边栏',
+  af17:'拼音 / 简繁搜索', af17d:'全拼、首字母、混合、模糊拼音和简繁读音',
+  af18:'键盘导航', af18d:'↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回',
+  af19:'地址栏 bm', af19d:'地址栏输入 bm + 关键词，直接搜书签'
+});
+
 const EN = {
   brand:'Bookmark Manager', brand_full:'Bookmark Manager Pro',
   nav_features:'Features', nav_all:'All features', nav_privacy:'Privacy', nav_faq:'FAQ', nav_cta:'Add to Chrome, free',
@@ -776,8 +790,61 @@ const EN = {
   foot_privacy:'Privacy Policy', foot_contact:'Contact'
 };
 
+
+Object.assign(EN, {
+  hero_eyebrow:'CHROME / EDGE EXTENSION · FREE',
+  hero_h1:'Bookmarks, finally<br><span class="hl">searchable and visible</span>',
+  hero_sub:'Turn Chrome / Edge bookmarks into one minimal wall: search by pinyin, initials, fuzzy or Simplified/Traditional; frequent, recent, categories, previews and one-click pin all live on one page.',
+  hero_alt:'Bookmark Manager Pro’s minimal bookmark wall: search box, category pills and preview cards',
+  win_url:'New Tab · Minimal Wall',
+  float_b:'Pinyin search too', float_s:'khgl → Customer management',
+  trust1:'One minimal page', trust2:'Pinyin / Chinese search', trust3:'Chrome + Edge stores', trust4:'Local, no account',
+  f6_p:'The minimal page is the search box: titles, URLs, folders and pinyin together. Type khgl to find “Customer management”; ↑↓ to choose, Enter to open, Cmd/Ctrl+Enter for a new tab, Esc to go back.',
+  f6_l1:'One search across the minimal page and popup — pinyin, initials, Simplified/Traditional, fuzzy',
+  f6_l2:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back',
+  f6_l3:'Type bm plus a keyword in the address bar to search bookmarks',
+  pain_good:'Now: your new tab is the wall. Type Chinese, pinyin or initials; find it in three seconds.',
+  fz_p:'Saving still uses the star in the address bar; bookmarks go straight into native Chrome bookmarks and stay in sync with the bookmarks bar and Chrome manager. No migration; one-click pin just moves it to the first slot.',
+  bento_h2:'More than search: a set of <span class="hl">lightweight tools</span>',
+  bento_p:'The popup handles frequent actions; the minimal page handles browsing and tidying. No sidebar, no dashboard.',
+  f0_h:'Open it and search — the frequent actions are there',
+  f0_p:'Click the toolbar icon: search, top, bottom, recent and the wall are all there; hover a bookmark to pin it. The cursor starts in the search box; type and press Enter.',
+  f0_l1:'Pin to the first slot of Chrome’s bookmarks bar', f0_l3:'Right-click to open, edit or delete',
+  pop_search:'Search title/URL…', pop_nav:'Wall',
+  f2_p:'Previews load near the viewport and cache locally; turn them off in Settings for text-only cards.',
+  f2_l1:'Comfortable / compact, Alt+B returns anytime',
+  f2_l3:'Settings → Page previews to turn off; cards become text-only',
+  f4_h:'Years of bookmarks, tidied in minutes',
+  f4_p:'On the minimal page, select or select all, then move, categorize or delete in one go. Duplicates? One-click dedupe keeps the newest in each group.',
+  f4_l1:'Select or select all current results; use the bottom bulk bar',
+  f4_l3:'Set category / move / delete; every delete is undoable',
+  nt_p:'No sidebar, no dashboard: search, categories, frequent/recent and bookmark cards all on one page. Turn new-tab takeover on or off in Settings; previews, density and theme live there too.',
+  nt_c1:'Only search and a few actions on top', nt_c2:'Toggle new-tab takeover in Settings', nt_c3:'Pinyin, keyboard, previews and pin all work',
+  nt_url:'New Tab · Bookmark Wall',
+  nt_alt:'Bookmark Manager Pro’s minimal new tab: search, category pills, frequent wall and preview cards',
+  p_sub:'Core data stays local: categories, search learning and UI preferences on this device; the only external request is page previews, which you can turn off in Settings.',
+  p1_p:'Chrome manages your bookmarks; categories, search learning and UI preferences stay local. No backend server, so we cannot read them.',
+  p3_p:'Screenshots come from a third-party service (bookmark URLs are sent). Settings → Page previews turns them off; cards become text-only with no external requests.',
+  a2:'The developer has no backend: bookmarks, categories and search learning are not uploaded. The only external request is preview screenshots (bookmark URLs are sent); turn it off in Settings → Page previews.',
+  a3:'Right-click → Move to category; manual categories win. You can also multi-select on the minimal page and set a category.',
+  a5:'Free. Available on the Chrome Web Store and Microsoft Edge Add-ons; UI in English, Simplified and Traditional Chinese, following the browser.',
+  a7:'Yes, on by default: new tabs open the minimal wall. To turn it off, Settings → New tab takeover; new tabs then open your default search engine homepage. (Chrome limitation: once an extension overrides the new tab, the native one cannot be shown.)',
+  q8:'Does it support pinyin search?',
+  a8:'Yes. Chinese titles match full pinyin, initials, mixed and fuzzy pinyin, and Simplified/Traditional input; e.g. 客户管理系统 matches khgl or kehuguanli.',
+  q9:'Why is there no sidebar or full bookmark wall page?',
+  a9:'By design: the wall lives in the new tab, so frequent, all, recent and categories are on one page; the popup handles search and pinning; Settings holds cleanup, duplicates, dead links and previews. No second full UI.',
+  af2:'Visual preview cards', af2d:'Loaded on scroll; turn off in Settings → Page previews for text-only cards',
+  af6:'Minimal-page multi-select', af6d:'Select or select all; move, categorize, delete; deletes are undoable',
+  af13:'New-tab takeover', af13d:'Every new tab is the bookmark wall; turn it on/off in Settings',
+  af15:'Keyboard + address bar', af15d:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back; type bm in the address bar',
+  af16:'Minimal bookmark wall', af16d:'Frequent, all, recent and categories on one page; no sidebar needed',
+  af17:'Pinyin / Chinese search', af17d:'Full pinyin, initials, mixed, fuzzy, and Simplified/Traditional readings',
+  af18:'Keyboard navigation', af18d:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back',
+  af19:'Address bar bm', af19d:'Type bm plus a keyword in the address bar to search bookmarks'
+});
+
 /* ── 全部功能清单 ─────────────────────────────────────────────────── */
-const ALL_FEATURES = ['af12','af13','af9','af1','af2','af3','af4','af5','af6','af7','af8','af14','af15','af10','af11'];
+const ALL_FEATURES = ['af16','af17','af18','af19','af13','af9','af1','af2','af3','af4','af5','af6','af7','af8','af14','af15','af10','af11','af12'];
 document.getElementById('allGrid').innerHTML = ALL_FEATURES.map(k =>
   `<div class="all-item"><span class="ck" aria-hidden="true">✓</span><div><b data-i18n="${k}"></b><div data-i18n="${k}d"></div></div></div>`).join('');
 
@@ -808,8 +875,8 @@ function setLang(l, persist) {
   document.querySelectorAll('[data-i18n-alt]').forEach(el => { const v = dict[el.getAttribute('data-i18n-alt')]; if (v !== undefined) el.alt = v; });
   document.documentElement.lang = l === 'en' ? 'en' : 'zh-CN';
   document.title = l === 'en'
-    ? 'Bookmark Manager Pro: bookmarks, organized for you'
-    : '书签管理器 Pro：书签，终于不用自己整理了';
+    ? 'Bookmark Manager Pro: Chrome bookmarks, a searchable minimal new tab'
+    : '书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页';
   langBtn.textContent = l === 'en' ? '中' : 'EN';
   document.getElementById('toTop').setAttribute('aria-label', l === 'en' ? 'Back to top' : '回到顶部');
   if (persist) { try { localStorage.setItem('bmpro-lang', l); } catch (e) {} }
