@@ -334,6 +334,7 @@ footer a{color:var(--subtle)}
     <p class="hero-sub" data-i18n="hero_sub">Chrome 的书签菜单不能搜索，新存的永远沉在最底下。装上它：关键词直接搜、自动分类、失效重复一键清掉。</p>
     <div class="hero-cta">
       <a class="btn btn-primary" data-store data-i18n="hero_cta">免费添加至 Chrome</a>
+      <a class="btn btn-ghost" data-edge-store data-i18n="hero_edge">Edge 加载项</a>
       <a class="btn btn-ghost" href="#features" data-i18n="hero_cta2">看看它长什么样</a>
     </div>
     <ul class="trust">
@@ -583,11 +584,12 @@ footer a{color:var(--subtle)}
   <div class="cta reveal">
     <h2 data-i18n="cta_h2">今天存下的书签，<br>三年后<span class="hl">还找得到</span></h2>
     <a class="btn" data-store data-i18n="cta_btn">免费添加至 Chrome</a>
-    <p class="cta-p" data-i18n="cta_p">已在 Chrome 应用商店上线，一键安装，完全免费。</p>
+    <a class="btn btn-ghost" data-edge-store data-i18n="edge_cta">Edge 加载项</a>
+    <p class="cta-p" data-i18n="cta_p">已在 Chrome 应用商店和 Microsoft Edge 加载项上线，一键安装，完全免费。</p>
   </div>
   <footer>
     <span>© 2026 <span data-i18n="brand_full">书签管理器 Pro</span></span>
-    <nav><a href="privacy.html" data-i18n="foot_privacy">隐私政策</a><a href="mailto:allenma2ong@gmail.com" data-i18n="foot_contact">联系我们</a></nav>
+    <nav><a href="privacy.html" data-i18n="foot_privacy">隐私政策</a><a href="mailto:allenma2ong@gmail.com" data-i18n="foot_contact">联系我们</a><a data-edge-store data-i18n="foot_edge">Edge 加载项</a></nav>
   </footer>
 </section>
 </main>
@@ -603,10 +605,22 @@ footer a{color:var(--subtle)}
    例如 https://chromewebstore.google.com/detail/xxxxxxxxxxxxxxxx
    ═══════════════════════════════════════════════════════════════════ */
 const STORE_URL = "https://chromewebstore.google.com/detail/bookmark-manager-pro/lincaijloppehjnkmaonboclmbmfhpbn";
+const EDGE_STORE_URL = "https://microsoftedge.microsoft.com/addons/detail/bookmark-manager-pro/bjkobohdkdldfnkannkbgcekflendcna";
 
 document.querySelectorAll('[data-store]').forEach(a => {
   if (STORE_URL) {
     a.href = STORE_URL;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  } else {
+    a.classList.add('is-disabled');
+    a.setAttribute('aria-disabled', 'true');
+  }
+});
+
+document.querySelectorAll('[data-edge-store]').forEach(a => {
+  if (EDGE_STORE_URL) {
+    a.href = EDGE_STORE_URL;
     a.target = '_blank';
     a.rel = 'noopener';
   } else {
@@ -640,7 +654,8 @@ const EN = {
   hero_eyebrow:'CHROME EXTENSION · FREE',
   hero_h1:'Your bookmarks,<br><span class="hl">organized for you</span>',
   hero_sub:'Chrome’s bookmark menu has no search, and new saves sink to the bottom. This adds it: type a keyword to find any bookmark, auto-sorted, with one-click cleanup of dead links and duplicates.',
-  hero_cta:'Add to Chrome, free', hero_cta2:'See how it looks',
+  hero_cta:'Add to Chrome, free', hero_edge:'Edge Add-on', hero_cta2:'See how it looks',
+  edge_cta:'Edge Add-on', foot_edge:'Edge Add-on',
   trust1:'Core data stays local', trust2:'No account needed', trust3:'English + Chinese (Simplified & Traditional)', trust4:'Zero learning curve',
   win_url:'New Tab · Bookmark grid',
   hero_alt:'The Bookmark Manager grid: auto-sorted categories on the left, a grid of bookmarks with website previews on the right',
@@ -755,7 +770,7 @@ const EN = {
   q7:'Does it replace my new tab page? How do I turn that off?',
   a7:'Yes, on by default: new tabs open your bookmark grid with a web search bar. If you’d rather not, click “New Tab: Off” in the grid header; new tabs will then open your default search engine’s homepage. (A Chrome limitation: once an extension overrides the new tab page, the native Chrome new tab can no longer be shown.)',
   cta_h2:'The bookmark you save today,<br><span class="hl">findable</span> three years from now',
-  cta_p:'Now on the Chrome Web Store. One click to install, completely free.',
+  cta_p:'Now on the Chrome Web Store and Microsoft Edge Add-ons. One click to install, completely free.',
   cta_btn:'Add to Chrome, free',
   foot_privacy:'Privacy Policy', foot_contact:'Contact'
 };
