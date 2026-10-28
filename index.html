@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页</title>
 <meta name="description" content="Chrome / Edge 书签扩展：一页极简书签墙，拼音/首字母/简繁模糊搜索、弹窗、置顶、最近添加、网页预览、查重和失效检测。免费、本地、无账号。">
-<meta name="theme-color" content="#F6F8FC">
+<meta name="theme-color" content="#F2EFE6">
 <meta name="google-site-verification" content="kSH0kA3LoPYsSlYA-3v17h5grOpsXaPIeVuYvYenxoY">
 <link rel="canonical" href="https://ma2ong.github.io/bookmark-manager-site/">
 
@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://ma2ong.github.io/bookmark-manager-site/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="书签管理器 Pro 的极简书签墙：顶部是搜索框，下面是分类胶囊和带网页预览的书签卡片">
+<meta property="og:image:alt" content="书签管理器 Pro 的纸感书签索引：钴蓝标题、真实书签墙截图和编号">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,8 +29,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 字体不阻塞首屏：国内访问 fonts.googleapis.com 不通时，立即用系统字体渲染 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"></noscript>
 <script>document.documentElement.classList.add('js');</script>
 <style>
 /* ── Tokens ─────────────────────────────────────────────────────────────
@@ -125,8 +125,8 @@ kbd{font-family:var(--num);font-size:.9em;font-weight:700;border:1px solid var(-
 .win img.switching{opacity:.3}
 .hero-art::before{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;background:radial-gradient(circle at 72% 18%,rgba(255,255,255,.75),transparent 45%),var(--tint);border-radius:40px}
 .hero-art::after{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;border-radius:40px;background-image:radial-gradient(rgba(26,115,232,.18) 1px,transparent 1px);background-size:12px 12px;opacity:.45;pointer-events:none;z-index:0}
-.hero-art .win,.hero-art .float-card{position:relative;z-index:1}
-.hero-art .float-card{z-index:2}
+.hero-art .win{position:relative;z-index:1}
+.hero-art .float-card{position:absolute;z-index:2}
 .win{position:relative;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 1px 3px rgba(60,64,67,.2),0 24px 60px -24px rgba(26,115,232,.35)}
 .win-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--panel2)}
 .win-bar i{width:10px;height:10px;border-radius:50%}
@@ -287,6 +287,7 @@ footer a{color:var(--subtle)}
 .to-top .ring{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg);pointer-events:none}
 .to-top .ring circle{fill:none;stroke:var(--btn);stroke-width:3;stroke-linecap:round}
 .to-top>svg:last-child{position:relative}
+@media (max-width:960px){#faq .faq{grid-template-columns:1fr}}
 @media (max-width:640px){.to-top{right:16px;bottom:18px;width:46px;height:46px}}
 @media (prefers-reduced-motion:reduce){.to-top{transition:none}}
 
@@ -353,6 +354,571 @@ footer a{color:var(--subtle)}
 .real-demo .ui-shot{border-radius:14px}
 
 </style>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     THE BOOKMARK INDEX — award-layer art direction
+     纸、墨、钴蓝、编号、真实界面。覆盖旧组件样式，不动内容结构。
+     ═══════════════════════════════════════════════════════════════════ -->
+<style id="award-layer">
+:root{
+  --paper:#F2EFE6; --paper-2:#E8E3D5; --card:#FAF8F1;
+  --ink:#15171B; --ink-2:#30333A; --muted:#66635A; --subtle:#6F6B5F;
+  --blue:#1F4BFF; --blue-2:#1539D6; --orange:#FF5A36;
+  --line:rgba(21,23,27,.15); --line-2:rgba(21,23,27,.28);
+  --tint:#E4E9FF; --tint-ink:#0C2266; --tint-muted:#46516B;
+  --panel:#1F4BFF; --panel-muted:rgba(255,255,255,.72); --panel-acc:#FF5A36; --panel-card:rgba(255,255,255,.1);
+  --hl:#FFD8C8; --res:#F2EFE6;
+  --sans:"Inter",-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --latin:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --mono:"DM Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --num:"DM Mono","SFMono-Regular",Consolas,monospace;
+}
+html[lang="en"]{--serif:var(--latin)}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3{font-weight:400;letter-spacing:-.015em}
+*{scrollbar-color:var(--line-2) transparent}
+::selection{background:var(--blue);color:var(--paper)}
+html{scroll-padding-top:92px}
+body{
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(rgba(21,23,27,.042) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(21,23,27,.042) 1px,transparent 1px);
+  background-size:72px 72px;
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:900;line-height:1.02;letter-spacing:-.03em;text-wrap:balance}
+.hl{color:var(--blue)}
+.nowrap{white-space:nowrap}
+p{color:inherit}
+a{color:var(--blue)}
+a:hover{color:var(--ink)}
+.wrap{max-width:1240px;padding:0 32px}
+.sec{position:relative;padding-top:140px;padding-bottom:96px;border-top:1px solid var(--line)}
+.sec-h{font-size:clamp(42px,5.4vw,76px);line-height:.98;letter-spacing:-.04em}
+.sec-p{max-width:660px;margin-top:22px;font-size:18px;line-height:1.75;color:var(--muted)}
+.sec[data-kicker]::before{
+  content:attr(data-kicker);display:flex;align-items:center;gap:14px;
+  margin-bottom:30px;padding-left:13px;border-left:1px solid var(--line-2);
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--blue);
+}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue)}
+
+/* ── controls ─────────────────────────────────────────────── */
+.btn{
+  min-height:56px;padding:0 24px;border-radius:0;border:1px solid var(--ink);
+  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
+}
+.btn::after{content:"↗";font-family:var(--mono);font-size:13px;transition:transform .2s}
+.btn-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-primary:hover{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{background:var(--paper-2);border-color:var(--ink)}
+.btn:hover::after{transform:translate(3px,-3px)}
+.btn.is-disabled{opacity:.6}
+kbd{font-family:var(--mono);font-size:.82em;font-weight:400;border:1px solid var(--line-2);border-bottom-width:2px;border-radius:0;padding:1px 6px;background:var(--card)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* ── header ───────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:40;padding:0;
+  background:rgba(242,239,230,.82);border-bottom:1px solid transparent;
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
+  transition:background .25s,border-color .25s;
+}
+.nav.scrolled{background:rgba(242,239,230,.95);border-bottom-color:var(--line)}
+.nav-in{
+  max-width:1240px;padding:17px 32px;border:0;border-radius:0;background:transparent;
+  box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;position:relative;
+}
+.brand{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:-.01em;gap:9px}
+.logo{width:28px;height:28px;border-radius:0;background:var(--blue)}
+.logo svg{width:14px;height:14px}
+.pro{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--ink);background:transparent;border:1px solid var(--line-2);padding:2px 6px;border-radius:0;letter-spacing:.08em}
+.nav-status{
+  position:absolute;left:224px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--subtle);
+  padding-left:16px;border-left:1px solid var(--line);white-space:nowrap;pointer-events:none;
+}
+html[lang="en"] .nav-status{display:none}
+.nav-links{gap:28px;font-size:12px}
+.nav-links a{
+  position:relative;padding:5px 0;border-radius:0;color:var(--ink-2);
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--blue);transform:scaleX(0);transform-origin:right;transition:transform .25s}
+.nav-links a:hover{background:transparent;color:var(--blue)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-right{gap:10px}
+.lang-btn{
+  min-height:40px;min-width:42px;padding:0 10px;border:1px solid var(--line-2);border-radius:0;
+  color:var(--ink-2);font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+}
+.lang-btn:hover{background:var(--paper-2);color:var(--ink)}
+.nav .btn{min-height:40px;padding:0 16px;font-size:12px}
+.install-menu summary{border-radius:0}
+.install-trigger{
+  min-height:40px;padding:0 16px;border:1px solid var(--ink);border-radius:0;
+  background:var(--ink);color:var(--paper);font-family:var(--mono);
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase; gap:9px;
+}
+.install-trigger:hover{background:var(--blue);border-color:var(--blue)}
+.install-pop{border-radius:0;border:1px solid var(--ink);box-shadow:10px 10px 0 rgba(21,23,27,.12);padding:4px;background:var(--card)}
+.install-pop a{border-radius:0;padding:12px}
+.install-pop a:hover{background:var(--paper-2)}
+.install-pop b{font-family:var(--sans);font-size:13px;font-weight:600}
+.install-pop span{font-family:var(--mono);font-size:9px;letter-spacing:.02em;color:var(--muted)}
+
+/* ── hero ─────────────────────────────────────────────────── */
+.hero{
+  position:relative;grid-template-columns:minmax(0,5.1fr) minmax(0,6.9fr);
+  gap:64px;align-items:center;padding-top:92px;padding-bottom:44px;
+}
+.hero::before{
+  content:"01 / THE WALL";position:absolute;left:-46px;top:128px;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--subtle);
+}
+.eyebrow{
+  background:transparent;border:0;border-radius:0;padding:0;color:var(--blue);
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;
+}
+.eyebrow .dot{width:6px;height:6px;border-radius:0;background:var(--blue);margin-right:2px}
+.hero h1{font-size:clamp(48px,5.1vw,74px);line-height:1.02;letter-spacing:-.045em;margin-top:28px}
+.hero-sub{max-width:540px;margin-top:28px;font-size:19px;line-height:1.75;color:var(--muted)}
+.hero-cta{margin-top:36px;gap:10px}
+.hero-cta .btn{min-height:54px}
+.hero-more{
+  margin-top:20px;padding:0 0 3px;border:0;border-bottom:1px solid var(--line-2);border-radius:0;
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+}
+.hero-more:hover{color:var(--blue);border-color:var(--blue);background:transparent}
+.trust{
+  margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--muted);
+}
+.trust li{gap:8px;align-items:flex-start}
+.ck{
+  width:14px;height:14px;border-radius:0;background:transparent;color:var(--blue);
+  font-size:12px;font-weight:400;display:inline-flex;align-items:center;justify-content:center;
+}
+.hero-art{padding:0 0 52px 0}
+.hero-tabs{
+  display:flex;gap:26px;width:max-content;max-width:100%;margin:0 0 16px;
+  padding:0;background:transparent;border:0;border-radius:0;
+  -webkit-backdrop-filter:none;backdrop-filter:none;overflow:auto;
+}
+.hero-tab{
+  border:0;border-bottom:1px solid transparent;border-radius:0;padding:0 0 9px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--subtle);background:transparent;white-space:nowrap;
+}
+.hero-tab:hover:not(.active){background:transparent;color:var(--ink)}
+.hero-tab.active{background:transparent;color:var(--ink);border-bottom-color:var(--blue);font-weight:500}
+.hero-art::before{
+  content:"";position:absolute;top:44px;right:-20px;bottom:20px;left:34px;
+  background:var(--blue);border-radius:0;
+}
+.hero-art::after{
+  content:"";position:absolute;top:44px;right:-20px;bottom:20px;left:34px;
+  background-image:radial-gradient(rgba(242,239,230,.55) 1px,transparent 1px);
+  background-size:11px 11px;opacity:.34;pointer-events:none;z-index:0;
+}
+.hero-art .win{position:relative;z-index:1}
+.hero-art .float-card{position:absolute;z-index:2;left:-18px;bottom:48px}
+.win{
+  border:1px solid var(--ink);border-radius:0;background:var(--card);
+  box-shadow:12px 12px 0 rgba(21,23,27,.08);overflow:hidden;
+}
+.win-bar{background:var(--paper-2);border-bottom:1px solid var(--line);padding:9px 12px;gap:5px}
+.win-bar i{width:6px;height:6px}
+.win-url{
+  margin-left:8px;background:transparent;border-radius:0;padding:0;
+  font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);
+}
+.win img{display:block;width:100%;height:auto}
+.plate-caption{
+  display:flex;justify-content:space-between;gap:12px;margin-top:10px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--subtle);position:relative;z-index:2;
+}
+.float-card{
+  left:-18px;bottom:48px;background:var(--card);border:1px solid var(--ink);border-radius:0;
+  padding:10px 13px;box-shadow:7px 7px 0 rgba(21,23,27,.1);transform:rotate(-2deg);gap:10px;
+}
+.float-card .ai{width:30px;height:30px;border-radius:0;background:var(--blue);font-family:var(--mono);font-size:11px}
+.float-card b{font-family:var(--serif);font-size:13px;font-weight:700;line-height:1.2}
+.float-card span{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.02em}
+
+/* ticker */
+.ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
+.ticker-track{display:flex;align-items:center;width:max-content;padding:17px 0;animation:ticker 46s linear infinite}
+.ticker span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-2);white-space:nowrap}
+.ticker i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--blue);margin:0 26px}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
+/* ── search ───────────────────────────────────────────────── */
+.search-sec{border-top:0;padding-top:124px}
+.search-sec .card{
+  background:var(--ink);color:var(--paper);border-radius:0;border:0;
+  padding:68px 56px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:56px;align-items:center;box-shadow:16px 16px 0 var(--blue);
+  position:relative;overflow:hidden;
+}
+.search-sec .sec-h{color:var(--paper);font-size:clamp(40px,4.1vw,58px);letter-spacing:-.035em}
+.search-sec .sec-h .hl{color:var(--orange)}
+.search-sec .sec-p{color:rgba(255,255,255,.66);font-size:16px;max-width:520px}
+.search-sec .ticks{color:rgba(255,255,255,.68);font-size:14px;gap:11px;margin-top:26px}
+.search-sec .ticks b{color:var(--paper)}
+.search-sec .ticks li::before{color:var(--orange)}
+.search-sec .demo-wrap{background:transparent;padding:0;border-radius:0;position:relative}
+.search-sec .demo-wrap::after{
+  content:attr(data-caption);display:flex;margin-top:12px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.38);
+}
+.search-sec .ui-shot{border:1px solid rgba(255,255,255,.18);border-radius:0;box-shadow:none}
+.search-sec .demo-note{display:none}
+.search-sec .demo[hidden]{display:none}
+
+/* ── why ──────────────────────────────────────────────────── */
+#why .sec-h{max-width:1000px}
+.why-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;margin-top:56px;align-items:start}
+.menu-card{
+  position:relative;padding:22px;background:var(--paper-2);border:1px solid var(--line);
+  border-radius:0;box-shadow:10px 10px 0 rgba(21,23,27,.06);
+}
+.menu-title{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);margin-bottom:14px}
+.menu-card .ui-shot{border:1px solid var(--line);border-radius:0;box-shadow:none;max-width:300px;margin:0 auto}
+.menu-card::after{
+  content:attr(data-caption);display:flex;margin-top:14px;padding-top:10px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);
+}
+.pains{gap:0;border-top:1px solid var(--line)}
+.pain{
+  display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;align-items:start;
+  background:transparent;border-bottom:1px solid var(--line);border-radius:0;padding:24px 0;
+}
+.pain .n{font-family:var(--mono);font-size:9px;font-weight:400;color:var(--blue);padding-top:7px;letter-spacing:.08em}
+.pain p{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.5;letter-spacing:-.015em;color:var(--muted)}
+.pain p b{color:var(--ink)}
+.pain-good{
+  margin-top:18px;background:var(--blue);color:var(--paper);border-radius:0;padding:26px 28px;
+  font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.5;position:relative;
+}
+.pain-good::after{content:"↗";position:absolute;right:22px;top:20px;font-family:var(--mono);font-size:16px;color:rgba(255,255,255,.6)}
+.origin{
+  max-width:820px;margin:48px 0 0;padding:0 0 0 22px;border-left:2px solid var(--blue);
+  text-align:left;font-family:var(--serif);font-size:19px;font-style:italic;line-height:1.7;color:var(--muted);
+}
+
+/* ── collection / blue panel ──────────────────────────────── */
+.panel{
+  background:var(--blue);color:var(--paper);border-radius:0;padding:76px 56px;
+  position:relative;overflow:hidden;box-shadow:16px 16px 0 var(--ink);
+}
+.panel::after{
+  content:"★";position:absolute;right:-34px;top:-138px;
+  font-family:var(--latin);font-size:360px;line-height:1;color:rgba(255,255,255,.075);pointer-events:none;
+}
+.panel > *{position:relative;z-index:1}
+.panel .sec-h{color:var(--paper);font-size:clamp(40px,4.4vw,64px)}
+.panel .hl{color:var(--orange)}
+.panel-p{color:rgba(255,255,255,.7);font-size:16px;line-height:1.8;max-width:480px}
+.panel .split{gap:56px;align-items:start}
+.addr{background:var(--paper);border-radius:0;color:var(--ink);font-family:var(--mono);font-size:11px;padding:12px 14px}
+.addr svg{margin-left:auto}
+.fz-note{font-family:var(--mono);font-size:8px;letter-spacing:.04em;color:rgba(255,255,255,.52);text-align:left;margin-top:6px}
+.saved{background:var(--paper);color:var(--ink);border-radius:0;border:1px solid rgba(21,23,27,.08);margin-top:12px}
+.saved b{font-family:var(--serif);font-size:14px}
+.saved div span{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.02em}
+.fz-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:48px;border-top:1px solid rgba(255,255,255,.28)}
+.fz-list li{
+  background:transparent;border-radius:0;padding:22px 22px 0 0;border-right:1px solid rgba(255,255,255,.2);
+  font-size:14px;line-height:1.7;color:rgba(255,255,255,.82);
+}
+.fz-list li:nth-child(3n){border-right:0}
+.fz-list li b{color:var(--paper);font-weight:600}
+
+/* ── features: editorial plates ───────────────────────────── */
+.feats{margin-top:56px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.card.feat{
+  background:transparent;border-radius:0;border:0;border-bottom:1px solid var(--line);
+  padding:64px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:64px;align-items:center;transition:none;box-shadow:none;
+}
+.card.feat:hover{transform:none;box-shadow:none}
+.feat > div:first-child{order:1}
+.feat > .mock{order:2}
+@media (min-width:961px){
+  .feat:nth-child(even) > div:first-child{order:2}
+  .feat:nth-child(even) > .mock{order:1}
+}
+.feat-tag{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.feat h3{font-size:clamp(30px,3.2vw,44px);line-height:1.06;margin-top:18px;letter-spacing:-.035em}
+.feat-p{margin-top:20px;font-size:16px;line-height:1.8;color:var(--muted);max-width:480px}
+.feat ul.dots{margin-top:24px;padding:0;font-size:14px;line-height:1.8;color:var(--muted);list-style:none;display:flex;flex-direction:column;gap:7px}
+.feat ul.dots li{position:relative;padding-left:18px}
+.feat ul.dots li::before{content:"—";position:absolute;left:0;color:var(--blue)}
+.mock{
+  position:relative;background-color:var(--paper-2);border:1px solid var(--line);
+  background-image:linear-gradient(rgba(21,23,27,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(21,23,27,.035) 1px,transparent 1px);
+  background-size:20px 20px;border-radius:0;padding:20px;
+}
+.mock::after{
+  content:attr(data-caption);display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:11px;
+  border-top:1px solid var(--line);font-family:var(--mono);font-size:8px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--subtle);
+}
+.mock::before{content:"";position:absolute;left:20px;top:20px;width:5px;height:5px;background:var(--blue);z-index:2}
+.ui-shot{border-radius:0;border:1px solid var(--line);box-shadow:none;background:var(--card);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.ui-shot.popup-shot{max-width:290px;margin:0 auto}
+.card.feat .mock:hover .ui-shot{transform:scale(1.012)}
+.preview-window{border-radius:0;border:1px solid var(--line);box-shadow:none;background:var(--card)}
+.preview-bar{background:var(--paper-2);border-bottom:1px solid var(--line);padding:8px 10px}
+.preview-bar i{width:5px;height:5px}
+.preview-bar span{font-family:var(--mono);font-size:8px;letter-spacing:.04em;color:var(--subtle)}
+.preview-window img{width:100%;height:auto;display:block}
+.preview-visual .pills{margin-top:12px}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:0;font-family:var(--mono);font-size:8px;padding:5px 8px;text-transform:uppercase;letter-spacing:.04em}
+.pill.on{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+
+/* ── new tab ──────────────────────────────────────────────── */
+.nt{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:0;
+  padding:88px 48px 0;text-align:center;position:relative;overflow:hidden;
+  box-shadow:16px 16px 0 rgba(21,23,27,.06);
+}
+.nt::before{content:"06 / WALL";position:absolute;left:24px;top:24px;font-family:var(--mono);font-size:8px;letter-spacing:.16em;color:var(--subtle)}
+.nt-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.nt .sec-h{margin-top:18px;color:var(--ink);font-size:clamp(44px,5.2vw,72px)}
+.nt .sec-h .hl{color:var(--blue)}
+.nt-p{margin:20px auto 0;max-width:620px;font-size:16px;line-height:1.8;color:var(--muted)}
+.chips{margin-top:26px;gap:8px;font-size:10px}
+.chips span{background:transparent;border:1px solid var(--line-2);border-radius:0;padding:7px 11px;font-family:var(--mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.nt .win{margin:48px auto 0;max-width:1060px;border:1px solid var(--ink);border-bottom:0;border-radius:0;box-shadow:none}
+.mid-note{margin-top:18px;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle)}
+
+/* ── index / all ──────────────────────────────────────────── */
+.all{
+  counter-reset:all;margin-top:48px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;border-top:1px solid var(--line);border-radius:0;background:transparent;
+}
+.all-item{
+  display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;
+  padding:22px 20px 22px 0;border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+}
+.all-item:nth-child(3n){border-right:0}
+.all-item .ck{display:none}
+.all-item::before{counter-increment:all;content:counter(all,decimal-leading-zero);font-family:var(--mono);font-size:9px;color:var(--blue);padding-top:4px;letter-spacing:.04em}
+.all-item b{font-family:var(--serif);font-size:17px;font-weight:700;letter-spacing:-.01em}
+.all-item div div{margin-top:4px;font-size:12px;line-height:1.6;color:var(--muted)}
+
+/* ── privacy ──────────────────────────────────────────────── */
+.priv{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;position:relative;padding-top:174px}
+.priv > *{position:relative;z-index:1}
+.priv::before{position:absolute;left:32px;top:118px;margin:0;z-index:2}
+@media (min-width:961px){.priv > div:first-child{position:sticky;top:112px;align-self:start}}
+.priv::after{
+  content:"LOCAL";position:absolute;right:-8px;bottom:40px;z-index:0;
+  font-family:var(--latin);font-size:clamp(90px,13vw,180px);line-height:1;letter-spacing:-.04em;
+  color:transparent;-webkit-text-stroke:1px rgba(21,23,27,.13);pointer-events:none;
+}
+.priv .sec-h{font-size:clamp(44px,5.2vw,74px)}
+.priv .sec-p{font-size:16px}
+.priv-cards{gap:0;border-top:1px solid var(--line)}
+.priv-card{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:24px 0}
+.priv-card h3{font-size:23px;font-weight:700;letter-spacing:-.015em}
+.priv-card p{margin-top:8px;font-size:14px;line-height:1.75;color:var(--muted)}
+
+/* ── faq ──────────────────────────────────────────────────── */
+#faq .faq{max-width:100%;margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:0 48px;border-top:1px solid var(--line)}
+.faq details{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:24px 0}
+.faq summary{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.35;letter-spacing:-.015em;min-height:0}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--blue);align-self:flex-start;margin-top:2px}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:14px;max-width:800px;font-size:15px;line-height:1.8;color:var(--muted)}
+
+/* ── cta ──────────────────────────────────────────────────── */
+.cta{
+  background:var(--ink);color:var(--paper);border-radius:0;padding:110px 56px;
+  text-align:center;position:relative;overflow:hidden;box-shadow:16px 16px 0 var(--blue);
+}
+.cta::before{
+  content:"↗";position:absolute;right:30px;top:-60px;font-family:var(--latin);
+  font-size:300px;line-height:1;color:rgba(255,255,255,.07);pointer-events:none;
+}
+.cta::after{content:"";position:absolute;left:36px;bottom:32px;width:7px;height:7px;background:var(--orange)}
+.cta h2{position:relative;z-index:1;font-size:clamp(44px,6.2vw,84px);line-height:1;color:var(--paper);max-width:900px;margin:0 auto;letter-spacing:-.045em}
+.cta .hl{color:var(--orange)}
+.cta .btn{position:relative;z-index:1;margin-top:38px;background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.cta .btn:hover{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.cta .btn-ghost{background:transparent;color:var(--paper);border-color:rgba(255,255,255,.32)}
+.cta .btn-ghost:hover{background:transparent;border-color:var(--paper);color:var(--paper)}
+.cta-p{position:relative;z-index:1;margin-top:18px;font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:rgba(255,255,255,.4)}
+footer{
+  margin-top:0;padding:24px 0 44px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-top:1px solid var(--line);font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--subtle);
+}
+footer nav{gap:22px}
+footer a{font-family:var(--mono);font-size:9px;color:var(--subtle)}
+footer a:hover{color:var(--blue)}
+
+/* ── motion / selection ───────────────────────────────────── */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.feat{transition:none}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .hero .eyebrow,.hero h1,.hero-sub,.hero-cta,.hero-more,.trust,.hero-art{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero h1{animation-delay:.05s}.hero-sub{animation-delay:.12s}.hero-cta,.hero-more{animation-delay:.18s}.trust{animation-delay:.24s}.hero-art{animation-delay:.1s}
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .ui-shot{transition:none}
+}
+
+/* ── responsive ───────────────────────────────────────────── */
+@media (max-width:1240px){.hero::before{display:none}.nav-status{display:none}}
+@media (max-width:1080px){
+  .hero{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:36px}
+  .hero h1{font-size:clamp(48px,6.2vw,72px)}
+  .feat,.why-grid,.priv{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px}
+  .search-sec .card{padding:48px 36px;gap:36px}
+  .panel{padding:60px 36px}
+}
+@media (max-width:960px){
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;gap:48px;padding-top:72px}
+  .hero h1{font-size:clamp(48px,8vw,72px)}
+  .hero-sub{max-width:620px}
+  .hero-art{max-width:760px;margin:0 auto;padding-bottom:52px}
+  .sec{padding-top:110px;padding-bottom:80px}
+  .sec-h{font-size:clamp(40px,7vw,60px)}
+  .search-sec .card{grid-template-columns:1fr;gap:40px;padding:48px 32px;box-shadow:10px 10px 0 var(--blue)}
+  .why-grid,.priv{grid-template-columns:1fr;gap:40px}
+  .card.feat{grid-template-columns:1fr;gap:36px;padding:48px 0}
+  .card.feat > div:first-child,.card.feat > .mock{order:initial}
+  .card.feat:nth-child(even) > div:first-child,.card.feat:nth-child(even) > .mock{order:initial}
+  .mock{max-width:680px;width:100%}
+  .panel .split{grid-template-columns:1fr}
+  .fz-list{grid-template-columns:1fr}
+  .fz-list li{border-right:0;border-bottom:1px solid rgba(255,255,255,.2);padding:18px 0}
+  .fz-list li:last-child{border-bottom:0}
+  .all{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .all-item:nth-child(3n){border-right:1px solid var(--line)}
+  .all-item:nth-child(2n){border-right:0}
+  .priv::after{display:none}
+  .nt{padding:64px 28px 0}
+}
+@media (max-width:640px){
+  .wrap{padding:0 20px}
+  .nav{padding:0}
+  .nav-in{padding:12px 20px}
+  .nav-status{display:none}
+  .brand{font-size:14px}
+  .logo{width:26px;height:26px}
+  .pro{font-size:8px}
+  .nav-right{gap:6px}
+  .lang-btn{min-height:36px;min-width:38px}
+  .install-trigger{min-height:36px;padding:0 12px;font-size:9px}
+  .install-pop{width:264px}
+  .hero{padding-top:56px;gap:36px}
+  .hero h1{font-size:clamp(42px,12vw,58px);line-height:1}
+  .hero-sub{font-size:17px;margin-top:22px}
+  .hero-cta .btn{flex:1 1 100%}
+  .hero-more{font-size:9px}
+  .trust{grid-template-columns:1fr 1fr;font-size:8px;margin-top:32px;gap:8px 12px}
+  .hero-tabs{gap:18px}
+  .hero-tab{font-size:8px}
+  .hero-art{padding:0 0 36px 0}
+  .hero-art::before{top:36px;right:-10px;bottom:14px;left:18px}
+  .hero-art::after{top:36px;right:-10px;bottom:14px;left:18px}
+  .float-card{display:none}
+  .plate-caption{font-size:7px}
+  .win{box-shadow:8px 8px 0 rgba(21,23,27,.08)}
+  .ticker-track{padding:14px 0;animation-duration:30s}
+  .ticker span{font-size:8px}
+  .ticker i{margin:0 16px;font-size:9px}
+  .sec{padding-top:88px;padding-bottom:64px}
+  .sec[data-kicker]::before{font-size:8px;margin-bottom:22px;gap:10px}
+  .sec[data-kicker]::before::after{width:32px}
+  .sec-h{font-size:clamp(36px,9vw,48px)}
+  .sec-p{font-size:16px;margin-top:16px}
+  .search-sec{padding-top:88px}
+  .search-sec .card{padding:36px 22px;box-shadow:8px 8px 0 var(--blue)}
+  .search-sec .sec-h{font-size:clamp(34px,8vw,44px)}
+  .search-sec .sec-p{font-size:14px}
+  .search-sec .ticks{font-size:13px;margin-top:20px}
+  .why-grid{margin-top:40px}
+  .menu-card{padding:14px}
+  .pain{grid-template-columns:30px minmax(0,1fr);gap:12px;padding:20px 0}
+  .pain p{font-size:17px}
+  .pain-good{font-size:18px;padding:22px}
+  .origin{font-size:16px;margin-top:36px;padding-left:16px}
+  .panel{padding:44px 22px;box-shadow:8px 8px 0 var(--ink)}
+  .panel::after{font-size:220px;top:-100px;right:-30px}
+  .panel .sec-h{font-size:clamp(36px,9vw,48px)}
+  .panel-p{font-size:14px}
+  .fz-list li{font-size:13px}
+  .card.feat{padding:36px 0;grid-template-columns:1fr}
+  .feat h3{font-size:clamp(28px,8vw,34px)}
+  .feat-p{font-size:15px}
+  .mock{padding:14px}
+  .mock::before{left:14px;top:14px}
+  .mock::after{font-size:7px;margin-top:12px;padding-top:9px}
+  .ui-shot.popup-shot{max-width:250px}
+  .nt{padding:48px 18px 0}
+  .nt .sec-h{font-size:clamp(38px,10vw,52px)}
+  .nt-p{font-size:14px}
+  .chips{gap:6px}
+  .chips span{font-size:7px;padding:6px 8px}
+  .nt .win{margin-top:32px}
+  .all{grid-template-columns:1fr;margin-top:36px}
+  .all-item{border-right:0;padding:16px 0}
+  .all-item b{font-size:16px}
+  .priv{padding-top:140px}
+  .priv::before{left:20px;top:84px}
+  .priv .sec-h{font-size:clamp(38px,10vw,52px)}
+  .priv-card{padding:20px 0}
+  .priv-card h3{font-size:21px}
+  .faq summary{font-size:18px}
+  .faq p{font-size:14px}
+  .cta{padding:72px 22px;box-shadow:8px 8px 0 var(--blue)}
+  .cta h2{font-size:clamp(38px,10vw,52px)}
+  .cta .btn{width:100%;margin-top:18px}
+  .cta .btn + .btn{margin-top:8px}
+  .cta-p{font-size:8px}
+  footer{font-size:8px;padding-bottom:32px}
+  footer nav{gap:14px}
+}
+
+.faq-cta{background:var(--ink);color:var(--paper);padding:22px 24px;display:flex;flex-direction:column;justify-content:center;gap:8px;position:relative;min-height:112px}
+.faq-cta::before{content:"↗";position:absolute;right:18px;top:10px;font-family:var(--latin);font-size:54px;line-height:1;color:rgba(255,255,255,.12)}
+.faq-cta span{font-family:var(--mono);font-size:8px;letter-spacing:.14em;color:var(--orange)}
+.faq-cta b{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.4}
+.faq-cta a{color:var(--paper);font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);width:max-content;padding-bottom:2px}
+.faq-cta a:hover{color:var(--orange);border-color:var(--orange)}
+
+
+.all-item{transition:background .2s}
+.all-item:hover{background:rgba(31,75,255,.045)}
+.all-item:hover b{color:var(--blue)}
+.faq summary{transition:color .2s}
+.faq summary:hover,.faq details[open] summary{color:var(--blue)}
+
+</style>
+
 </head>
 <body>
 
@@ -362,6 +928,7 @@ footer a{color:var(--subtle)}
       <span class="logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span>
       <span data-i18n="brand">书签管理器</span> <span class="pro">PRO</span>
     </a>
+    <span class="nav-status" aria-hidden="true">LOCAL-FIRST / v3.2.1</span>
     <nav class="nav-links">
       <a href="#features" data-i18n="nav_features">功能</a>
       <a href="#all" data-i18n="nav_all">全部清单</a>
@@ -389,7 +956,7 @@ footer a{color:var(--subtle)}
 <section class="wrap hero" id="top">
   <div>
     <p class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">CHROME / EDGE 扩展 · 免费</span></p>
-    <h1 data-i18n="hero_h1">书签，终于<br><span class="hl">能搜又能看</span>了</h1>
+    <h1 data-i18n="hero_h1">书签，终于<br><span class="hl">能搜又能看了</span></h1>
     <p class="hero-sub" data-i18n="hero_sub">把 Chrome / Edge 书签变成一页极简书签墙：拼音、首字母、简繁模糊都能搜；常用、最近、分类、网页预览和一键置顶，全在这一页。</p>
     <div class="hero-cta">
       <a class="btn btn-primary" data-store data-i18n="hero_cta">免费添加至 Chrome</a>
@@ -422,8 +989,15 @@ footer a{color:var(--subtle)}
   </div>
 </section>
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>GITHUB</span><i>×</i><span>FIGMA</span><i>×</i><span>NOTION</span><i>×</i><span>YOUTUBE</span><i>×</i><span>GOOGLE</span><i>×</i><span>CLAUDE</span><i>×</i><span>APPLE</span><i>×</i><span>INSTAGRAM</span><i>×</i><span>客户管理系统</span><i>×</i>
+    <span>GITHUB</span><i>×</i><span>FIGMA</span><i>×</i><span>NOTION</span><i>×</i><span>YOUTUBE</span><i>×</i><span>GOOGLE</span><i>×</i><span>CLAUDE</span><i>×</i><span>APPLE</span><i>×</i><span>INSTAGRAM</span><i>×</i><span>客户管理系统</span><i>×</i>
+  </div>
+</div>
+
 <!-- ══ 搜索（可打字演示） ═══════════════════════════════════════════ -->
-<section class="wrap sec search-sec" id="features">
+<section class="wrap sec search-sec" id="features" data-kicker="02 — SEARCH">
   <div class="card split reveal">
     <div>
       <h2 class="sec-h" data-i18n="f_h2">Chrome 的书签，<br>终于<span class="hl">能搜了</span></h2>
@@ -436,7 +1010,7 @@ footer a{color:var(--subtle)}
       </ul>
     </div>
     <div>
-      <div class="demo-wrap real-demo">
+      <div class="demo-wrap real-demo" data-caption="02 — SEARCH / 800 × 600">
         <img class="ui-shot" src="shot-search.jpg" width="800" height="600" loading="lazy"
              alt="书签管理器 Pro 真实搜索界面：输入 git 命中 GitHub，上方同时显示网页搜索入口">
         <div class="demo" hidden aria-hidden="true">
@@ -454,12 +1028,12 @@ footer a{color:var(--subtle)}
 </section>
 
 <!-- ══ 痛点 ═════════════════════════════════════════════════════════ -->
-<section class="wrap sec" id="why">
-  <h2 class="sec-h reveal" data-i18n="why_h2">你也每天在 Chrome 里<span class="hl">翻书签</span>吗？</h2>
+<section class="wrap sec" id="why" data-kicker="03 — WHY">
+  <h2 class="sec-h reveal" data-i18n="why_h2">你也每天在 <span class="nowrap">Chrome 里</span><span class="hl">翻书签</span>吗？</h2>
   <div class="why-grid reveal">
-    <div class="card menu-card">
+    <div class="card menu-card" data-caption="03 — POPUP SEARCH / 360 × 600">
       <div class="menu-title" data-i18n="cm_title">书签管理器 Pro · 弹窗搜索</div>
-      <img class="ui-shot popup-shot" src="shot-popup-search.png" width="720" height="1200" loading="lazy"
+      <img class="ui-shot popup-shot" src="shot-popup-search.png" width="720" height="700" loading="lazy"
            alt="书签管理器 Pro 的真实弹窗搜索：输入 Apple 后只显示 Apple 书签">
     </div>
     <div class="pains">
@@ -473,7 +1047,7 @@ footer a{color:var(--subtle)}
 </section>
 
 <!-- ══ 收藏方式 ═════════════════════════════════════════════════════ -->
-<section class="wrap sec">
+<section class="wrap sec" data-kicker="04 — COLLECTION">
   <div class="panel reveal">
     <div class="split">
       <div>
@@ -495,7 +1069,7 @@ footer a{color:var(--subtle)}
 </section>
 
 <!-- ══ 书签工作台：六张大卡 ═════════════════════════════════════════ -->
-<section class="wrap sec">
+<section class="wrap sec" data-kicker="05 — TOOLKIT">
   <h2 class="sec-h reveal" data-i18n="bento_h2">不止搜索，一整套<span class="hl">轻量工具</span></h2>
   <p class="sec-p reveal" data-i18n="bento_p">弹窗管高频操作，极简页管浏览和整理；没有侧边栏，也没有多余仪表盘。</p>
   <div class="feats">
@@ -507,8 +1081,8 @@ footer a{color:var(--subtle)}
         <p class="feat-p" data-i18n="f0_p">点工具栏图标：搜索、到顶部、到底部、最近添加、书签墙都在；悬停书签可一键置顶。点开光标已经在搜索框里，敲关键词、回车，第一个结果直接打开。</p>
         <ul class="dots"><li data-i18n="f0_l1">一键置顶到 Chrome 书签栏第一位</li><li data-i18n="f0_l2">最近添加 / 书签墙，一键切换</li><li data-i18n="f0_l3">右键打开、编辑、删除</li></ul>
       </div>
-      <div class="mock stack" aria-hidden="true">
-        <img class="ui-shot popup-shot" src="shot-popup-hover.png" width="720" height="1200" loading="lazy"
+      <div class="mock stack" aria-hidden="true" data-caption="01 — POPUP / 360 × 600">
+        <img class="ui-shot popup-shot" src="shot-popup-hover.png" width="720" height="900" loading="lazy"
              alt="书签管理器 Pro 的真实弹窗：鼠标悬停 Figma 时显示蓝色置顶按钮">
       </div>
     </article>
@@ -520,7 +1094,7 @@ footer a{color:var(--subtle)}
         <p class="feat-p" data-i18n="f1_p">按域名和关键词自动把书签归入设计、编程、AI、商务等 8 个分类，不用建文件夹，不用拖拽。分错了？右键手动指定一次，它永久记住。</p>
         <ul class="dots"><li data-i18n="f1_l1">域名 + 关键词双重识别</li><li data-i18n="f1_l2">手动分类优先，你的判断永远高于规则</li><li data-i18n="f1_l3">空分类自动隐藏，有了新书签又自动出现</li></ul>
       </div>
-      <div class="mock" aria-hidden="true">
+      <div class="mock" aria-hidden="true" data-caption="02 — AUTO CATEGORY / 800 × 600">
         <img class="ui-shot" src="shot-category.jpg" width="800" height="600" loading="lazy"
              alt="书签管理器 Pro 真实书签墙：自动分类胶囊，以及 GitHub、Figma、Notion、Instagram、YouTube、Google 的网页预览卡片">
       </div>
@@ -533,7 +1107,7 @@ footer a{color:var(--subtle)}
         <p class="feat-p" data-i18n="f2_p">滚动到哪，哪里的书签就按需生成网页截图并缓存在本机。标题记不清没关系，扫一眼就知道是哪个网站；不想看图，设置里可一键关闭。</p>
         <ul class="dots"><li data-i18n="f2_l1">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时回来</li><li data-i18n="f2_l2">深色 / 浅色 / 跟随系统三种主题</li><li data-i18n="f2_l3">设置 → 网页预览，一键关闭，卡片变纯文字</li></ul>
       </div>
-      <div class="mock preview-visual" aria-hidden="true">
+      <div class="mock preview-visual" aria-hidden="true" data-caption="03 — PREVIEW / 800 × 600">
         <div class="preview-window">
           <div class="preview-bar"><i></i><i></i><i></i><span>网页预览</span></div>
           <img src="preview-shot.jpg" width="800" height="600" loading="lazy" alt="书签管理器 Pro 的网页预览卡片：Instagram、YouTube、Google、Claude、Apple、客户管理系统、GitHub 等">
@@ -549,7 +1123,7 @@ footer a{color:var(--subtle)}
         <p class="feat-p" data-i18n="f3_p">一键体检当前列表：真正 404 的标「失效」，只是响应慢的标「超时」；批量清理只删确认失效的，绝不误伤慢网站。</p>
         <ul class="dots"><li data-i18n="f3_l1">可只扫当前分类，快而省流量</li><li data-i18n="f3_l2">只有 HEAD 与 GET 都返回 404/410 才判定失效，网络异常不自动删除</li><li data-i18n="f3_l3">删除同样可撤销</li></ul>
       </div>
-      <div class="mock stack" aria-hidden="true">
+      <div class="mock stack" aria-hidden="true" data-caption="04 — SCAN / 800 × 600">
         <img class="ui-shot" src="shot-dead.png" width="800" height="600" loading="lazy"
              alt="书签管理器 Pro 的真实失效检测确认窗口：检测会逐个访问当前列表的书签网址">
       </div>
@@ -562,7 +1136,7 @@ footer a{color:var(--subtle)}
         <p class="feat-p" data-i18n="f4_p">极简页多选：勾选或全选当前结果，然后一次性移动、归类或删除。重复收藏的同一个网页？「一键清理重复」每组只留最新的。</p>
         <ul class="dots"><li data-i18n="f4_l1">勾选或全选当前筛选结果，底部批量条操作</li><li data-i18n="f4_l2">按 URL 归一化识别重复（带不带 www 都算同一个）</li><li data-i18n="f4_l3">设置分类 / 移动 / 删除；删除都能撤销</li></ul>
       </div>
-      <div class="mock stack" aria-hidden="true">
+      <div class="mock stack" aria-hidden="true" data-caption="05 — SELECT / 800 × 600">
         <img class="ui-shot" src="shot-bulk.jpg" width="800" height="600" loading="lazy"
              alt="书签管理器 Pro 的真实多选界面：已选 9 个，底部有全选、移动、设置分类、删除所选和取消选择">
       </div>
@@ -575,7 +1149,7 @@ footer a{color:var(--subtle)}
         <p class="feat-p" data-i18n="f5_p">别的工具删书签前弹窗问你「确定吗」，删完就真没了。这里反过来：直接删，但任何删除（包括批量删除几十个）都能一键撤销，书签回到原来的文件夹原来的位置。</p>
         <ul class="dots"><li data-i18n="f5_l1">单个、批量、去重、清理失效，全部可撤销</li><li data-i18n="f5_l2">恢复时连手动分类一起带回来</li></ul>
       </div>
-      <div class="mock" aria-hidden="true">
+      <div class="mock" aria-hidden="true" data-caption="06 — UNDO / 800 × 600">
         <img class="ui-shot" src="shot-undo.jpg" width="800" height="600" loading="lazy"
              alt="书签管理器 Pro 的真实撤销提示：已删除 1 个书签，点击撤销可恢复">
       </div>
@@ -584,7 +1158,7 @@ footer a{color:var(--subtle)}
 </section>
 
 <!-- ══ 新标签页（真实截图） ═════════════════════════════════════════ -->
-<section class="wrap sec">
+<section class="wrap sec" data-kicker="06 — NEW TAB">
   <div class="nt reveal">
     <div class="nt-eyebrow" data-i18n="nt_eyebrow">新标签页接管</div>
     <h2 class="sec-h" data-i18n="nt_h">打开新标签页，就是你的<span class="hl">书签墙</span></h2>
@@ -599,13 +1173,13 @@ footer a{color:var(--subtle)}
 </section>
 
 <!-- ══ 全部清单（JS 生成，双语在字典里） ═══════════════════════════ -->
-<section class="wrap sec" id="all">
+<section class="wrap sec" id="all" data-kicker="07 — INDEX">
   <h2 class="sec-h reveal" data-i18n="all_h2">全部功能，<span class="hl">一张清单</span>看完</h2>
   <div class="card all reveal" id="allGrid"></div>
 </section>
 
 <!-- ══ 隐私 ═════════════════════════════════════════════════════════ -->
-<section class="wrap sec priv" id="privacy">
+<section class="wrap sec priv" id="privacy" data-kicker="08 — LOCAL">
   <div class="reveal">
     <h2 class="sec-h" data-i18n="p_h2">你的书签，<br><span class="hl">只属于你</span></h2>
     <p class="sec-p" data-i18n="p_sub">核心数据保存在本地：分类、搜索学习、界面偏好都在本机；唯一的外部请求是网页预览截图，可在设置里一键关闭。</p>
@@ -619,7 +1193,7 @@ footer a{color:var(--subtle)}
 </section>
 
 <!-- ══ 常见问题 ═════════════════════════════════════════════════════ -->
-<section class="wrap sec" id="faq">
+<section class="wrap sec" id="faq" data-kicker="09 — FAQ">
   <h2 class="sec-h reveal" data-i18n="q_h2">常见问题</h2>
   <div class="faq reveal">
     <details><summary data-i18n="q1">它会动我现有的书签吗？</summary><p data-i18n="a1">不会。它直接读写 Chrome 自带的书签，不做迁移、不建副本。你在这里做的整理（移动、删除、排序）就是对 Chrome 书签本身的操作，随 Chrome 账号正常同步；智能分类只是展示层，不改变你的文件夹结构。添加新书签也照旧：点地址栏的 ★ 星标就行，两边实时互通。</p></details>
@@ -631,6 +1205,11 @@ footer a{color:var(--subtle)}
     <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到极简书签墙。不想要的话，设置 → 新标签页接管，关掉后新标签页会打开你在浏览器里设置的默认搜索引擎首页。（Chrome 的限制：扩展接管新标签页后，无法再显示原生新标签页。）</p></details>
     <details><summary data-i18n="q8">支持拼音搜索吗？</summary><p data-i18n="a8">支持。中文书签可以按全拼、首字母、混合拼音和模糊拼音搜索，也能用简体或繁体输入；例如「客户管理系统」输入 khgl 或 kehuguanli 都能命中。</p></details>
     <details><summary data-i18n="q9">为什么没有侧边栏或完整书签墙页面？</summary><p data-i18n="a9">这是故意的：把书签墙直接放进新标签页，一页看完常用、所有、最近和分类；弹窗负责高频搜索和置顶，设置里放整理、查重、失效检测和预览开关，不再需要第二个完整界面。</p></details>
+    <div class="faq-cta">
+      <span>STILL STUCK?</span>
+      <b data-i18n="faq_more">还有问题？直接问作者。</b>
+      <a href="mailto:allenma2ong@gmail.com" data-i18n="faq_contact">写邮件 ↗</a>
+    </div>
   </div>
 </section>
 
@@ -943,6 +1522,7 @@ Object.assign(EN, {
 
 Object.assign(EN, {
   nav_install:'Install free',
+  faq_more:'Still have a question? Ask the author.', faq_contact:'Email ↗',
   heroTabWall:'Wall', heroTabSearch:'Pinyin search', heroTabPreview:'Previews',
   install_chrome:'Chrome Web Store',
   install_chrome_note:'Chrome / Edge and other Chromium browsers',
