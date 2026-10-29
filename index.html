@@ -626,7 +626,7 @@ footer a{color:var(--subtle)}
     <details><summary data-i18n="q2">我的书签数据会被上传吗？</summary><p data-i18n="a2">开发者没有后端服务器，书签、分类和搜索学习记录不会上传。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在设置 → 网页预览里关掉即可停用。</p></details>
     <details><summary data-i18n="q3">自动分类分错了怎么办？</summary><p data-i18n="a3">右键书签 →「移动到分类」手动指定，手动分类永久生效、优先于自动规则；也可以在极简页多选后批量设置分类。</p></details>
     <details><summary data-i18n="q4">删错了能恢复吗？</summary><p data-i18n="a4">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
-    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。Chrome 应用商店和 Microsoft Edge 加载项都已上架；界面支持简体中文、繁体中文和英文，跟随浏览器语言自动切换。</p></details>
+    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。Chrome 应用商店和 Microsoft Edge 加载项都已上架；界面支持 13 种语言（简体中文、繁体中文、英语、日语、韩语、西班牙语、葡萄牙语、法语、德语、俄语、意大利语、越南语、印尼语），跟随浏览器语言自动切换。</p></details>
     <details><summary data-i18n="q6">书签特别多（几千个）会卡吗？</summary><p data-i18n="a6">不会。5 万个书签实测，每按一个键 20 毫秒内出结果；预览图只在接近可视区域时按需加载并缓存。</p></details>
     <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到极简书签墙。不想要的话，设置 → 新标签页接管，关掉后新标签页会打开你在浏览器里设置的默认搜索引擎首页。（Chrome 的限制：扩展接管新标签页后，无法再显示原生新标签页。）</p></details>
     <details><summary data-i18n="q8">支持拼音搜索吗？</summary><p data-i18n="a8">支持。中文书签可以按全拼、首字母、混合拼音和模糊拼音搜索，也能用简体或繁体输入；例如「客户管理系统」输入 khgl 或 kehuguanli 都能命中。</p></details>
@@ -695,7 +695,7 @@ const ZH = {
   af7:'删除可撤销', af7d:'单个和批量删除都能一键原位恢复',
   af8:'书签编辑', af8d:'右键改标题、改网址、置顶',
   af9:'秒级搜索', af9d:'标题、网址、文件夹一起检索，多个关键词，命中高亮',
-  af10:'主题、密度、多语言', af10d:'深浅色 / 舒适紧凑 / 简繁中文和英文界面',
+  af10:'主题、密度、多语言', af10d:'深浅色 / 舒适紧凑 / 13 种界面语言',
   af11:'导入导出', af11d:'HTML / JSON 导出，分类数据可迁移',
   af12:'零学习成本', af12d:'用 Chrome 原生 ★ 收藏，无迁移、完全互通',
   af13:'新标签页导航', af13d:'新标签页即书签导航 + 网页搜索栏，可一键关闭',
@@ -850,7 +850,7 @@ const EN = {
   af7:'Undoable deletes', af7d:'Single and bulk deletes restore in place',
   af8:'Bookmark editing', af8d:'Rename, change URL, pin to top from the context menu',
   af9:'Instant search', af9d:'Titles, URLs and folders together, multiple keywords, highlighted hits',
-  af10:'Themes, density, language', af10d:'Dark/light, comfortable/compact, English / Simplified & Traditional Chinese',
+  af10:'Themes, density, language', af10d:'Dark/light, comfortable/compact, 13 interface languages',
   af11:'Import & export', af11d:'HTML / JSON export, category data portable',
   af12:'Zero learning curve', af12d:'Save with Chrome’s native ★. No migration, fully interoperable',
   af13:'New-tab dashboard', af13d:'Every new tab opens your grid plus a web search bar; one click to turn off',
@@ -925,7 +925,7 @@ Object.assign(EN, {
   p3_p:'Screenshots come from a third-party service (bookmark URLs are sent). Settings → Page previews turns them off; cards become text-only with no external requests.',
   a2:'The developer has no backend: bookmarks, categories and search learning are not uploaded. The only external request is preview screenshots (bookmark URLs are sent); turn it off in Settings → Page previews.',
   a3:'Right-click → Move to category; manual categories win. You can also multi-select on the minimal page and set a category.',
-  a5:'Free. Available on the Chrome Web Store and Microsoft Edge Add-ons; UI in English, Simplified and Traditional Chinese, following the browser.',
+  a5:'Free. Available on the Chrome Web Store and Microsoft Edge Add-ons; UI in 13 languages (English, Simplified and Traditional Chinese, Japanese, Korean, Spanish, Portuguese, French, German, Russian, Italian, Vietnamese, Indonesian), following the browser.',
   a7:'Yes, on by default: new tabs open the minimal wall. To turn it off, Settings → New tab takeover; new tabs then open your default search engine homepage. (Chrome limitation: once an extension overrides the new tab, the native one cannot be shown.)',
   q8:'Does it support pinyin search?',
   a8:'Yes. Chinese titles match full pinyin, initials, mixed and fuzzy pinyin, and Simplified/Traditional input; e.g. 客户管理系统 matches khgl or kehuguanli.',
