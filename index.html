@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页</title>
 <meta name="description" content="Chrome / Edge 书签扩展：一页极简书签墙，拼音/首字母/简繁模糊搜索、弹窗、置顶、最近添加、网页预览、查重和失效检测。免费、本地、无账号。">
-<meta name="theme-color" content="#F6F8FC">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="google-site-verification" content="kSH0kA3LoPYsSlYA-3v17h5grOpsXaPIeVuYvYenxoY">
 <link rel="canonical" href="https://ma2ong.github.io/bookmark-manager-site/">
 
@@ -26,1045 +26,990 @@
 <meta name="twitter:description" content="把 Chrome / Edge 书签变成一页极简书签墙：拼音搜索、弹窗置顶、Chrome 原生书签同步、新标签页开关、网页预览。免费、本地、无账号。">
 <meta name="twitter:image" content="https://ma2ong.github.io/bookmark-manager-site/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231a73e8'/%3E%3Cpath d='M8 5h8a1 1 0 0 1 1 1v13l-5-3-5 3V6a1 1 0 0 1 1-1z' fill='%23fff'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 字体不阻塞首屏：国内访问 fonts.googleapis.com 不通时，立即用系统字体渲染 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"></noscript>
 <script>document.documentElement.classList.add('js');</script>
 <style>
-/* ── Tokens ─────────────────────────────────────────────────────────────
-   浅蓝灰底 + 插件同款蓝（#1A73E8 / #1967D2）+ 插件同款琥珀高亮。
-   大色块用深藏青，和插件蓝同色系。标题用衬线（Noto Serif SC）。 */
 :root{
-  --bg:#F6F8FC; --card:#FFFFFF; --panel2:#F0F4F9; --div:#E3E8EF;
-  --ink:#1F2430; --muted:#3D4350; --subtle:#666C78;
-  --btn:#1A73E8; --acc:#1967D2;
-  --tint:#E8EEFD; --tint-ink:#0B2A5B; --tint-muted:#3D4A66; --line:#BCCDEB;
-  --panel:#17305C; --panel-muted:#C5D3EC; --panel-acc:#FBC02D; --panel-card:rgba(255,255,255,.09);
-  --hl:#FDE293; --res:#EEF2FB; --dark-acc:#8AB4F8;
-  --red:#B3261E; --amber-ink:#8A5A00; --green:#188038;
-  --sans:-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
-  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
-  --num:"Plus Jakarta Sans",var(--sans);
+  --ink:#1B1D21; --ink2:#2B2E34; --muted:#6B7078; --faint:#9A9EA6; --line:#ECEEF1; --soft:#F6F7F9;
+  --blue:#1A73E8; --blue2:#1967D2; --red:#D93025; --green:#188038;
+  --sans:-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
 }
-/* 英文标题不用中文衬线：中文字体会把 ’ “ ” 排成全角，出现 won’ t 这样的空隙 */
-html[lang="en"]{--serif:Georgia,"Times New Roman",serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
-a{color:var(--acc)}
-a:hover{color:var(--ink)}
-img{max-width:100%}
-h1,h2,h3{font-family:var(--serif);margin:0;font-weight:900;text-wrap:balance}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;color:var(--ink);text-wrap:balance}
 p{margin:0}
-.hl{color:var(--acc)}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-.sec{padding-top:100px;padding-bottom:40px}
-.sec-h{font-size:clamp(28px,3.4vw,44px);line-height:1.25}
-.sec-p{margin-top:14px;font-size:17px;line-height:1.7;color:var(--muted)}
-kbd{font-family:var(--num);font-size:.9em;font-weight:700;border:1px solid var(--div);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:var(--card)}
-:focus-visible{outline:3px solid var(--btn);outline-offset:2px}
+section[id]{scroll-margin-top:90px}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+.narrow{max-width:1180px}
+.center{text-align:center}
+.eyebrow{font-size:14px;color:var(--muted);margin-bottom:12px}
+.h2{font-size:40px;line-height:1.3;font-weight:700;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--muted);margin-top:14px}
+.sec{padding:140px 0 0}
+.ic{width:16px;height:16px;flex:none}
 
-/* 按钮 */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;border:1px solid transparent;cursor:pointer}
-.btn-primary{background:var(--btn);color:#fff}
-.btn-primary:hover{color:#fff;background:#1765CC}
-.btn-ghost{background:var(--card);color:var(--acc);border-color:var(--line)}
-.btn.is-disabled{cursor:default}
-.btn-primary.is-disabled:hover{background:var(--btn)}
+/* 顶部通知条 */
+.notice{background:#E3ECFD;color:#2D4C80;font-size:14px;text-align:center;padding:7px 16px}
+.notice a:hover{text-decoration:underline}
 
-/* 顶栏：浮起来的胶囊导航 */
-.nav{position:sticky;top:0;z-index:30;padding:12px 20px 0;background:transparent;transition:padding .25s}
-.nav.scrolled{padding-top:8px}
-.nav-in{max-width:1120px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 10px 9px 16px;border:1px solid transparent;border-radius:999px;background:transparent;transition:background .25s,border-color .25s,box-shadow .25s}
-.nav.scrolled .nav-in{background:rgba(255,255,255,.82);border-color:rgba(31,36,48,.08);box-shadow:0 18px 50px -34px rgba(31,36,48,.45);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;white-space:nowrap}
-.brand:hover{color:var(--ink)}
-.logo{width:32px;height:32px;background:var(--btn);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pro{font-family:var(--num);font-size:11px;font-weight:800;color:var(--acc);background:var(--tint);border-radius:999px;padding:2px 8px}
-.nav-links{display:flex;align-items:center;gap:4px;font-size:14px}
-.nav-links a{text-decoration:none;color:var(--muted);padding:8px 14px;border-radius:999px}
-.nav-links a:hover{background:var(--panel2);color:var(--ink)}
-.nav-right{display:flex;align-items:center;gap:8px}
-.lang-btn{font:inherit;font-size:14px;color:var(--muted);background:none;border:1px solid var(--div);border-radius:999px;min-height:40px;min-width:44px;padding:0 12px;cursor:pointer}
-.lang-btn:hover{background:var(--panel2);color:var(--ink)}
-.nav .btn{min-height:40px;padding:0 18px;font-size:14px;font-weight:500}
-.install-menu{position:relative}
-.install-menu summary{list-style:none}
-.install-menu summary::-webkit-details-marker{display:none}
-.install-trigger{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--btn);color:#fff;font:inherit;font-size:14px;font-weight:500;cursor:pointer;user-select:none;transition:background .2s}
-.install-trigger:hover{background:#1765CC}
-.install-trigger svg{transition:transform .2s}
-.install-menu[open] .install-trigger svg{transform:rotate(180deg)}
-.install-pop{position:absolute;right:0;top:calc(100% + 10px);width:286px;max-width:calc(100vw - 32px);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 70px -28px rgba(31,36,48,.45);padding:6px;z-index:50}
-.install-pop a{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--ink)}
-.install-pop a:hover{background:var(--panel2)}
-.install-pop b{font-size:14px;font-weight:600}
-.install-pop span{font-size:12px;color:var(--muted);line-height:1.4}
+/* 悬浮胶囊导航 */
+.nav{position:sticky;top:12px;z-index:40;display:flex;justify-content:center;pointer-events:none;margin-top:12px}
+.nav-in{pointer-events:auto;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 16px;border-radius:999px;background:rgba(255,255,255,.8);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(20,30,50,.08);box-shadow:0 8px 30px -12px rgba(20,30,60,.25)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-right:18px;white-space:nowrap}
+.logo{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(145deg,#3C8CF5,#1A73E8 45%,#1967D2);box-shadow:0 4px 12px -4px rgba(26,115,232,.7);flex:none}
+.nav-in nav{display:flex}
+.nav-in nav a{font-size:14px;color:#4A4F57;padding:7px 12px;border-radius:999px;white-space:nowrap}
+.nav-in nav a:hover{background:#F1F3F6;color:var(--ink)}
+.lang{font:inherit;font-size:13px;color:#4A4F57;padding:7px 10px;border-radius:999px;display:flex;align-items:center;gap:4px;border:0;background:transparent;cursor:pointer;white-space:nowrap}
+.lang:hover{background:#F1F3F6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:600;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-dark{color:#fff;background:linear-gradient(180deg,#3A3F4B,#20232B);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 20px -8px rgba(20,24,32,.6)}
+.btn-light{color:var(--ink);background:#fff;border:1px solid #E3E5E9;box-shadow:0 4px 14px -8px rgba(20,24,32,.2)}
+.btn-sm{height:36px;padding:0 16px;font-size:14px}
 
 /* 首屏 */
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;padding-top:56px;padding-bottom:32px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--tint);color:var(--acc);border-radius:999px;padding:6px 14px;font-family:var(--num);font-size:12px;font-weight:800;letter-spacing:.08em}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34A853}
-.hero h1{margin-top:24px;font-size:clamp(40px,4.3vw,60px);line-height:1.16;letter-spacing:-.01em}
-.hero-sub{margin-top:24px;font-size:18px;line-height:1.8;color:var(--muted)}
-.hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
-.hero-more{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding-bottom:2px;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px;text-decoration:none;transition:color .2s,border-color .2s}
-.hero-more:hover{color:var(--acc);border-color:var(--acc)}
-.trust{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px;font-size:14px;color:var(--muted)}
-.trust li,.check-li{display:flex;align-items:center;gap:8px}
-.ck{width:18px;height:18px;border-radius:50%;background:var(--tint);color:var(--acc);font-size:11px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.hero-art{position:relative;padding:0 0 40px 24px}
-.hero-tabs{display:flex;gap:4px;width:max-content;max-width:100%;margin:0 0 10px 24px;padding:4px;background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:999px;position:relative;z-index:3;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow:auto}
-.hero-tab{border:0;background:transparent;border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
-.hero-tab:hover:not(.active){background:var(--card);color:var(--ink)}
-.hero-tab.active{background:var(--btn);color:#fff;font-weight:500}
-.win img{transition:opacity .2s ease}
-.win img.switching{opacity:.3}
-.hero-art::before{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;background:radial-gradient(circle at 72% 18%,rgba(255,255,255,.75),transparent 45%),var(--tint);border-radius:40px}
-.hero-art::after{content:"";position:absolute;top:28px;right:-24px;bottom:0;left:48px;border-radius:40px;background-image:radial-gradient(rgba(26,115,232,.18) 1px,transparent 1px);background-size:12px 12px;opacity:.45;pointer-events:none;z-index:0}
-.hero-art .win,.hero-art .float-card{position:relative;z-index:1}
-.hero-art .float-card{z-index:2}
-.win{position:relative;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 1px 3px rgba(60,64,67,.2),0 24px 60px -24px rgba(26,115,232,.35)}
-.win-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--panel2)}
-.win-bar i{width:10px;height:10px;border-radius:50%}
-.win-bar i:nth-child(1){background:#F28B82}.win-bar i:nth-child(2){background:#FDD663}.win-bar i:nth-child(3){background:#81C995}
-.win-url{margin-left:10px;flex:1;background:var(--card);border-radius:999px;padding:4px 12px;font-size:11px;color:var(--subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.win img{display:block;width:100%;height:auto}
-.float-card{position:absolute;left:0;bottom:0;background:var(--card);border-radius:18px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 32px -12px rgba(31,36,48,.35)}
-.float-card .ai{width:36px;height:36px;border-radius:10px;background:var(--btn);color:#fff;font-family:var(--num);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-.float-card b{font-size:14px;display:block}
-.float-card span{font-size:12px;color:var(--subtle)}
+.hero{padding:76px 0 0;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #E6E8EC;border-radius:999px;padding:5px 14px;font-size:13px;color:#4A4F57;background:#fff}
+.badge i{width:6px;height:6px;border-radius:50%;background:#34A853;box-shadow:0 0 0 3px rgba(52,168,83,.18)}
+.hero h1{font-size:56px;line-height:1.2;font-weight:800;letter-spacing:-.02em;margin:22px 0 0;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.hero h1 .app{width:58px;height:58px;border-radius:16px;display:inline-grid;place-items:center;background:linear-gradient(145deg,#5BA0F7,#1A73E8 50%,#1967D2);box-shadow:0 12px 26px -10px rgba(26,115,232,.8),inset 0 1px 0 rgba(255,255,255,.4);transform:rotate(-6deg)}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#1A73E8,#7B61FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:18px;max-width:660px;margin:20px auto 0}
+.cta-row{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}
+.trust{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:22px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
+.trust li{display:flex;align-items:center;gap:6px}
+.trust svg{color:#34A853}
 
-/* 白卡 */
-.card{background:var(--card);border-radius:32px}
-.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:40px;align-items:center}
-.split>*,.hero>*,.why-grid>*,.priv>*{min-width:0}
-.ticks{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.7;color:var(--muted)}
-.ticks li{display:flex;gap:10px}
-.ticks li::before{content:"✓";color:var(--acc);font-weight:900}
-.ticks b{color:var(--ink)}
+/* 点阵画布 */
+.art{position:relative;border-radius:28px;overflow:hidden;
+  background:
+    radial-gradient(60% 70% at 15% 20%,#CFE0FF 0,transparent 60%),
+    radial-gradient(50% 60% at 85% 15%,#E6DCFF 0,transparent 60%),
+    radial-gradient(55% 65% at 75% 90%,#FFE6D2 0,transparent 60%),
+    radial-gradient(50% 60% at 10% 95%,#D5F1EA 0,transparent 60%),
+    #F3F5FB;
+  background-size:140% 140%;animation:drift 18s ease-in-out infinite alternate;
+  box-shadow:0 30px 70px -40px rgba(30,50,110,.45);border:1px solid rgba(20,40,90,.06)}
+.art::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.75) 1.1px,transparent 1.5px) 0 0/7px 7px;mix-blend-mode:soft-light;pointer-events:none}
+.art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(90,110,180,.10) 1px,transparent 1.4px) 3px 3px/7px 7px;pointer-events:none}
+@keyframes drift{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+.art>*{position:relative;z-index:1}
 
-/* 搜索演示 */
-.search-sec .card{padding:56px 48px}
-.search-sec .sec-h{font-size:clamp(28px,2.8vw,38px)}
-.demo-wrap{background:var(--panel2);border-radius:28px;padding:28px}
-.demo{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 1px 3px rgba(60,64,67,.15)}
-.demo label{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--div)}
-.demo input{flex:1;min-width:0;border:0;outline:none;font:inherit;font-size:17px;color:var(--ink);background:transparent;min-height:28px}
-.demo-count{font-family:var(--num);font-size:12px;color:var(--acc);font-weight:700;white-space:nowrap}
-.demo ul{list-style:none;margin:0;padding:6px;min-height:250px}
-.demo li{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:14px}
-.demo li.first{background:var(--res)}
-.av{width:26px;height:26px;border-radius:8px;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.r-txt{display:flex;flex-direction:column;min-width:0;gap:2px}
-.r-t{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.r-u{font-size:12px;color:var(--subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-mark{background:var(--hl);color:inherit;border-radius:3px}
-.demo .empty{padding:20px 12px;font-size:14px;color:var(--muted);line-height:1.6}
-.demo-note{margin:14px 4px 0;font-size:13px;color:var(--subtle)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.stage{margin-top:56px;padding:56px 56px 0;height:620px}
+.stage .nt{min-height:540px}
+.seg{display:inline-flex;gap:2px;padding:4px;border-radius:12px;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);border:1px solid rgba(20,30,50,.07);box-shadow:0 8px 24px -14px rgba(20,30,60,.35)}
+.seg button{font:inherit;font-size:13px;border:0;background:transparent;color:#5A5F68;padding:6px 14px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 2px 6px -2px rgba(0,0,0,.18)}
+.stage .seg{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3}
+.float{position:absolute;right:34px;top:180px;z-index:3;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:16px;padding:12px 16px;box-shadow:0 18px 40px -18px rgba(20,40,90,.45);text-align:left;animation:bob 5s ease-in-out infinite}
+.float .pin{width:36px;height:36px;border-radius:10px;background:#FFF3D6;color:#B06A00;display:grid;place-items:center;font-weight:800}
+.float b{display:block;font-size:14px}.float span{font-size:12.5px;color:var(--muted)}
+@keyframes bob{50%{transform:translateY(-8px)}}
 
-/* 痛点 */
-.why-grid{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;align-items:stretch}
-.menu-card{padding:32px}
-.menu-title{font-size:13px;color:var(--subtle);margin-bottom:12px}
-.menu{border:1px solid #DADCE0;border-radius:10px;font-size:14px;color:#3C4043;overflow:hidden;background:#fff}
-.menu div{padding:9px 14px}
-.menu .dead{color:var(--red)}
-.menu .bottom{background:#FCE8E6;color:var(--red);font-weight:500}
-.menu .more{color:var(--subtle);font-size:13px;border-top:1px solid #DADCE0}
-.pains{display:flex;flex-direction:column;gap:14px}
-.pain{background:var(--card);border-radius:24px;padding:24px 28px;display:flex;gap:18px;align-items:baseline}
-.pain .n{font-family:var(--num);font-weight:800;color:var(--acc);font-size:22px}
-.pain p{font-size:17px;line-height:1.7}
-.pain-good{background:var(--btn);color:#fff;border-radius:24px;padding:24px 28px;font-size:17px;font-weight:700;line-height:1.6}
-.origin{margin:32px auto 0;max-width:760px;text-align:center;font-size:15px;line-height:1.85;color:var(--subtle)}
+/* ── 插件界面复刻（按 navigation.css 的真实样式） ── */
+.win{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(20,40,90,.45),0 0 0 1px rgba(20,40,90,.06);text-align:left}
+.win-bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#F4F6F9;border-bottom:1px solid #ECEEF2;font-size:12px;color:#8A8F98}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:#FF5F57}.win-bar i:nth-child(2){background:#FEBC2E}.win-bar i:nth-child(3){background:#28C840}
+.win-bar span{margin-left:8px}
+.nt{background:radial-gradient(ellipse 80% 50% at 50% 0,#E8EEF8,#F8F9FA 70%);padding:30px 36px 40px;color:#3C4043;transition:background .4s,color .4s}
+.nt-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
+.nt-logo{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#3C8CF5,#1A73E8 45%,#1967D2);box-shadow:0 8px 22px -8px rgba(26,115,232,.7);flex:none}
+.nt-name{font-size:17px;font-weight:700}
+.pro{font-size:9px;font-weight:800;letter-spacing:.08em;color:#1967D2;background:#E8EEFD;border-radius:999px;padding:3px 7px}
+.sbox{max-width:620px;margin:0 auto;height:50px;display:flex;align-items:center;gap:12px;padding:0 18px;background:#fff;border:1px solid #E0E0E0;border-radius:999px;box-shadow:0 2px 10px rgba(60,64,67,.07);font-size:15px;color:#80868B;transition:all .3s}
+.sbox.focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,115,232,.10),0 18px 44px -22px rgba(26,115,232,.5);color:#202124}
+.sbox .q{flex:1;white-space:nowrap;overflow:hidden}
+.caret{display:inline-block;width:1.5px;height:17px;background:var(--blue);vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.chips{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin:16px 0 20px}
+.chip{height:26px;padding:0 10px;border:1px solid #E0E0E0;border-radius:999px;background:#fff;font-size:11.5px;font-weight:500;color:#5F6368;display:inline-flex;align-items:center;white-space:nowrap}
+.chip.on{background:#E8EEFD;border-color:var(--blue);color:#1967D2;font-weight:700}
+.wh{display:flex;align-items:baseline;gap:7px;margin:0 0 10px}
+.wh b{font-size:15px;font-weight:700}.wh span{font-size:11px;color:#5F6368}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bm{display:grid;grid-template-columns:auto 1fr;column-gap:9px;align-items:center;background:#fff;border:1px solid #E0E0E0;border-radius:10px;padding:10px 12px;min-width:0;position:relative;transition:background .4s,border-color .4s}
+.bm .av{grid-row:span 2;width:20px;height:20px;border-radius:5px;background:var(--c);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;align-self:start;margin-top:1px}
+.bm b{font-size:12.5px;font-weight:600;color:#202124;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bm small{font-size:11px;color:#5F6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bm.hit{border:1.5px solid var(--blue);box-shadow:0 0 0 4px rgba(26,115,232,.12)}
+.bm.sel{border:1.5px solid var(--blue);background:#F5F8FF}
+.bm.ck{grid-template-columns:auto auto 1fr}
+.bm.ck .box{grid-row:span 2;width:16px;height:16px;border-radius:4px;border:1.5px solid #9EC2F7;display:grid;place-items:center;color:var(--blue);font-size:11px;font-weight:800}
+.bm .tag-bad,.bm .tag-slow{position:absolute;right:8px;top:8px;font-size:10px;font-weight:700;border-radius:999px;padding:1px 7px}
+.bm .tag-bad{background:#FCE8E6;color:#C5221F}.bm .tag-slow{background:#FEF3D6;color:#8A5A00}
+.bm.gone{opacity:.45;text-decoration:line-through}
+mark{background:#FCE7A6;color:inherit;border-radius:2px;padding:0 1px}
+.pop-in{animation:popin .35s ease both}
+@keyframes popin{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.web{max-width:620px;margin:8px auto 0;background:#fff;border:1px solid #E0E0E0;border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;text-align:left}
+.web .g{width:30px;height:30px;border-radius:50%;background:#E8EEFD;display:grid;place-items:center;color:var(--blue);flex:none}
+.web b{display:block;font-size:13px;font-weight:700;color:#202124}.web small{font-size:11.5px;color:#5F6368}
+.nt.dark{background:radial-gradient(ellipse 80% 50% at 50% 0,#2A2F3A,#1B1C1F 70%);color:#E8EAED}
+.nt.dark .sbox,.nt.dark .bm,.nt.dark .chip{background:#26282C;border-color:#3A3C41;color:#BDC1C6}
+.nt.dark .bm b,.nt.dark .nt-name,.nt.dark .wh b{color:#E8EAED}
+.nt.dark .bm small,.nt.dark .wh span{color:#9AA0A6}
+.nt.dark .chip.on{background:#1E3A66;border-color:#8AB4F8;color:#8AB4F8}
+.nt.dark .pro{background:#1E3A66;color:#8AB4F8}
+.nt.compact .grid{grid-template-columns:repeat(5,1fr);gap:7px}
+.nt.compact .bm{padding:7px 10px}
+.nt.compact .bm small{display:none}
 
-/* 收藏方式（深色整块） */
-.panel{background:var(--panel);color:#fff;border-radius:40px;padding:64px 48px}
-.panel .sec-h{color:#fff}
-.panel .hl{color:var(--panel-acc)}
-.panel-p{margin-top:18px;font-size:17px;line-height:1.85;color:var(--panel-muted)}
-.fz-demo{display:flex;flex-direction:column;gap:12px}
-.addr{background:var(--card);color:var(--ink);border-radius:999px;padding:12px 18px;display:flex;align-items:center;font-size:14px}
-.addr svg{margin-left:auto}
-.fz-note{text-align:right;font-size:13px;color:var(--panel-muted)}
-.saved{background:var(--card);color:var(--ink);border-radius:18px;padding:12px 16px;display:flex;align-items:center;gap:12px}
-.saved b{display:block;font-size:14px}
-.saved div span{font-size:12px;color:var(--subtle)}
-.fz-list{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.fz-list li{background:var(--panel-card);border-radius:24px;padding:24px;font-size:16px;line-height:1.75}
+/* 预览缩略图（示意网页） */
+.pv{grid-column:1/-1;height:74px;border-radius:7px;margin:-2px -4px 8px;overflow:hidden;position:relative;background:#fff;border:1px solid #EEF0F3}
+.pv.gh{background:#0D1117}.pv.gh::before{content:"";position:absolute;left:18%;right:18%;top:28px;height:9px;border-radius:3px;background:#E6EDF3;box-shadow:0 16px 0 -2px #7D8590}
+.pv.fg::before{content:"";position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;background:#F24E1E;box-shadow:26px 0 0 #A259FF,52px 0 0 #1ABCFE,0 26px 0 #0ACF83,26px 26px 0 #FF7262}
+.pv.yt::before{content:"";position:absolute;left:10px;top:8px;width:22px;height:13px;border-radius:4px;background:#FF0033}
+.pv.yt::after{content:"";position:absolute;left:10px;right:10px;top:30px;height:32px;background:linear-gradient(90deg,#E9EBEE 0 30%,transparent 30% 35%,#E9EBEE 35% 65%,transparent 65% 70%,#E9EBEE 70%)}
+.pv.no::before{content:"";position:absolute;left:14px;top:14px;width:60%;height:10px;border-radius:3px;background:#2F3437;box-shadow:0 18px 0 -2px #D3D5D8,0 32px 0 -2px #D3D5D8}
+.pv.go::before{content:"Google";position:absolute;left:0;right:0;top:16px;text-align:center;font:700 17px/1 Arial,sans-serif;background:linear-gradient(90deg,#4285F4 0 18%,#EA4335 18% 34%,#FBBC05 34% 50%,#4285F4 50% 66%,#34A853 66% 82%,#EA4335 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pv.go::after{content:"";position:absolute;left:24%;right:24%;top:44px;height:14px;border-radius:999px;border:1px solid #DADCE0}
+.pv.ap{background:#000}.pv.ap::before{content:"MacBook Pro";position:absolute;left:0;right:0;top:20px;text-align:center;color:#F5F5F7;font:600 13px/1 -apple-system,"Segoe UI",sans-serif}
+.pv.ap::after{content:"";position:absolute;left:30%;right:30%;bottom:0;height:22px;border-radius:6px 6px 0 0;background:linear-gradient(135deg,#4A5BFF,#C04CFF)}
 
-/* 功能大卡 */
-.feats{margin-top:44px;display:flex;flex-direction:column;gap:20px}
-.feat{padding:40px}
-.feat-tag{font-family:var(--num);font-size:14px;font-weight:800;color:var(--acc)}
-.feat h3{margin-top:10px;font-size:28px;line-height:1.35}
-.feat-p{margin-top:14px;font-size:16px;line-height:1.8;color:var(--muted)}
-.feat ul.dots{margin:16px 0 0;padding:0 0 0 18px;font-size:15px;line-height:1.9;color:var(--muted)}
-.mock{background-color:var(--panel2);background-image:radial-gradient(rgba(31,36,48,.055) 1px,transparent 1px);background-size:12px 12px;border-radius:24px;padding:28px}
-.card.feat{transition:transform .28s ease,box-shadow .28s ease}
-@media (hover:hover){.card.feat:hover{transform:translateY(-2px);box-shadow:0 24px 60px -48px rgba(31,36,48,.45)}}
-.pill{display:inline-block;padding:5px 12px;border-radius:999px;background:var(--card);font-size:12px}
-.pill.on{background:var(--btn);color:#fff}
-.pills{display:flex;gap:6px;flex-wrap:wrap}
-.rows{background:var(--card);border-radius:16px;padding:6px;font-size:14px}
-.rows div{padding:10px 12px;display:flex;justify-content:space-between;gap:10px;border-radius:12px}
-.rows .sel{background:var(--panel2)}
-.tagnew{font-size:12px;color:var(--acc);font-weight:700}
-.tagpin{font-size:12px;border:1px solid #C4C7C5;border-radius:999px;padding:0 8px}
-.fake-input{background:var(--card);border-radius:16px;padding:10px 14px;font-size:14px;color:var(--subtle)}
-.cats{display:flex;flex-wrap:wrap;gap:10px}
-.cats span{padding:10px 18px;border-radius:999px;background:var(--card);font-size:14px}
-.cats span.on{background:var(--btn);color:#fff;font-weight:500}
-.ctx{margin-top:14px;background:var(--card);border-radius:14px;padding:6px;font-size:13px;max-width:200px}
-.ctx div{padding:7px 10px}
-.ctx .on{background:var(--tint);border-radius:8px}
-.crop{border-radius:16px;overflow:hidden;aspect-ratio:12/7;background:url(hero-shot.jpg) right top/170% auto no-repeat}
-.stat{background:var(--card);border-radius:14px;padding:12px 16px;font-size:14px;display:flex;justify-content:space-between;gap:10px}
-.st-dead{color:var(--red);font-weight:700}
-.st-slow{color:var(--amber-ink);font-weight:700}
-.st-keep{color:var(--green);font-weight:700}
-.del-all{background:var(--red);color:#fff;border-radius:999px;padding:10px 16px;font-size:14px;text-align:center;font-weight:500}
-.dup{background:var(--card);border-radius:14px;padding:11px 16px;color:var(--subtle);text-decoration:line-through}
-.bar{background:var(--ink);color:#fff;border-radius:999px;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px}
-.bar span{color:var(--line)}.bar .x{color:#F28B82}
-.toast{background:var(--ink);color:#fff;border-radius:16px;padding:14px 20px;font-size:15px;display:flex;gap:32px;align-items:center;box-shadow:0 12px 28px -12px rgba(0,0,0,.5)}
-.toast b{color:var(--dark-acc)}
-.stack{display:flex;flex-direction:column;gap:10px}
+/* 弹窗复刻 */
+.pop{width:320px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -20px rgba(10,40,100,.45),0 0 0 1px rgba(20,40,90,.05);text-align:left;font-size:13px}
+.pop-h{display:flex;align-items:center;gap:8px;padding:13px 15px 9px;font-weight:700;color:#3C4043}
+.pop-h .nt-logo{width:24px;height:24px;border-radius:7px}
+.pop-s{margin:0 13px;height:36px;border:1px solid #DADCE0;border-radius:10px;display:flex;align-items:center;padding:0 12px;color:#80868B}
+.pop-s.focus{border-color:var(--blue);color:#202124;box-shadow:0 0 0 3px rgba(26,115,232,.1)}
+.pop-q{display:grid;grid-template-columns:repeat(4,1fr);padding:9px 8px 7px;border-bottom:1px solid #EEF0F3}
+.pop-q span{display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;color:#5F6368;white-space:nowrap}
+.pop-q i{width:18px;height:18px;border-radius:6px;display:inline-block}
+.pop-l div{display:flex;align-items:center;gap:10px;padding:8px 15px;color:#202124}
+.pop-l .av{width:18px;height:18px;border-radius:5px;background:var(--c);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;flex:none}
+.pop-l .hov{background:#F1F3F4}
+.pinbtn{margin-left:auto;background:var(--blue);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:2px 10px}
 
-/* 新标签页 */
-.nt{background:var(--tint);border-radius:40px;padding:64px 48px 0;overflow:hidden;text-align:center}
-.nt-eyebrow{font-size:14px;font-weight:700;color:var(--acc)}
-.nt .sec-h{margin-top:12px;color:var(--tint-ink)}
-.nt-p{margin:16px auto 0;max-width:680px;font-size:17px;line-height:1.8;color:var(--tint-muted)}
-.chips{margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:14px}
-.chips span{background:var(--card);border-radius:999px;padding:8px 16px}
-.nt .win{margin:48px auto 0;max-width:1000px;border-radius:20px 20px 0 0;box-shadow:0 -8px 40px -16px rgba(26,115,232,.4)}
-.mid-note{margin-top:20px;text-align:center;font-size:14px;color:var(--subtle)}
+/* 地址栏复刻 */
+.ob{width:100%;max-width:480px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -20px rgba(10,40,100,.45),0 0 0 1px rgba(20,40,90,.05);font-size:13px;color:#202124;text-align:left}
+.ob-in{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #EEF0F3}
+.kw{background:#E8F0FE;color:#1967D2;border-radius:6px;padding:2px 8px;font-size:12px;white-space:nowrap}
+.ob-r{display:flex;align-items:center;gap:10px;padding:9px 16px;white-space:nowrap;overflow:hidden}
+.ob-r.on{background:#EEF3FD}
+.ob-r .u{color:#1967D2;overflow:hidden;text-overflow:ellipsis}
+.ob-r svg{color:#80868B;flex:none}
 
-/* 清单 */
-.all{margin-top:36px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4px}
-.all-item{display:flex;gap:14px;padding:16px 18px}
-.all-item .ck{width:22px;height:22px;font-size:12px;margin-top:2px}
-.all-item b{font-size:15px}
-.all-item div div{margin-top:3px;font-size:14px;line-height:1.65;color:var(--subtle)}
+/* 原生书签树复刻 */
+.tree{font-size:13px;color:#5F6368;text-align:left}
+.tree div{display:flex;align-items:center;gap:8px;padding:5px 0}
+.tree svg{color:#8A8F98;flex:none}
+.tree .d1{padding-left:18px}.tree .d2{padding-left:36px}.tree .d3{padding-left:54px}.tree .d4{padding-left:72px}
+.tree .lost{color:#B0B4BA}
+.tree .where{color:var(--red);font-weight:600}
+
+/* 对话框 / 提示 / 批量条 / 设置 */
+.dlg{background:#fff;border-radius:14px;box-shadow:0 30px 60px -24px rgba(10,40,100,.5),0 0 0 1px rgba(20,40,90,.05);font-size:12.5px;color:#3C4043;padding:16px 18px 14px;text-align:left}
+.dlg b{display:block;font-size:14px;color:#202124;margin-bottom:6px}
+.dlg p{line-height:1.7;margin-bottom:12px}
+.dlg .f{display:flex;justify-content:flex-end;gap:8px}
+.b1{background:#F1F3F4;border-radius:8px;padding:4px 12px;font-weight:600}.b2{background:var(--blue);color:#fff;border-radius:8px;padding:4px 12px;font-weight:600}
+.toast{display:inline-flex;align-items:center;gap:16px;background:#323639;color:#fff;border-radius:9px;padding:10px 16px;font-size:13px;box-shadow:0 12px 30px -12px rgba(0,0,0,.5)}
+.toast b{color:#8AB4F8}
+.bar{display:flex;align-items:center;gap:5px;background:#fff;border:1px solid #E0E0E0;border-radius:12px;padding:7px 8px 7px 14px;box-shadow:0 12px 30px -14px rgba(0,0,0,.3);font-size:11.5px;color:#3C4043;white-space:nowrap}
+.bar b{margin-right:auto;font-size:12.5px}
+.bar span{background:#F1F3F4;border-radius:999px;padding:3px 10px}
+.bar .del{background:#fff;border:1px solid #D93025;color:#D93025}
+.setting{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -24px rgba(10,40,100,.45),0 0 0 1px rgba(20,40,90,.05);font-size:12.5px;text-align:left}
+.setting .r{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid #EEF0F3}
+.setting .r:last-child{border-bottom:0}
+.setting .r b{display:block;font-weight:600;color:#202124}.setting .r small{color:#5F6368;font-size:11px}
+.sw{width:34px;height:20px;border-radius:999px;background:#DADCE0;position:relative;flex:none;transition:background .3s}
+.sw::after{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .3s}
+.sw.on{background:var(--blue)}.sw.on::after{left:17px}
+.no{color:#188038;font-weight:600;font-size:11.5px;white-space:nowrap}
+
+/* 便当格卡片 */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
+.tile{position:relative;border-radius:24px;background:linear-gradient(180deg,#F7F8FA,#F2F4F7);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.tile.big{grid-column:1/-1}
+.tile .show{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:36px 32px 8px;min-height:300px}
+.tile.big .show{min-height:400px}
+.tile .txt{padding:22px 30px 28px}
+.chip-tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#4A4F57;background:#fff;border:1px solid #E6E8EC;border-radius:999px;padding:3px 11px;margin-bottom:10px}
+.tile h3{font-size:22px;font-weight:700}
+.tile .txt p{font-size:14.5px;color:var(--muted);margin-top:6px}
+.keys{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.keys span{font-size:12.5px;color:#4A4F57;background:#fff;border:1px solid #E6E8EC;border-radius:8px;padding:3px 10px}
+kbd{font:inherit;font-size:11.5px;font-weight:700;border:1px solid #D5D8DD;border-bottom-width:2px;border-radius:5px;padding:0 5px;background:#fff;color:var(--ink2)}
+
+/* 前后对比：一眼看出差别 */
+.vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
+.vs .tile .show{min-height:330px;align-items:flex-start}
+.vs .old{background:linear-gradient(180deg,#F6F6F7,#EFEFF1)}
+.vs .old .show{filter:grayscale(1)}
+.vs .new{background:linear-gradient(180deg,#F1F6FF,#E6EEFD);border:2px solid #9DBDF5;box-shadow:0 30px 60px -36px rgba(26,115,232,.55)}
+.vs-head{display:flex;align-items:center;gap:12px;padding:22px 26px 0}
+.vs-tag{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 14px 6px 8px;font-size:14px;font-weight:700;white-space:nowrap}
+.vs-tag i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;color:#fff}
+.vs-tag.bad{background:#FCE8E6;color:#B3261E}.vs-tag.bad i{background:var(--red)}
+.vs-tag.ok{background:#E6F4EA;color:#137333}.vs-tag.ok i{background:#1E8E3E}
+.vs-big{font-size:26px;font-weight:800;line-height:1.3;padding:16px 26px 0}
+.vs .old .vs-big{color:#5F6368}
+.vs .new .vs-big{color:#1967D2}
+.vs-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.vs-list li{display:flex;gap:10px;font-size:15px;line-height:1.55;color:#4A4F57}
+.vs-list li i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;margin-top:2px}
+.vs .old .vs-list i{background:#FCE8E6;color:var(--red)}
+.vs .new .vs-list i{background:#E6F4EA;color:#1E8E3E}
+.vs .new .vs-list li{color:#24324A}
+.vs-arrow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:64px;height:64px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 8px #fff,0 16px 30px -10px rgba(26,115,232,.7)}
+.origin{max-width:760px;margin:48px auto 0;text-align:center;font-size:16px;line-height:1.9;color:var(--muted)}
+.origin::before{content:"“";display:block;font:700 54px/0.6 Georgia,serif;color:#C9D6EE;margin-bottom:10px}
+
+/* 左文右图 */
+.split{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center}
+.ticks{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px}
+.ticks li{display:flex;gap:10px;font-size:15.5px;color:#3E434B}
+.ticks svg{color:var(--blue);margin-top:4px}
+.addr{display:flex;align-items:center;gap:10px;height:38px;border-radius:19px;background:#EFF2F6;padding:0 8px 0 16px;font-size:13px;color:#3C4043}
+.addr .url{flex:1}
+.star{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#FFF3D6;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(242,183,5,.45)}50%{box-shadow:0 0 0 9px rgba(242,183,5,0)}}
+
+/* 六张功能卡 */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.feat .show{min-height:250px;padding:28px 24px 6px}
+.feat .txt{padding:18px 24px 26px}
+.num{font-size:12.5px;font-weight:700;color:var(--blue);letter-spacing:.04em}
+.feat h3{font-size:20px;margin-top:6px}
+.dots{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:5px}
+.dots li{font-size:13.5px;color:#4A4F57;padding-left:14px;position:relative}
+.dots li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:#B7C9EC}
+
+/* 新标签页展示 */
+.nt-show{margin-top:40px;padding:56px 56px 0;height:600px}
+.nt-show .win{max-width:1060px;margin:0 auto}
+.seg-row{display:flex;justify-content:center;margin-top:30px}
+.nt-chips{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:22px;font-size:14.5px;color:var(--muted)}
+.nt-chips span::before{content:"✓";color:#34A853;font-weight:700;margin-right:6px}
+.mid{text-align:center;margin-top:22px;font-size:14px;color:var(--faint)}
+
+/* 全部清单 */
+.all{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.all>div{padding:22px 22px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.all>div:nth-child(4n){border-right:0}
+.all>div:nth-last-child(-n+4){border-bottom:0}
+.all .i{width:30px;height:30px;border-radius:9px;background:#EEF3FD;color:var(--blue);display:grid;place-items:center;margin-bottom:12px}
+.all b{display:block;font-size:15.5px}
+.all span{display:block;font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.55}
+.all .go{background:linear-gradient(160deg,#F1F6FF,#E6EEFD);display:flex;flex-direction:column;justify-content:space-between}
+.all .go b{font-size:17px}
 
 /* 隐私 */
-.priv{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:start}
-.priv-cards{display:flex;flex-direction:column;gap:14px}
-.priv-card{background:var(--card);border-radius:24px;padding:24px 28px}
-.priv-card h3{font-size:18px}
-.priv-card p{margin-top:8px;font-size:15px;line-height:1.8;color:var(--muted)}
+.priv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.browsers{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--muted)}
+.browsers i{width:20px;height:20px;border-radius:50%;display:inline-block}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.pcards .tile .txt{padding:24px 26px 0}
+.pcards .tile .show{padding:22px 26px 0;min-height:250px;align-items:flex-end}
+.pcards .win{width:100%;border-radius:12px 12px 0 0}
+.plist div{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid #F0F1F3;font-size:12.5px;color:#3C4043}
 
 /* 常见问题 */
-.faq{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:14px;align-items:start}
-.faq details{background:var(--card);border-radius:24px;padding:22px 28px}
-.faq summary{font-family:var(--serif);font-size:17px;font-weight:700;min-height:28px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-family:var(--num);color:var(--acc);font-size:20px;line-height:1.2}
-.faq details[open] summary::after{content:"−"}
-.faq p{margin-top:12px;font-size:15px;line-height:1.85;color:var(--muted)}
+.faq{display:grid;grid-template-columns:4fr 7fr;gap:64px}
+.faq-l .btn{margin-top:24px}
+details{border-bottom:1px solid var(--line)}
+details[open]{background:var(--soft);border-radius:16px;border-color:transparent}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 22px;font-size:17px;font-weight:600}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-weight:400;font-size:22px;color:#8A8F98;line-height:1}
+details[open] summary::after{content:"−"}
+details p{padding:0 22px 22px;font-size:15px;color:#4A4F57;line-height:1.8}
 
-/* 收尾 */
-.cta{background:var(--panel);border-radius:40px;padding:80px 48px;text-align:center;color:#fff}
-.cta h2{font-size:clamp(30px,4.2vw,56px);line-height:1.25}
-.cta .hl{color:var(--panel-acc)}
-.cta .btn{margin-top:32px;background:var(--card);color:var(--acc);min-height:56px;font-size:17px}
-.cta-p{margin-top:14px;font-size:14px;color:var(--panel-muted)}
-footer{margin-top:32px;padding-bottom:48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--subtle)}
-footer nav{display:flex;gap:20px}
-footer a{color:var(--subtle)}
+/* 收尾 + 页脚 */
+.final{margin-top:140px;padding:96px 40px;text-align:center}
+.final h2{font-size:44px;font-weight:800;line-height:1.3}
+.final p{font-size:16px;color:#4A4F57;margin-top:18px}
+footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot .desc{font-size:14px;color:var(--muted);margin:12px 0 18px}
+.stores{display:flex;gap:10px;flex-wrap:wrap}
+.stores a{display:inline-flex;align-items:center;gap:8px;border:1px solid #E3E5E9;border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600}
+.stores a:hover{border-color:var(--ink)}
+.stores i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.cols{display:flex;gap:80px}
+.cols h5{margin:0 0 14px;font-size:14px}
+.cols a{display:block;font-size:14px;color:var(--muted);margin-bottom:10px;cursor:pointer}
+.cols a:hover{color:var(--ink)}
+.copy{display:flex;justify-content:space-between;gap:16px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+.copy button{font:inherit;border:0;background:none;color:var(--faint);cursor:pointer;padding:0 0 0 14px}
+.copy button.on{color:var(--ink);font-weight:700}
+.to-top{position:fixed;right:24px;bottom:24px;z-index:30;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #E6E8EC;border-radius:999px;padding:9px 16px;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;box-shadow:0 10px 26px -12px rgba(20,30,60,.35);opacity:0;pointer-events:none;transition:opacity .25s}
+.to-top.show{opacity:1;pointer-events:auto}
 
-/* 回到顶部：滚动一屏后出现，外圈进度随阅读画满 */
-.to-top{position:fixed;right:26px;bottom:28px;z-index:30;width:52px;height:52px;border-radius:50%;border:1px solid var(--div);background:var(--card);color:var(--acc);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px -10px rgba(31,36,48,.3);opacity:0;transform:translateY(18px) scale(.9);pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .2s ease}
-.to-top.show{opacity:1;transform:none;pointer-events:auto}
-.to-top:hover{transform:translateY(-3px);box-shadow:0 16px 38px -10px rgba(26,115,232,.45)}
-.to-top:active{transform:scale(.94)}
-.to-top .ring{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg);pointer-events:none}
-.to-top .ring circle{fill:none;stroke:var(--btn);stroke-width:3;stroke-linecap:round}
-.to-top>svg:last-child{position:relative}
-@media (max-width:640px){.to-top{right:16px;bottom:18px;width:46px;height:46px}}
-@media (prefers-reduced-motion:reduce){.to-top{transition:none}}
-
-/* 滚动渐入：只在 JS 正常运行时隐藏，脚本出错也不会留下空白页 */
-.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+/* 滚动渐入：脚本没跑起来时内容照样可见 */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.art,.float,.star,.caret{animation:none}.js .reveal{opacity:1;transform:none}}
 
-/* 平板 */
-@media (max-width:960px){
-  .hero{grid-template-columns:1fr;gap:40px;padding-top:40px}
-  .nav-links{display:none}
+@media (max-width:1000px){
+  .wrap{padding:0 18px}
+  .nav-in nav{display:none}
+  .nav-in{max-width:calc(100vw - 20px)}
+  .brand{min-width:0;margin-right:6px}
+  .brand span:last-child{overflow:hidden;text-overflow:ellipsis}
+  .hero{padding-top:48px}
+  .hero h1{font-size:30px;gap:10px}
+  .hero h1 .app{width:42px;height:42px;border-radius:12px}
+  .hero .lead{font-size:16px}
+  .h2{font-size:28px}
+  .sec{padding-top:90px}
+  .stage{padding:22px 14px 0;height:520px;border-radius:20px}
+  .stage .nt{min-height:430px}
+  .float{display:none}
+  .seg button{padding:6px 8px;font-size:12px}
+  .stage .seg{max-width:calc(100% - 20px);overflow-x:auto}
+  .nt{padding:20px 14px 28px}
+  .grid,.nt.compact .grid{grid-template-columns:repeat(2,1fr)}
+  .bento,.vs,.split,.feats,.pcards,.faq{grid-template-columns:1fr}
+  .vs{gap:44px}
+  .vs-big{font-size:21px}
+  .split{gap:36px}
+  .all{grid-template-columns:1fr}
+  .all>div{border-right:0!important;border-bottom:1px solid var(--line)!important}
+  .nt-show{padding:22px 14px 0;height:520px}
+  .final{padding:64px 20px}
+  .final h2{font-size:30px}
+  .cols{gap:48px}
+  .copy{flex-direction:column;gap:8px}
+  .copy button{padding:0 14px 0 0}
+  .tile .show{padding:24px 14px 8px}
+  .pop{width:290px}
 }
-/* 手机 */
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  .sec{padding-top:72px;padding-bottom:24px}
-  .nav .btn{display:none}
-  .nav{padding:8px 12px 0}
-  .nav-in{padding:7px 8px 7px 13px}
-  .nav-right{gap:6px}
-  .install-trigger{min-height:36px;padding:0 12px;font-size:13px}
-  .lang-btn{min-height:36px;min-width:40px;padding:0 9px;font-size:13px}
-  .hero h1{font-size:38px}
-  .hero-sub{font-size:16px}
-  .hero-cta .btn{flex:1 1 100%}
-  .hero-art{padding:0 0 32px 0}
-  .hero-tabs{margin-left:0;margin-bottom:8px}
-  .hero-art::before{left:24px;right:-16px}
-  .float-card{left:8px;padding:10px 12px}
-  .search-sec .card{padding:28px 20px}
-  .demo-wrap{padding:14px;border-radius:22px}
-  .card,.feat{border-radius:24px}
-  .feat{padding:24px 20px}
-  .feat h3{font-size:23px}
-  .split{grid-template-columns:1fr;gap:24px}
-  .why-grid,.priv,.all{grid-template-columns:1fr}
-  .menu-card{padding:20px}
-  .pain{padding:18px 20px}
-  .pain p,.pain-good{font-size:16px}
-  .panel{padding:40px 22px;border-radius:28px}
-  .nt{padding:40px 18px 0;border-radius:28px}
-  .mock{padding:18px}
-  .faq details{padding:18px 20px}
-  .cta{padding:56px 22px;border-radius:28px}
-  .toast{gap:18px}
-}
-
-/* 网页预览卡片：保持截图原始比例，禁止被 height 属性拉高 */
-.preview-window{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 36px -30px rgba(31,36,48,.35)}
-.preview-bar{display:flex;align-items:center;gap:5px;padding:9px 12px;background:var(--panel2);border-bottom:1px solid var(--div)}
-.preview-bar i{width:7px;height:7px;border-radius:50%;background:#F28B82}
-.preview-bar i:nth-child(2){background:#FDD663}
-.preview-bar i:nth-child(3){background:#81C995}
-.preview-bar span{margin-left:8px;font-size:10px;color:var(--subtle)}
-.preview-window img{display:block;width:100%;height:auto;object-fit:contain}
-.preview-visual .pills{margin-top:14px}
-/* 真实界面截图：统一白底、圆角、原始比例 */
-.ui-shot{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 16px 40px -32px rgba(31,36,48,.4);background:#fff}
-.ui-shot.popup-shot{max-width:300px;margin:0 auto}
-.chrome-ui{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 16px 40px -32px rgba(31,36,48,.4);background:#fff}
-.demo[hidden]{display:none}
-.real-demo{padding:16px}
-.real-demo .ui-shot{border-radius:14px}
-
 </style>
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top">
-      <span class="logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span>
-      <span data-i18n="brand">书签管理器</span> <span class="pro">PRO</span>
-    </a>
-    <nav class="nav-links">
-      <a href="#features" data-i18n="nav_features">功能</a>
-      <a href="#all" data-i18n="nav_all">全部清单</a>
-      <a href="#privacy" data-i18n="nav_privacy">隐私</a>
-      <a href="#faq" data-i18n="nav_faq">常见问题</a>
-    </nav>
-    <div class="nav-right">
-      <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">EN</button>
-      <details class="install-menu">
-        <summary class="install-trigger">
-          <span data-i18n="nav_install">免费安装</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="install-pop">
-          <a data-store><b data-i18n="install_chrome">Chrome 应用商店</b><span data-i18n="install_chrome_note">Chrome / Edge 等 Chromium 浏览器</span></a>
-          <a data-edge-store><b data-i18n="install_edge">Microsoft Edge 加载项</b><span data-i18n="install_edge_note">Edge 官方加载项商店</span></a>
-        </div>
-      </details>
-    </div>
+<div class="notice"><a data-store data-en="Now on the Chrome Web Store and Microsoft Edge Add-ons, completely free →">已在 Chrome 应用商店和 Microsoft Edge 加载项上线，完全免费 →</a></div>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="logo"><svg width="13" height="13" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span data-en="Bookmark Manager Pro">书签管理器 Pro</span></a>
+    <nav><a href="#features" data-en="Features">功能</a><a href="#all" data-en="All features">全部清单</a><a href="#privacy" data-en="Privacy">隐私</a><a href="#faq" data-en="FAQ">常见问题</a></nav>
+    <button class="lang" id="langBtn" type="button" aria-label="Switch language"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langLabel">EN</span></button>
+    <a class="btn btn-dark btn-sm" data-store data-en="Install free">免费安装</a>
   </div>
 </header>
 
-<main>
-<!-- ══ 首屏 ═════════════════════════════════════════════════════════ -->
-<section class="wrap hero" id="top">
-  <div>
-    <p class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">CHROME / EDGE 扩展 · 免费</span></p>
-    <h1 data-i18n="hero_h1">书签，终于<br><span class="hl">能搜又能看</span>了</h1>
-    <p class="hero-sub" data-i18n="hero_sub">把 Chrome / Edge 书签变成一页极简书签墙：拼音、首字母、简繁模糊都能搜；常用、最近、分类、网页预览和一键置顶，全在这一页。</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" data-store data-i18n="hero_cta">免费添加至 Chrome</a>
-      <a class="btn btn-ghost" data-edge-store data-i18n="hero_edge">Edge 加载项</a>
+<main id="top">
+<!-- ══ 首屏 ══ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="badge"><i></i><span data-en="Chrome / Edge extension · Free · No sign-up">Chrome / Edge 扩展 · 免费 · 无需注册</span></span>
+    <h1><span data-en="Bookmarks you can finally <em>search and see</em>">书签，终于<em>能搜又能看</em>了</span><span class="app"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span></h1>
+    <p class="lead" data-en="Turn your Chrome / Edge bookmarks into one clean bookmark wall you can search: frequent, recent, auto-sorted categories, web previews and one-click pin, all on one page.">把 Chrome / Edge 书签变成一页极简书签墙：拼音、首字母、简繁模糊都能搜；常用、最近、分类、网页预览和一键置顶，全在这一页。</p>
+    <div class="cta-row">
+      <a class="btn btn-dark" data-store><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg><span data-en="Add to Chrome, free">免费添加至 Chrome</span></a>
+      <a class="btn btn-light" data-edge-store data-en="Edge Add-on">Edge 加载项</a>
     </div>
-    <a class="hero-more" href="#features"><span data-i18n="hero_cta2">先看看它长什么样</span><span aria-hidden="true">↓</span></a>
     <ul class="trust">
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust1">极简一页墙</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust2">拼音 / 简繁搜索</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust3">Chrome / Edge 双商店</span></li>
-      <li><span class="ck" aria-hidden="true">✓</span><span data-i18n="trust4">本地、无账号</span></li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="One clean page">极简一页墙</span></li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="Instant search">拼音 / 简繁搜索</span></li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="Chrome &amp; Edge stores">Chrome / Edge 双商店</span></li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="Local, no account">本地、无账号</span></li>
     </ul>
-  </div>
-  <!-- 真实截图：navigation.html（源图 og-src/shot-ai-tools.png，裁左侧 1200px） -->
-  <div class="hero-art">
-    <div class="hero-tabs" aria-label="产品视图">
-      <button class="hero-tab active" type="button" data-src="hero-shot.jpg" data-alt="书签管理器 Pro 的极简书签墙：搜索框、分类胶囊和带网页预览的书签卡片" aria-pressed="true" data-i18n="heroTabWall">书签墙</button>
-      <button class="hero-tab" type="button" data-src="search-shot.jpg" data-alt="书签管理器的拼音搜索：输入 khgl 命中客户管理系统" aria-pressed="false" data-i18n="heroTabSearch">拼音搜索</button>
-      <button class="hero-tab" type="button" data-src="preview-hero.jpg" data-alt="书签管理器的网页预览：三列书签卡片和网页截图" aria-pressed="false" data-i18n="heroTabPreview">网页预览</button>
-    </div>
-    <div class="win">
-      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="win_url">新标签页 · 极简书签墙</span></div>
-      <img id="heroShot" src="hero-shot.jpg" width="1200" height="700" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt"
-           alt="书签管理器 Pro 的极简书签墙：搜索框、分类胶囊和带网页预览的书签卡片">
-    </div>
-    <div class="float-card">
-      <span class="ai" aria-hidden="true">拼</span>
-      <div><b data-i18n="float_b">拼音也能搜</b><span data-i18n="float_s">khgl → 客户管理系统</span></div>
+
+    <!-- 会动的搜索演示：按插件真实样式复刻，示例书签都是公开网站 -->
+    <div class="art stage" role="img" aria-label="书签管理器 Pro 的新标签页演示：输入关键词，书签随之筛选" data-en-aria="Bookmark Manager Pro new tab demo: type a keyword and the bookmarks filter instantly">
+      <div class="win" style="max-width:1060px;margin:0 auto">
+        <div class="win-bar"><i></i><i></i><i></i><span data-en="New Tab · Bookmark wall">新标签页 · 书签墙</span></div>
+        <div class="nt">
+          <div class="nt-brand"><span class="nt-logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span class="nt-name" data-en="Bookmark Manager">书签管理器</span><span class="pro">PRO</span></div>
+          <div class="sbox" id="demoBox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span class="q" id="demoQ"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+          <div class="chips" id="demoChips"></div>
+          <div class="wh"><b id="demoTitle"></b><span id="demoCount"></span></div>
+          <div class="grid" id="demoGrid"></div>
+        </div>
+      </div>
+      <div class="float"><span class="pin" data-en="⌨">拼</span><div><b data-en="Keyboard-first">拼音也能搜</b><span data-en="↑↓ to pick · Enter to open">bdwp → 百度网盘</span></div></div>
+      <div class="seg" id="demoSeg"><button data-i="0" class="on" data-en="Short query">拼音首字母</button><button data-i="1" data-en="Keyword">中文关键词</button><button data-i="2" data-en="Name or URL">英文 / 网址</button><button data-i="3" data-en="Two keywords">多个关键词</button></div>
     </div>
   </div>
 </section>
 
-<!-- ══ 搜索（可打字演示） ═══════════════════════════════════════════ -->
-<section class="wrap sec search-sec" id="features">
-  <div class="card split reveal">
-    <div>
-      <h2 class="sec-h" data-i18n="f_h2">Chrome 的书签，<br>终于<span class="hl">能搜了</span></h2>
-      <p class="sec-p" data-i18n="f6_p">极简页就是搜索框：标题、网址、文件夹、拼音一起搜。输入 khgl 也能找到「客户管理系统」；↑↓ 选、Enter 开、Cmd/Ctrl+Enter 新标签、Esc 返回。</p>
+<!-- ══ 搜索：三个入口 ══ -->
+<section class="sec" id="features">
+  <div class="wrap narrow">
+    <div class="center reveal">
+      <h2 class="h2" data-en="Chrome bookmarks, finally searchable">Chrome 的书签，终于能搜了</h2>
+      <p class="lead" data-en="The new tab page is a search box: titles, URLs and folders are searched together. Type a few letters and the right bookmark is already there.">极简页就是搜索框：标题、网址、文件夹、拼音一起搜。输入 bdwp 也能找到「百度网盘」。</p>
+    </div>
+    <div class="bento">
+      <div class="tile big reveal">
+        <div class="show">
+          <div class="win" style="width:100%;max-width:780px">
+            <div class="nt" style="padding:26px 30px 30px">
+              <div class="sbox focus"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="q"><span data-en="google cal">微信 平台</span><span class="caret"></span></span><kbd>Esc</kbd></div>
+              <div class="wh" style="margin-top:18px"><b data-en="Search “google cal”">搜索「微信 平台」</b><span data-en="2 bookmarks · every keyword matched">2 个书签 · 多个关键词同时命中</span></div>
+              <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+                <div class="bm hit"><span class="av" style="--c:#3BAA3B" data-en="G">W</span><b data-en="<mark>Google</mark> <mark>Cal</mark>endar"><mark>微信</mark>公众<mark>平台</mark></b><small data-en="calendar.google.com · Work · Enter to open">mp.weixin.qq.com · 工作 · Enter 打开</small></div>
+                <div class="bm"><span class="av" style="--c:#3BAA3B" data-en="G">W</span><b data-en="<mark>Google</mark> <mark>Cal</mark>endar · Team"><mark>微信</mark>开放<mark>平台</mark></b><small data-en="calendar.google.com/team · Work">open.weixin.qq.com · 工作</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <span class="chip-tag" data-en="Partial words / several keywords / folders">拼音 / 首字母 / 简繁 / 模糊</span>
+          <h3 data-en="One search for the new tab page and the popup">极简页和弹窗共用一套搜索</h3>
+          <p data-en="Titles, URLs and folders are searched together, several keywords work too. Matches are highlighted, and you can see which folder each one lives in.">标题、网址、文件夹一起搜，多个关键词也行，命中的字会高亮，还会显示它在哪个文件夹。</p>
+          <div class="keys"><span><kbd>↑</kbd> <kbd>↓</kbd> <span data-en="select">选择</span></span><span><kbd>Enter</kbd> <span data-en="open">打开</span></span><span><kbd>Cmd/Ctrl</kbd>+<kbd>Enter</kbd> <span data-en="new tab">新标签</span></span><span><kbd>Esc</kbd> <span data-en="back">返回</span></span><span><kbd>/</kbd> <span data-en="focus search">聚焦搜索</span></span></div>
+        </div>
+      </div>
+      <div class="tile reveal">
+        <div class="show">
+          <div class="ob">
+            <div class="ob-in"><span class="kw" data-en="Bookmark Manager Pro">书签管理器 Pro</span><span data-en="yt">blbl</span><span class="caret"></span></div>
+            <div class="ob-r on"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg><span data-en="Search bookmarks: type a keyword, press Enter">搜索书签：输入关键词，回车打开</span></div>
+            <div class="ob-r"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span data-en="YouTube — <span class=u>youtube.com</span>">哔哩哔哩 — <span class="u">bilibili.com</span></span></div>
+          </div>
+        </div>
+        <div class="txt">
+          <span class="chip-tag" data-en="Address bar">地址栏</span>
+          <h3 data-en="Type bm + a keyword in the address bar">地址栏输入 bm + 关键词，也能搜书签</h3>
+          <p data-en="No page to open first: bm, space, keyword, Enter. Same ranking as the new tab page.">不用打开任何页面：bm、空格、关键词，回车直接打开。和极简页用的是同一套排序和拼音搜索。</p>
+        </div>
+      </div>
+      <div class="tile reveal">
+        <div class="show">
+          <div class="win" style="width:100%;max-width:440px">
+            <div class="nt" style="padding:22px 20px 24px">
+              <div class="sbox focus" style="height:44px;font-size:14px"><span class="q"><span data-en="midjourney tutorial">midjourney 教程</span><span class="caret"></span></span></div>
+              <div class="web"><span class="g"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span><span><b data-en="Search the web for “midjourney tutorial”">搜索网页「midjourney 教程」</b><small data-en="Enter · your default search engine">Enter · 跟随 Chrome 默认搜索引擎</small></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <span class="chip-tag" data-en="One search box">一个搜索框</span>
+          <h3 data-en="Bookmarks first, then the web">先搜书签，没有就搜网页</h3>
+          <p data-en="Same box for both: it searches your bookmarks first; if nothing matches, Enter searches the web with your default engine.">同一个搜索框：先搜书签；没有匹配时，回车直接用你的默认搜索引擎搜网页。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 前后对比 ══ -->
+<section class="sec" id="why">
+  <div class="wrap narrow">
+    <div class="center reveal">
+      <h2 class="h2" data-en="Still digging through Chrome’s bookmarks every day?">你也每天在 Chrome 里翻书签吗？</h2>
+    </div>
+    <div class="vs">
+      <div class="tile old reveal">
+        <div class="vs-head"><span class="vs-tag bad"><i>✕</i><span data-en="Before · Chrome’s own">以前 · Chrome 自带</span></span></div>
+        <p class="vs-big" data-en="Four folder levels, opened one by one">4 层文件夹，一层层点开</p>
+        <div class="show">
+          <div class="win" style="width:100%">
+            <div class="win-bar"><i></i><i></i><i></i><span data-en="Chrome Bookmark Manager">Chrome 书签管理器</span></div>
+            <div class="tree" style="padding:14px 18px 18px">
+              <div><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="Bookmarks bar">书签栏</span></div>
+              <div class="d1"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="Work">工作</span></div>
+              <div class="d2"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="2023 files">2023 资料</span></div>
+              <div class="d3"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="Reference">参考</span></div>
+              <div class="d4 lost" data-en="… 214 more bookmarks">…… 还有 214 个书签</div>
+              <div class="d1"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="Read later">稍后读</span></div>
+              <div class="d1"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="Tools (old)">工具 (旧)</span></div>
+              <div class="where" data-en="The one you just saved? At the very bottom…">刚存的那个，在最底下……</div>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <ul class="vs-list">
+            <li><i>✕</i><span data-en="<b>Folders only</b>: no frequent, recent or auto-sorted view"><b>只有文件夹层级</b>：没有常用、最近、自动分类</span></li>
+            <li><i>✕</i><span data-en="<b>New bookmarks land at the bottom</b>, yet the ones you just saved are the ones you need most"><b>新存的书签永远在最底下</b>，偏偏刚存的才是最常用的</span></li>
+            <li><i>✕</i><span data-en="<b>To find one, you open folder after folder</b>"><b>想找书签，只能在文件夹里一层层展开</b></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="vs-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="tile new reveal">
+        <div class="vs-head"><span class="vs-tag ok"><i>✓</i><span data-en="Now · Bookmark Manager Pro">现在 · 书签管理器 Pro</span></span></div>
+        <p class="vs-big" data-en="Type two letters, press Enter">输入 2 个字母，回车就到</p>
+        <div class="show" style="justify-content:center">
+          <div class="pop">
+            <div class="pop-h"><span class="nt-logo"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span data-en="Bookmark Manager">书签管理器</span><span class="pro">PRO</span></div>
+            <div class="pop-s focus"><span data-en="go">bd</span><span class="caret"></span></div>
+            <div class="pop-l" style="padding:8px 0">
+              <div class="hov"><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Drive"><mark>百度</mark>网盘</span><span class="pinbtn">Enter</span></div>
+              <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Maps"><mark>百度</mark>地图</span></div>
+              <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Translate"><mark>百度</mark>翻译</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <ul class="vs-list">
+            <li><i>✓</i><span data-en="<b>Frequent, recent and auto-sorted categories</b> on one page"><b>常用、最近、自动分类</b>，一页看全</span></li>
+            <li><i>✓</i><span data-en="<b>Recently added comes first</b>, so new saves are right there"><b>最近添加排最前</b>，刚存的马上找到</span></li>
+            <li><i>✓</i><span data-en="<b>Type a few letters</b> and find any bookmark in three seconds"><b>输入中文、拼音或首字母</b>，三秒找到</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="origin reveal" data-en="This isn’t a big-company product. It was built by someone who digs through hundreds of bookmarks every day and finally had enough of Chrome. Every feature comes from a real moment of frustration, not a product meeting.">这不是大厂产品：它是一个每天要在几百个书签里找东西的外贸人，被 Chrome 逼出来的作品。所以每个功能都来自真实的抓狂瞬间，而不是产品会议。</p>
+  </div>
+</section>
+
+<!-- ══ 收藏方式 ══ -->
+<section class="sec">
+  <div class="wrap narrow split">
+    <div class="reveal">
+      <p class="eyebrow" data-en="Zero learning curve">零学习成本</p>
+      <h2 class="h2" data-en="Nothing about saving changes">收藏方式，一个都没变</h2>
+      <p class="lead" data-en="You still save with the star in the address bar. Bookmarks are written straight into Chrome’s own bookmarks and stay in sync with the bookmarks bar and Chrome’s manager. No migration, nothing to relearn; pinning just moves a bookmark to the front of the bookmarks bar.">收藏还是点地址栏那颗星；书签直接写进 Chrome 原生书签，和书签栏、Chrome 管理器实时互通。不迁移、不学习；一键置顶只是把它移到书签栏第一位。</p>
       <ul class="ticks">
-        <li><span data-i18n="f6_l1">极简页和弹窗<b>共用一套搜索</b>，拼音 / 首字母 / 简繁 / 模糊</span></li>
-        <li><span data-i18n="f6_l2">↑↓ 选择，<b>Enter</b> 打开，<b>Cmd/Ctrl+Enter</b> 新标签，<b>Esc</b> 返回</span></li>
-        <li><span data-i18n="f6_l3">地址栏输入 <b>bm</b> + 关键词，也能搜书签</span></li>
-        <li><span data-i18n="f6_l4">同一个搜索框：先搜书签；没有匹配时，回车直接用默认搜索引擎搜网页</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="Click Chrome’s native <b>★</b> → it shows up here, <b>already sorted</b>">点 Chrome 原生 <b>★</b> 收藏 → 立刻出现在这里并<b>自动归类</b></span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="<b>Fully in sync</b> with Chrome bookmarks; your folders stay as they are">与 Chrome 书签<b>完全互通</b>，文件夹结构原样保留</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span data-en="Syncs with your Chrome account as usual; <b>uninstalling loses nothing</b>">跟随 Chrome 账号正常同步，<b>卸载不丢任何数据</b></span></li>
       </ul>
     </div>
-    <div>
-      <div class="demo-wrap real-demo">
-        <img class="ui-shot" src="shot-search.jpg" width="800" height="600" loading="lazy"
-             alt="书签管理器 Pro 真实搜索界面：输入 git 命中 GitHub，上方同时显示网页搜索入口">
-        <div class="demo" hidden aria-hidden="true">
-          <label>
-            <span class="sr" data-i18n="demo_label">搜索示例书签</span>
-            <input type="search" id="demoInput" value="led" autocomplete="off" spellcheck="false" data-i18n-ph="demo_ph" placeholder="试试 led、报价、figma">
-            <span class="demo-count" id="demoCount" aria-live="polite"></span>
-          </label>
-          <ul id="demoList"></ul>
+    <div class="art reveal" style="padding:48px 40px">
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i></div>
+        <div style="padding:16px 18px 22px">
+          <div class="addr"><span class="url">midjourney.com</span><span class="star"><svg width="18" height="18" viewBox="0 0 24 24" fill="#F2B705" stroke="#8A6A00" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l2.8 5.9 6.2.8-4.6 4.3 1.2 6.2L12 17.2 6.4 20.2l1.2-6.2L3 9.7l6.2-.8z"/></svg></span></div>
+          <p style="text-align:right;font-size:12.5px;color:#80868B;margin:8px 4px 0" data-en="↑ Same star, saving works exactly as before">↑ 还是这颗星，收藏方式和原来一模一样</p>
+          <div class="nt" style="margin-top:18px;padding:16px;border-radius:12px">
+            <div class="chips" style="justify-content:flex-start;margin:0 0 12px"><span class="chip" data-en="Frequent">常用书签</span><span class="chip" data-en="Recent">最近添加</span><span class="chip on" data-en="AI Tools">AI 工具</span></div>
+            <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+              <div class="bm hit pop-in"><span class="av" style="--c:#B5336B">M</span><b>Midjourney</b><small data-en="Just added · auto-filed under “AI Tools”">刚刚添加 · 已自动归入「AI 工具」</small></div>
+              <div class="bm"><span class="av" style="--c:#3BAA3B">D</span><b>DeepSeek</b><small>chat.deepseek.com</small></div>
+              <div class="bm"><span class="av" style="--c:#B8612E">C</span><b>Claude</b><small>claude.ai</small></div>
+              <div class="bm"><span class="av" style="--c:#202124">C</span><b>ChatGPT</b><small>chatgpt.com</small></div>
+            </div>
+          </div>
         </div>
-        <p class="demo-note" data-i18n="demo_note">真实界面：输入 git 直接命中 GitHub</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ 痛点 ═════════════════════════════════════════════════════════ -->
-<section class="wrap sec" id="why">
-  <h2 class="sec-h reveal" data-i18n="why_h2">你也每天在 Chrome 里<span class="hl">翻书签</span>吗？</h2>
-  <div class="why-grid reveal">
-    <div class="card menu-card">
-      <div class="menu-title" data-i18n="cm_title">书签管理器 Pro · 弹窗搜索</div>
-      <img class="ui-shot popup-shot" src="shot-popup-search.png" width="720" height="1200" loading="lazy"
-           alt="书签管理器 Pro 的真实弹窗搜索：输入 Apple 后只显示 Apple 书签">
+<!-- ══ 六个工具 ══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center reveal">
+      <h2 class="h2" data-en="Beyond search: a set of light tools">不止搜索，一整套轻量工具</h2>
+      <p class="lead" data-en="The popup handles what you do most; the new tab page handles browsing and tidying. No sidebar, no extra dashboard.">弹窗管高频操作，极简页管浏览和整理；没有侧边栏，也没有多余仪表盘。</p>
     </div>
-    <div class="pains">
-      <div class="pain"><span class="n">01</span><p data-i18n="pain1"><b>只有文件夹层级</b>：没有常用、最近、自动分类</p></div>
-      <div class="pain"><span class="n">02</span><p data-i18n="pain2"><b>新存的书签永远在最底下</b>，偏偏刚存的才是最常用的</p></div>
-      <div class="pain"><span class="n">03</span><p data-i18n="pain3"><b>想找书签，只能在文件夹里一层层展开</b></p></div>
-      <div class="pain-good" data-i18n="pain_good">现在：新标签页就是书签墙，输入中文、拼音或首字母，三秒找到。</div>
-    </div>
-  </div>
-  <p class="origin reveal" data-i18n="origin">这不是大厂产品：它是一个每天要在几百个书签里找东西的外贸人，被 Chrome 逼出来的作品。所以每个功能都来自真实的抓狂瞬间，而不是产品会议。</p>
-</section>
-
-<!-- ══ 收藏方式 ═════════════════════════════════════════════════════ -->
-<section class="wrap sec">
-  <div class="panel reveal">
-    <div class="split">
-      <div>
-        <h2 class="sec-h" data-i18n="fz_h">收藏方式，<span class="hl">一个都没变</span></h2>
-        <p class="panel-p" data-i18n="fz_p">收藏还是点地址栏那颗星；书签直接写进 Chrome 原生书签，和书签栏、Chrome 管理器实时互通。不迁移、不学习；一键置顶只是把它移到书签栏第一位。</p>
-      </div>
-      <div class="fz-demo">
-        <div class="addr">midjourney.com<svg width="20" height="20" viewBox="0 0 24 24" fill="#F2B705" stroke="#8A6A00" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.8 5.9 6.2.8-4.6 4.3 1.2 6.2L12 17.2 6.4 20.2l1.2-6.2L3 9.7l6.2-.8z"/></svg></div>
-        <span class="fz-note" data-i18n="fz_star">↑ 还是这颗星，收藏方式和原来一模一样</span>
-        <div class="saved"><span class="av" style="background:#3D8A5A;width:30px;height:30px">M</span><div><b data-i18n="fz_saved">Midjourney 已收藏</b><span data-i18n="fz_cat">已自动归入「AI 工具」</span></div></div>
-      </div>
-    </div>
-    <ul class="fz-list">
-      <li data-i18n="fz_l1">点 Chrome 原生 <b>★</b> 收藏 → 立刻出现在这里并<b>自动归类</b></li>
-      <li data-i18n="fz_l2">与 Chrome 书签<b>完全互通</b>，文件夹结构原样保留</li>
-      <li data-i18n="fz_l3">跟随 Chrome 账号正常同步，<b>卸载不丢任何数据</b></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ══ 书签工作台：六张大卡 ═════════════════════════════════════════ -->
-<section class="wrap sec">
-  <h2 class="sec-h reveal" data-i18n="bento_h2">不止搜索，一整套<span class="hl">轻量工具</span></h2>
-  <p class="sec-p reveal" data-i18n="bento_p">弹窗管高频操作，极简页管浏览和整理；没有侧边栏，也没有多余仪表盘。</p>
-  <div class="feats">
-
-    <article class="card feat split reveal">
-      <div>
-        <div class="feat-tag" data-i18n="t0">01 · 弹窗</div>
-        <h3 data-i18n="f0_h">点开就能搜，常用操作都在</h3>
-        <p class="feat-p" data-i18n="f0_p">点工具栏图标：搜索、到顶部、到底部、最近添加、书签墙都在；悬停书签可一键置顶。点开光标已经在搜索框里，敲关键词、回车，第一个结果直接打开。</p>
-        <ul class="dots"><li data-i18n="f0_l1">一键置顶到 Chrome 书签栏第一位</li><li data-i18n="f0_l2">最近添加 / 书签墙，一键切换</li><li data-i18n="f0_l3">右键打开、编辑、删除</li></ul>
-      </div>
-      <div class="mock stack" aria-hidden="true">
-        <img class="ui-shot popup-shot" src="shot-popup-hover.png" width="720" height="1200" loading="lazy"
-             alt="书签管理器 Pro 的真实弹窗：鼠标悬停 Figma 时显示蓝色置顶按钮">
-      </div>
-    </article>
-
-    <article class="card feat split reveal">
-      <div>
-        <div class="feat-tag" data-i18n="t1">02 · 自动分类</div>
-        <h3 data-i18n="f1_h">存进来，就已经分好类了</h3>
-        <p class="feat-p" data-i18n="f1_p">按域名和关键词自动把书签归入设计、编程、AI、商务等 8 个分类，不用建文件夹，不用拖拽。分错了？右键手动指定一次，它永久记住。</p>
-        <ul class="dots"><li data-i18n="f1_l1">域名 + 关键词双重识别</li><li data-i18n="f1_l2">手动分类优先，你的判断永远高于规则</li><li data-i18n="f1_l3">空分类自动隐藏，有了新书签又自动出现</li></ul>
-      </div>
-      <div class="mock" aria-hidden="true">
-        <img class="ui-shot" src="shot-category.jpg" width="800" height="600" loading="lazy"
-             alt="书签管理器 Pro 真实书签墙：自动分类胶囊，以及 GitHub、Figma、Notion、Instagram、YouTube、Google 的网页预览卡片">
-      </div>
-    </article>
-
-    <article class="card feat split reveal">
-      <div>
-        <div class="feat-tag" data-i18n="t2">03 · 网页预览</div>
-        <h3 data-i18n="f2_h">认图比认字快</h3>
-        <p class="feat-p" data-i18n="f2_p">滚动到哪，哪里的书签就按需生成网页截图并缓存在本机。标题记不清没关系，扫一眼就知道是哪个网站；不想看图，设置里可一键关闭。</p>
-        <ul class="dots"><li data-i18n="f2_l1">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时回来</li><li data-i18n="f2_l2">深色 / 浅色 / 跟随系统三种主题</li><li data-i18n="f2_l3">设置 → 网页预览，一键关闭，卡片变纯文字</li></ul>
-      </div>
-      <div class="mock preview-visual" aria-hidden="true">
-        <div class="preview-window">
-          <div class="preview-bar"><i></i><i></i><i></i><span>网页预览</span></div>
-          <img src="preview-shot.jpg" width="800" height="600" loading="lazy" alt="书签管理器 Pro 的网页预览卡片：Instagram、YouTube、Google、Claude、Apple、客户管理系统、GitHub 等">
+    <div class="feats">
+      <article class="tile feat reveal">
+        <div class="show">
+          <div class="pop" style="width:270px">
+            <div class="pop-h"><span class="nt-logo"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span data-en="Bookmark Manager">书签管理器</span><span class="pro">PRO</span></div>
+            <div class="pop-q"><span><i style="background:#E8EEFD"></i><span data-en="Top">顶部</span></span><span><i style="background:#E6F4EA"></i><span data-en="Bottom">底部</span></span><span><i style="background:#FEF3D6"></i><span data-en="Recent">最近</span></span><span><i style="background:#EFE8FD"></i><span data-en="Wall">书签墙</span></span></div>
+            <div class="pop-l">
+              <div><span class="av" style="--c:#8E3BBF">G</span>GitHub</div>
+              <div class="hov"><span class="av" style="--c:#B5336B">F</span>Figma<span class="pinbtn" data-en="Pin">置顶</span></div>
+              <div><span class="av" style="--c:#C2336B">N</span>Notion</div>
+            </div>
+          </div>
         </div>
-        <div class="pills"><span class="pill on" data-i18n="f2_c1">舒适</span><span class="pill" data-i18n="f2_c2">紧凑</span><span class="pill" data-i18n="f2_c3">深色模式</span></div>
-      </div>
-    </article>
-
-    <article class="card feat split reveal">
-      <div>
-        <div class="feat-tag" data-i18n="t3">04 · 失效检测</div>
-        <h3 data-i18n="f3_h">打不开的书签，留着干嘛</h3>
-        <p class="feat-p" data-i18n="f3_p">一键体检当前列表：真正 404 的标「失效」，只是响应慢的标「超时」；批量清理只删确认失效的，绝不误伤慢网站。</p>
-        <ul class="dots"><li data-i18n="f3_l1">可只扫当前分类，快而省流量</li><li data-i18n="f3_l2">只有 HEAD 与 GET 都返回 404/410 才判定失效，网络异常不自动删除</li><li data-i18n="f3_l3">删除同样可撤销</li></ul>
-      </div>
-      <div class="mock stack" aria-hidden="true">
-        <img class="ui-shot" src="shot-dead.png" width="800" height="600" loading="lazy"
-             alt="书签管理器 Pro 的真实失效检测确认窗口：检测会逐个访问当前列表的书签网址">
-      </div>
-    </article>
-
-    <article class="card feat split reveal">
-      <div>
-        <div class="feat-tag" data-i18n="t4">05 · 批量整理</div>
-        <h3 data-i18n="f4_h">攒了三年的书签，几分钟理完</h3>
-        <p class="feat-p" data-i18n="f4_p">极简页多选：勾选或全选当前结果，然后一次性移动、归类或删除。重复收藏的同一个网页？「一键清理重复」每组只留最新的。</p>
-        <ul class="dots"><li data-i18n="f4_l1">勾选或全选当前筛选结果，底部批量条操作</li><li data-i18n="f4_l2">按 URL 归一化识别重复（带不带 www 都算同一个）</li><li data-i18n="f4_l3">设置分类 / 移动 / 删除；删除都能撤销</li></ul>
-      </div>
-      <div class="mock stack" aria-hidden="true">
-        <img class="ui-shot" src="shot-bulk.jpg" width="800" height="600" loading="lazy"
-             alt="书签管理器 Pro 的真实多选界面：已选 9 个，底部有全选、移动、设置分类、删除所选和取消选择">
-      </div>
-    </article>
-
-    <article class="card feat split reveal">
-      <div>
-        <div class="feat-tag" data-i18n="t5">06 · 撤销</div>
-        <h3 data-i18n="f5_h">手滑了？点一下「撤销」</h3>
-        <p class="feat-p" data-i18n="f5_p">别的工具删书签前弹窗问你「确定吗」，删完就真没了。这里反过来：直接删，但任何删除（包括批量删除几十个）都能一键撤销，书签回到原来的文件夹原来的位置。</p>
-        <ul class="dots"><li data-i18n="f5_l1">单个、批量、去重、清理失效，全部可撤销</li><li data-i18n="f5_l2">恢复时连手动分类一起带回来</li></ul>
-      </div>
-      <div class="mock" aria-hidden="true">
-        <img class="ui-shot" src="shot-undo.jpg" width="800" height="600" loading="lazy"
-             alt="书签管理器 Pro 的真实撤销提示：已删除 1 个书签，点击撤销可恢复">
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ══ 新标签页（真实截图） ═════════════════════════════════════════ -->
-<section class="wrap sec">
-  <div class="nt reveal">
-    <div class="nt-eyebrow" data-i18n="nt_eyebrow">新标签页接管</div>
-    <h2 class="sec-h" data-i18n="nt_h">打开新标签页，就是你的<span class="hl">书签墙</span></h2>
-    <p class="nt-p" data-i18n="nt_p">没有侧边栏，没有仪表盘：搜索、分类、常用 / 最近、书签卡片都在一页。新标签页接管可在设置里开或关；预览、密度、主题也都在设置里。</p>
-    <div class="chips"><span data-i18n="nt_c1">顶上只有搜索和几个动作</span><span data-i18n="nt_c2">设置里一键开关新标签页</span><span data-i18n="nt_c3">拼音、键盘、预览、置顶全都能用</span></div>
-    <div class="win">
-      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url" data-i18n="nt_url">新标签页 · 书签墙</span></div>
-      <img src="newtab-shot.jpg" width="1920" height="600" loading="lazy" decoding="async" data-i18n-alt="nt_alt" alt="书签管理器 Pro 的极简新标签页：搜索框、分类胶囊、常用书签墙和网页预览卡片">
+        <div class="txt">
+          <span class="num" data-en="01 · Popup">01 · 弹窗</span>
+          <h3 data-en="Open it and search, everyday actions included">点开就能搜，常用操作都在</h3>
+          <ul class="dots"><li data-en="Pin any bookmark to the front of the bookmarks bar">一键置顶到 Chrome 书签栏第一位</li><li data-en="Switch to recently added or the bookmark wall in one click">最近添加 / 书签墙，一键切换</li><li data-en="Right-click to open, edit or delete">右键打开、编辑、删除</li></ul>
+        </div>
+      </article>
+      <article class="tile feat reveal">
+        <div class="show">
+          <div class="nt" style="width:100%;border-radius:12px;padding:16px;box-shadow:0 20px 40px -24px rgba(10,40,100,.4)">
+            <div class="chips" style="margin:0 0 12px;justify-content:flex-start"><span class="chip" data-en="Design">设计资源</span><span class="chip" data-en="Code">编程开发</span><span class="chip on" data-en="AI Tools">AI 工具</span><span class="chip" data-en="Business">商务</span></div>
+            <div class="grid" style="grid-template-columns:1fr 1fr">
+              <div class="bm"><span class="av" style="--c:#B5336B">M</span><b>Midjourney</b><small>midjourney.com</small></div>
+              <div class="bm"><span class="av" style="--c:#3BAA3B">D</span><b>DeepSeek</b><small>chat.deepseek.com</small></div>
+              <div class="bm"><span class="av" style="--c:#B8612E">C</span><b>Claude</b><small>claude.ai</small></div>
+              <div class="bm"><span class="av" style="--c:#202124">C</span><b>ChatGPT</b><small>chatgpt.com</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <span class="num" data-en="02 · Auto-sort">02 · 自动分类</span>
+          <h3 data-en="Saved, and already sorted">存进来，就已经分好类了</h3>
+          <ul class="dots"><li data-en="Filed into 8 categories (Design, Code, AI, Business…) by domain and keywords">按域名和关键词归入设计、编程、AI、商务等 8 个分类</li><li data-en="Wrong guess? Reassign once with a right-click; it remembers">分错了？右键手动指定一次，永久记住</li><li data-en="Empty categories hide, and come back when they have bookmarks">空分类自动隐藏，有了新书签又自动出现</li></ul>
+        </div>
+      </article>
+      <article class="tile feat reveal">
+        <div class="show">
+          <div class="grid" style="grid-template-columns:repeat(3,1fr);width:100%">
+            <div class="bm"><div class="pv gh"></div><span class="av" style="--c:#8E3BBF">G</span><b>GitHub</b><small>github.com</small></div>
+            <div class="bm"><div class="pv fg"></div><span class="av" style="--c:#B5336B">F</span><b>Figma</b><small>figma.com</small></div>
+            <div class="bm"><div class="pv yt"></div><span class="av" style="--c:#A43FC4">Y</span><b>YouTube</b><small>youtube.com</small></div>
+            <div class="bm"><div class="pv go"></div><span class="av" style="--c:#3D6AC7">G</span><b>Google</b><small>google.com</small></div>
+            <div class="bm"><div class="pv no"></div><span class="av" style="--c:#C2336B">N</span><b>Notion</b><small>notion.so</small></div>
+            <div class="bm"><div class="pv ap"></div><span class="av" style="--c:#3BAA8B">A</span><b>Apple</b><small>apple.com</small></div>
+          </div>
+        </div>
+        <div class="txt">
+          <span class="num" data-en="03 · Previews">03 · 网页预览</span>
+          <h3 data-en="Pictures are faster than words">认图比认字快</h3>
+          <ul class="dots"><li data-en="Comfortable / compact density; <b>Alt+B</b> brings you back anytime">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时回来</li><li data-en="Dark / light / system themes">深色 / 浅色 / 跟随系统三种主题</li><li data-en="Settings → Web previews turns them off for text-only cards">设置 → 网页预览，一键关闭，卡片变纯文字</li></ul>
+        </div>
+      </article>
+      <article class="tile feat reveal">
+        <div class="show" style="flex-direction:column;gap:12px">
+          <div class="grid" style="grid-template-columns:1fr 1fr;width:100%">
+            <div class="bm"><span class="tag-bad" data-en="Dead">失效</span><span class="av" style="--c:#8A8F98">G</span><b>Google+</b><small>plus.google.com · 404</small></div>
+            <div class="bm"><span class="tag-slow" data-en="Timeout">超时</span><span class="av" style="--c:#C0662B">I</span><b>Internet Archive</b><small>archive.org</small></div>
+          </div>
+          <div class="dlg" style="width:100%"><b data-en="Clean up dead links">清理失效链接</b><p data-en="Only the 1 confirmed-dead bookmark is deleted; the 1 timeout is kept, so slow sites are safe. Deletion can be undone.">只删除确认失效的 1 个书签；超时的 1 个保留，不会误伤慢网站。删除后可撤销。</p><div class="f"><span class="b1" data-en="Cancel">取消</span><span class="b2" data-en="Delete 1">删除 1 个</span></div></div>
+        </div>
+        <div class="txt">
+          <span class="num" data-en="04 · Dead links">04 · 失效检测</span>
+          <h3 data-en="Why keep bookmarks that won’t open?">打不开的书签，留着干嘛</h3>
+          <ul class="dots"><li data-en="Scan just the current category: faster, lighter">可只扫当前分类，快而省流量</li><li data-en="Only 404/410 from both HEAD and GET counts as dead; network errors are never auto-deleted">HEAD 与 GET 都返回 404/410 才判定失效，网络异常不自动删除</li><li data-en="Deleting is undoable too">删除同样可撤销</li></ul>
+        </div>
+      </article>
+      <article class="tile feat reveal">
+        <div class="show" style="flex-direction:column;gap:12px">
+          <div class="grid" style="grid-template-columns:1fr 1fr;width:100%">
+            <div class="bm ck sel"><span class="box">✓</span><span class="av" style="--c:#C0562B" data-en="A">T</span><b data-en="Amazon">淘宝</b><small data-en="amazon.com">taobao.com</small></div>
+            <div class="bm ck"><span class="box"></span><span class="av" style="--c:#C2336B" data-en="E">J</span><b data-en="eBay">京东</b><small data-en="ebay.com">jd.com</small></div>
+            <div class="bm ck sel"><span class="box">✓</span><span class="av" style="--c:#8E3BBF">G</span><b>GitHub</b><small>github.com</small></div>
+            <div class="bm ck sel"><span class="box">✓</span><span class="av" style="--c:#8E3BBF">G</span><b data-en="GitHub (duplicate)">GitHub（重复）</b><small>www.github.com</small></div>
+          </div>
+          <div class="bar" style="width:100%"><b data-en="3 selected">已选 3 个</b><span data-en="Move to…">移动到…</span><span data-en="Set category">设置分类</span><span class="del" data-en="Delete">删除</span></div>
+        </div>
+        <div class="txt">
+          <span class="num" data-en="05 · Bulk tidy">05 · 批量整理</span>
+          <h3 data-en="Years of bookmarks, tidied in minutes">攒了三年的书签，几分钟理完</h3>
+          <ul class="dots"><li data-en="Select some or all of the current results, then use the bulk bar">勾选或全选当前筛选结果，底部批量条操作</li><li data-en="Duplicates matched by normalized URL (with or without www)">按 URL 归一化识别重复（带不带 www 都算同一个）</li><li data-en="Set category / move / delete; every delete can be undone">设置分类 / 移动 / 删除；删除都能撤销</li></ul>
+        </div>
+      </article>
+      <article class="tile feat reveal">
+        <div class="show" style="flex-direction:column;gap:18px">
+          <div class="grid" style="grid-template-columns:1fr 1fr;width:100%">
+            <div class="bm gone"><span class="av" style="--c:#C2336B" data-en="R">X</span><b data-en="Reddit">小红书</b><small data-en="reddit.com">xiaohongshu.com</small></div>
+            <div class="bm"><span class="av" style="--c:#3BAA3B" data-en="L">W</span><b data-en="LinkedIn">微信公众平台</b><small data-en="linkedin.com">mp.weixin.qq.com</small></div>
+          </div>
+          <span class="toast"><span data-en="Deleted “Reddit”">已删除「小红书」</span><b data-en="Undo">撤销</b></span>
+        </div>
+        <div class="txt">
+          <span class="num" data-en="06 · Undo">06 · 撤销</span>
+          <h3 data-en="Slipped? Just hit “Undo”">手滑了？点一下「撤销」</h3>
+          <ul class="dots"><li data-en="No “Are you sure?” pop-ups: delete freely, undo anything">不弹「确定吗」，直接删；任何删除都能一键撤销</li><li data-en="Single, bulk, dedupe and dead-link cleanup: all undoable">单个、批量、去重、清理失效，全部可撤销</li><li data-en="Back to the same folder and position, manual categories included">回到原来的文件夹、原来的位置，手动分类一起带回</li></ul>
+        </div>
+      </article>
     </div>
   </div>
-  <p class="mid-note" data-i18n="mid_cta_note">免费 · 无需注册 · 30 秒装好</p>
 </section>
 
-<!-- ══ 全部清单（JS 生成，双语在字典里） ═══════════════════════════ -->
-<section class="wrap sec" id="all">
-  <h2 class="sec-h reveal" data-i18n="all_h2">全部功能，<span class="hl">一张清单</span>看完</h2>
-  <div class="card all reveal" id="allGrid"></div>
-</section>
-
-<!-- ══ 隐私 ═════════════════════════════════════════════════════════ -->
-<section class="wrap sec priv" id="privacy">
-  <div class="reveal">
-    <h2 class="sec-h" data-i18n="p_h2">你的书签，<br><span class="hl">只属于你</span></h2>
-    <p class="sec-p" data-i18n="p_sub">核心数据保存在本地：分类、搜索学习、界面偏好都在本机；唯一的外部请求是网页预览截图，可在设置里一键关闭。</p>
-    <p class="sec-p" style="font-size:15px" data-i18n="p_more">权限逐项说明与完整条款，见 <a href="privacy.html">隐私政策</a>。</p>
-  </div>
-  <div class="priv-cards reveal">
-    <div class="priv-card"><h3 data-i18n="p1_h">核心数据留在本地</h3><p data-i18n="p1_p">书签由 Chrome 管理；分类、搜索学习和界面偏好保存在本地。我们没有后端服务器，无法读取这些数据。</p></div>
-    <div class="priv-card"><h3 data-i18n="p2_h">无账号、无追踪</h3><p data-i18n="p2_p">不用注册，没有统计脚本，没有广告 SDK。装上就用，卸载即净。</p></div>
-    <div class="priv-card"><h3 data-i18n="p3_h">预览可随时关闭</h3><p data-i18n="p3_p">截图由第三方服务生成（会把书签网址发给它）。设置 → 网页预览，一键关闭后卡片变纯文字，不再发出任何外部请求。</p></div>
-  </div>
-</section>
-
-<!-- ══ 常见问题 ═════════════════════════════════════════════════════ -->
-<section class="wrap sec" id="faq">
-  <h2 class="sec-h reveal" data-i18n="q_h2">常见问题</h2>
-  <div class="faq reveal">
-    <details><summary data-i18n="q1">它会动我现有的书签吗？</summary><p data-i18n="a1">不会。它直接读写 Chrome 自带的书签，不做迁移、不建副本。你在这里做的整理（移动、删除、排序）就是对 Chrome 书签本身的操作，随 Chrome 账号正常同步；智能分类只是展示层，不改变你的文件夹结构。添加新书签也照旧：点地址栏的 ★ 星标就行，两边实时互通。</p></details>
-    <details><summary data-i18n="q2">我的书签数据会被上传吗？</summary><p data-i18n="a2">开发者没有后端服务器，书签、分类和搜索学习记录不会上传。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在设置 → 网页预览里关掉即可停用。</p></details>
-    <details><summary data-i18n="q3">自动分类分错了怎么办？</summary><p data-i18n="a3">右键书签 →「移动到分类」手动指定，手动分类永久生效、优先于自动规则；也可以在极简页多选后批量设置分类。</p></details>
-    <details><summary data-i18n="q4">删错了能恢复吗？</summary><p data-i18n="a4">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
-    <details><summary data-i18n="q5">支持哪些浏览器？收费吗？</summary><p data-i18n="a5">完全免费。Chrome 应用商店和 Microsoft Edge 加载项都已上架；界面支持 13 种语言（简体中文、繁体中文、英语、日语、韩语、西班牙语、葡萄牙语、法语、德语、俄语、意大利语、越南语、印尼语），跟随浏览器语言自动切换。</p></details>
-    <details><summary data-i18n="q6">书签特别多（几千个）会卡吗？</summary><p data-i18n="a6">不会。5 万个书签实测，每按一个键 20 毫秒内出结果；预览图只在接近可视区域时按需加载并缓存。</p></details>
-    <details><summary data-i18n="q7">它会替换我的新标签页吗？怎么关掉？</summary><p data-i18n="a7">会，默认开启：打开新标签页直接看到极简书签墙。不想要的话，设置 → 新标签页接管，关掉后新标签页会打开你在浏览器里设置的默认搜索引擎首页。（Chrome 的限制：扩展接管新标签页后，无法再显示原生新标签页。）</p></details>
-    <details><summary data-i18n="q8">支持拼音搜索吗？</summary><p data-i18n="a8">支持。中文书签可以按全拼、首字母、混合拼音和模糊拼音搜索，也能用简体或繁体输入；例如「客户管理系统」输入 khgl 或 kehuguanli 都能命中。</p></details>
-    <details><summary data-i18n="q9">为什么没有侧边栏或完整书签墙页面？</summary><p data-i18n="a9">这是故意的：把书签墙直接放进新标签页，一页看完常用、所有、最近和分类；弹窗负责高频搜索和置顶，设置里放整理、查重、失效检测和预览开关，不再需要第二个完整界面。</p></details>
+<!-- ══ 新标签页 ══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center reveal">
+      <p class="eyebrow" data-en="New tab takeover">新标签页接管</p>
+      <h2 class="h2" data-en="Every new tab opens to your bookmark wall">打开新标签页，就是你的书签墙</h2>
+      <p class="lead" style="max-width:720px;margin-left:auto;margin-right:auto" data-en="No sidebar, no dashboard: search, categories, frequent / recent and bookmark cards on one page. Turn the new tab takeover on or off in Settings, along with previews, density and theme.">没有侧边栏，没有仪表盘：搜索、分类、常用 / 最近、书签卡片都在一页。新标签页接管可在设置里开或关；预览、密度、主题也都在设置里。</p>
+      <div class="seg-row"><div class="seg" id="themeSeg"><button class="on" data-m="" data-en="Light · Comfortable">浅色 · 舒适</button><button data-m="dark" data-en="Dark">深色</button><button data-m="compact" data-en="Compact">紧凑</button><button data-m="dark compact" data-en="Dark · Compact">深色 · 紧凑</button></div></div>
+    </div>
+    <div class="art nt-show reveal">
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i><span data-en="New Tab">新标签页</span></div>
+        <div class="nt" id="themeNt" style="padding-bottom:60px">
+          <div class="nt-brand"><span class="nt-logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span class="nt-name" data-en="Bookmark Manager">书签管理器</span><span class="pro">PRO</span></div>
+          <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span class="q" data-en="Search bookmark titles, URLs or the web…">搜索书签标题、网址或网页…</span></div>
+          <div class="chips" id="themeChips"></div>
+          <div class="wh"><b data-en="All bookmarks">所有书签</b><span data-en="20 bookmarks">20 个书签</span></div>
+          <div class="grid" id="themeGrid"></div>
+        </div>
+      </div>
+    </div>
+    <div class="nt-chips"><span data-en="Just search and a few actions up top">顶上只有搜索和几个动作</span><span data-en="Turn the new tab on / off in Settings">设置里一键开关新标签页</span><span data-en="Keyboard, previews and pinning all work">拼音、键盘、预览、置顶全都能用</span></div>
+    <p class="mid" data-en="Free · No sign-up · Installed in 30 seconds">免费 · 无需注册 · 30 秒装好</p>
   </div>
 </section>
 
-<!-- ══ 收尾 ═════════════════════════════════════════════════════════ -->
-<section class="wrap" id="install" style="padding-top:60px">
-  <div class="cta reveal">
-    <h2 data-i18n="cta_h2">今天存下的书签，<br>三年后<span class="hl">还找得到</span></h2>
-    <a class="btn" data-store data-i18n="cta_btn">免费添加至 Chrome</a>
-    <a class="btn btn-ghost" data-edge-store data-i18n="edge_cta">Edge 加载项</a>
-    <p class="cta-p" data-i18n="cta_p">已在 Chrome 应用商店和 Microsoft Edge 加载项上线，一键安装，完全免费。</p>
+<!-- ══ 全部清单 ══ -->
+<section class="sec" id="all">
+  <div class="wrap">
+    <div class="center reveal">
+      <h2 class="h2" data-en="Every feature, one list">全部功能，一张清单看完</h2>
+      <p class="lead" data-en="Each one is something you’ll actually use.">每一项都在用，不为凑数。</p>
+    </div>
+    <div class="all reveal" id="allGrid"></div>
   </div>
-  <footer>
-    <span>© 2026 <span data-i18n="brand_full">书签管理器 Pro</span></span>
-    <nav><a href="privacy.html" data-i18n="foot_privacy">隐私政策</a><a href="mailto:allenma2ong@gmail.com" data-i18n="foot_contact">联系我们</a><a data-edge-store data-i18n="foot_edge">Edge 加载项</a></nav>
-  </footer>
 </section>
+
+<!-- ══ 隐私 ══ -->
+<section class="sec" id="privacy">
+  <div class="wrap">
+    <div class="priv-head reveal">
+      <div>
+        <h2 class="h2" data-en="Your bookmarks belong to you">你的书签，只属于你</h2>
+        <p class="lead" data-en="Core data stays on your device: categories, search learning and preferences. The only external request is for web preview screenshots, and you can switch that off in Settings.">核心数据保存在本地：分类、搜索学习、界面偏好都在本机；唯一的外部请求是网页预览截图，可在设置里一键关闭。</p>
+        <div class="browsers"><i style="background:conic-gradient(#EA4335 0 33%,#FBBC05 0 66%,#34A853 0)"></i><i style="background:linear-gradient(135deg,#0C59A4,#36C3A5)"></i><span data-en="Works in Chrome, Edge and other Chromium browsers">适用于 Chrome、Edge 等 Chromium 浏览器</span></div>
+      </div>
+      <a class="btn btn-light btn-sm" href="privacy.html" data-en="Privacy Policy: every permission explained →">隐私政策：权限逐项说明 →</a>
+    </div>
+    <div class="pcards">
+      <div class="tile reveal">
+        <div class="txt"><h3 data-en="Core data stays local">核心数据留在本地</h3><p data-en="Chrome manages your bookmarks; categories, search learning and preferences stay on this device. We have no backend server and cannot read this data.">书签由 Chrome 管理；分类、搜索学习和界面偏好保存在本地。我们没有后端服务器，无法读取这些数据。</p></div>
+        <div class="show">
+          <div class="win"><div class="win-bar"><i></i><i></i><i></i><span data-en="Where your data lives">数据存在哪</span></div>
+            <div class="plist"><div><span data-en="Bookmarks">书签</span><span class="no" data-en="Chrome itself">Chrome 本身</span></div><div><span data-en="Categories">自动分类</span><span class="no" data-en="This device">仅本机</span></div><div><span data-en="Search learning">搜索学习</span><span class="no" data-en="This device">仅本机</span></div><div><span data-en="Preferences">界面偏好</span><span class="no" data-en="This device">仅本机</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tile reveal">
+        <div class="txt"><h3 data-en="No account, no tracking">无账号、无追踪</h3><p data-en="No sign-up, no analytics scripts, no ad SDKs. Install and go; uninstall and it’s gone.">不用注册，没有统计脚本，没有广告 SDK。装上就用，卸载即净。</p></div>
+        <div class="show">
+          <div class="win"><div class="win-bar"><i></i><i></i><i></i><span data-en="What we don’t collect">我们不收集</span></div>
+            <div class="plist"><div><s data-en="Account / phone number">账号 / 手机号</s><span class="no" data-en="None">没有</span></div><div><s data-en="Analytics scripts">统计脚本</s><span class="no" data-en="None">没有</span></div><div><s data-en="Ad SDKs">广告 SDK</s><span class="no" data-en="None">没有</span></div><div><s data-en="Backend server">后端服务器</s><span class="no" data-en="None">没有</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tile reveal">
+        <div class="txt"><h3 data-en="Previews can be turned off">预览可随时关闭</h3><p data-en="Screenshots come from a third-party service (your bookmark URLs are sent to it). Settings → Web previews: switch it off for text-only cards and zero external requests.">截图由第三方服务生成（会把书签网址发给它）。设置 → 网页预览，一键关闭后卡片变纯文字，不再发出任何外部请求。</p></div>
+        <div class="show">
+          <div class="setting" style="width:100%;border-radius:12px 12px 0 0">
+            <div class="r"><span><b data-en="Web previews">网页预览</b><small data-en="Off: cards are text only">关闭后卡片为纯文字</small></span><span class="sw" id="pvSw"></span></div>
+            <div class="r"><span><b data-en="New tab takeover">新标签页接管</b><small data-en="Off: opens your default search engine">关闭后打开默认搜索引擎首页</small></span><span class="sw on"></span></div>
+            <div class="r"><span><b data-en="Language">语言</b></span><span style="font-size:12px;color:#3C4043" data-en="System default">跟随系统</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 常见问题 ══ -->
+<section class="sec" id="faq">
+  <div class="wrap narrow faq">
+    <div class="faq-l reveal">
+      <h2 class="h2" data-en="FAQ">常见问题</h2>
+      <p class="lead" data-en="Didn’t find your answer? Just write to us.">没找到答案？直接写信给我们。</p>
+      <a class="btn btn-light btn-sm" href="mailto:allenma2ong@gmail.com" data-en="Contact us">联系我们</a>
+    </div>
+    <div class="reveal">
+      <details open><summary data-en="Will it mess with my existing bookmarks?">它会动我现有的书签吗？</summary><p data-en="No. It reads and writes Chrome’s own bookmarks directly: no migration, no copies. Anything you organize here (move, delete, reorder) is a normal Chrome bookmark operation and syncs with your Chrome account as usual. Smart categories are only a display layer and never change your folder structure. Saving works the same as always: click the ★ in the address bar, and both stay in sync in real time.">不会。它直接读写 Chrome 自带的书签，不做迁移、不建副本。你在这里做的整理（移动、删除、排序）就是对 Chrome 书签本身的操作，随 Chrome 账号正常同步；智能分类只是展示层，不改变你的文件夹结构。添加新书签也照旧：点地址栏的 ★ 星标就行，两边实时互通。</p></details>
+      <details><summary data-en="Is my bookmark data uploaded anywhere?">我的书签数据会被上传吗？</summary><p data-en="The developer has no backend: bookmarks, categories and search learning are never uploaded. The only external request is for preview screenshots (bookmark URLs are sent to the screenshot service); turn it off in Settings → Web previews.">开发者没有后端服务器，书签、分类和搜索学习记录不会上传。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在设置 → 网页预览里关掉即可停用。</p></details>
+      <details><summary data-en="What if auto-sorting gets it wrong?">自动分类分错了怎么办？</summary><p data-en="Right-click the bookmark → “Move to category” and pick one. Manual choices are permanent and always beat the rules. You can also multi-select on the new tab page and set a category in bulk.">右键书签 →「移动到分类」手动指定，手动分类永久生效、优先于自动规则；也可以在极简页多选后批量设置分类。</p></details>
+      <details><summary data-en="Can I recover something I deleted by mistake?">删错了能恢复吗？</summary><p data-en="Yes. Every delete (including bulk delete, dedupe and dead-link cleanup) shows an “Undo” button that restores everything to its original place, manual categories included.">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
+      <details><summary data-en="Which browsers? Is it free?">支持哪些浏览器？收费吗？</summary><p data-en="Completely free. It’s on the Chrome Web Store and Microsoft Edge Add-ons. The interface comes in 13 languages (English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Spanish, Portuguese, French, German, Russian, Italian, Vietnamese and Indonesian); it follows your browser by default, and you can switch it in Settings.">完全免费。Chrome 应用商店和 Microsoft Edge 加载项都已上架；界面支持 13 种语言（简体中文、繁体中文、英语、日语、韩语、西班牙语、葡萄牙语、法语、德语、俄语、意大利语、越南语、印尼语），默认跟随浏览器语言，也可以在设置里手动切换。</p></details>
+      <details><summary data-en="I have thousands of bookmarks. Will it lag?">书签特别多（几千个）会卡吗？</summary><p data-en="No. Tested with 50,000 bookmarks: results update within 20 ms of each keystroke. Previews load and cache only near the visible area.">不会。5 万个书签实测，每按一个键 20 毫秒内出结果；预览图只在接近可视区域时按需加载并缓存。</p></details>
+      <details><summary data-en="Does it replace my new tab page? How do I turn that off?">它会替换我的新标签页吗？怎么关掉？</summary><p data-en="Yes, on by default: new tabs open your bookmark wall. If you’d rather not, go to Settings → New tab takeover; new tabs will then open your browser’s default search engine homepage. (A Chrome limitation: once an extension takes over the new tab, Chrome’s native new tab can’t be shown.)">会，默认开启：打开新标签页直接看到极简书签墙。不想要的话，设置 → 新标签页接管，关掉后新标签页会打开你在浏览器里设置的默认搜索引擎首页。（Chrome 的限制：扩展接管新标签页后，无法再显示原生新标签页。）</p></details>
+      <details><summary data-en="Does search understand Chinese pinyin?">支持拼音搜索吗？</summary><p data-en="Yes. Chinese bookmark titles can be found by full pinyin, initials, mixed or fuzzy pinyin, in Simplified or Traditional characters. For example, “百度网盘” (Baidu Netdisk) matches bdwp or baiduwangpan.">支持。中文书签可以按全拼、首字母、混合拼音和模糊拼音搜索，也能用简体或繁体输入；例如「百度网盘」输入 bdwp 或 baiduwangpan 都能命中。</p></details>
+      <details><summary data-en="Why is there no sidebar or separate bookmark page?">为什么没有侧边栏或完整书签墙页面？</summary><p data-en="On purpose. The bookmark wall lives right in the new tab: frequent, all, recent and categories on one page. The popup handles quick search and pinning; Settings holds tidying, duplicates, dead-link checks and the preview switch. No second full interface needed.">这是故意的：把书签墙直接放进新标签页，一页看完常用、所有、最近和分类；弹窗负责高频搜索和置顶，设置里放整理、查重、失效检测和预览开关，不再需要第二个完整界面。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 收尾 ══ -->
+<div class="wrap">
+  <div class="art final reveal">
+    <h2 data-en="The bookmark you save today,<br>still findable three years from now">今天存下的书签，<br>三年后还找得到</h2>
+    <div class="cta-row">
+      <a class="btn btn-dark" data-store><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg><span data-en="Add to Chrome, free">免费添加至 Chrome</span></a>
+      <a class="btn btn-light" data-edge-store data-en="Edge Add-on">Edge 加载项</a>
+    </div>
+    <p data-en="Now on the Chrome Web Store and Microsoft Edge Add-ons. One click to install, completely free.">已在 Chrome 应用商店和 Microsoft Edge 加载项上线，一键安装，完全免费。</p>
+  </div>
+</div>
 </main>
 
-<button class="to-top" id="toTop" type="button" aria-label="回到顶部">
-  <svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle id="ttBar" cx="26" cy="26" r="24"/></svg>
-  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
-</button>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top"><span class="logo"><svg width="13" height="13" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span data-en="Bookmark Manager Pro">书签管理器 Pro</span></a>
+        <p class="desc" data-en="Turns your Chrome / Edge bookmarks into a clean bookmark wall you can search and see.">把 Chrome / Edge 书签变成能搜、能看的极简书签墙。</p>
+        <div class="stores">
+          <a data-store><i style="background:conic-gradient(#EA4335 0 33%,#FBBC05 0 66%,#34A853 0)"></i><span data-en="Chrome Web Store">Chrome 应用商店</span></a>
+          <a data-edge-store><i style="background:linear-gradient(135deg,#0C59A4,#36C3A5)"></i><span data-en="Microsoft Edge Add-ons">Microsoft Edge 加载项</span></a>
+        </div>
+      </div>
+      <div class="cols">
+        <div><h5 data-en="Product">产品</h5><a href="#features" data-en="Features">功能</a><a href="#all" data-en="All features">全部清单</a><a href="#privacy" data-en="Privacy">隐私</a></div>
+        <div><h5 data-en="Support">支持</h5><a href="#faq" data-en="FAQ">常见问题</a><a href="mailto:allenma2ong@gmail.com" data-en="Contact us">联系我们</a><a href="privacy.html" data-en="Privacy Policy">隐私政策</a></div>
+      </div>
+    </div>
+    <div class="copy"><span data-en="© 2026 Bookmark Manager Pro · Free · No account · Data stays on your device">© 2026 书签管理器 Pro · 免费 · 无账号 · 数据只在本机</span><span><button type="button" data-lang="zh">简体中文</button><button type="button" data-lang="en">English</button></span></div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button"><span data-en="Back to top">返回顶部</span> <span aria-hidden="true">↑</span></button>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════════
-   Chrome Web Store 链接：上架通过后，把下面这一行替换成你的商店页地址
-   例如 https://chromewebstore.google.com/detail/xxxxxxxxxxxxxxxx
-   ═══════════════════════════════════════════════════════════════════ */
+/* 商店地址 */
 const STORE_URL = "https://chromewebstore.google.com/detail/bookmark-manager-pro/lincaijloppehjnkmaonboclmbmfhpbn";
 const EDGE_STORE_URL = "https://microsoftedge.microsoft.com/addons/detail/bookmark-manager-pro/bjkobohdkdldfnkannkbgcekflendcna";
+document.querySelectorAll('[data-store]').forEach(a => { a.href = STORE_URL; a.target = '_blank'; a.rel = 'noopener'; });
+document.querySelectorAll('[data-edge-store]').forEach(a => { a.href = EDGE_STORE_URL; a.target = '_blank'; a.rel = 'noopener'; });
 
-document.querySelectorAll('[data-store]').forEach(a => {
-  if (STORE_URL) {
-    a.href = STORE_URL;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  } else {
-    a.classList.add('is-disabled');
-    a.setAttribute('aria-disabled', 'true');
-  }
-});
-
-document.querySelectorAll('[data-edge-store]').forEach(a => {
-  if (EDGE_STORE_URL) {
-    a.href = EDGE_STORE_URL;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  } else {
-    a.classList.add('is-disabled');
-    a.setAttribute('aria-disabled', 'true');
-  }
-});
-
-/* ── 双语字典：中文以页面内容为源，英文在 EN ─────────────────────────── */
-const ZH = {
-  af1:'智能自动分类', af1d:'域名 + 关键词识别，8 个分类开箱即用，空分类自动隐藏',
-  af2:'网页预览卡片', af2d:'截图网格、滚动时按需加载、可一键关闭',
-  af3:'常用书签', af3d:'按访问次数与最近打开时间排序',
-  af4:'失效链接检测', af4d:'404 双重确认才判失效，超时和未确认不参与删除',
-  af5:'重复一键清理', af5d:'URL 归一化识别，每组保留最新',
-  af6:'批量整理', af6d:'多选、Shift 圈选，可移动 / 归类 / 删除',
-  af7:'删除可撤销', af7d:'单个和批量删除都能一键原位恢复',
-  af8:'书签编辑', af8d:'右键改标题、改网址、置顶',
-  af9:'秒级搜索', af9d:'标题、网址、文件夹一起检索，多个关键词，命中高亮',
-  af10:'主题、密度、多语言', af10d:'深浅色 / 舒适紧凑 / 13 种界面语言',
-  af11:'导入导出', af11d:'HTML / JSON 导出，分类数据可迁移',
-  af12:'零学习成本', af12d:'用 Chrome 原生 ★ 收藏，无迁移、完全互通',
-  af13:'新标签页导航', af13d:'新标签页即书签导航 + 网页搜索栏，可一键关闭',
-  af14:'四种排序', af14d:'默认、最近添加、名称 A-Z、访问热度',
-  af15:'键盘快捷键', af15d:'/ 聚焦搜索、Esc 逐级退出、Alt+B 打开导航页',
-  demo_count:'{n} 个结果', demo_empty:'这里只有 10 个示例书签。装上以后，搜的是你自己的全部书签。'
+/* ── 示例书签：只用公开的知名网站（不放公司名或私人内容） ── */
+const BM = {
+  zh: [
+    ['bdwp','百度网盘','pan.baidu.com','B','#3D6AC7','常用'], ['txdoc','腾讯文档','docs.qq.com','T','#3D6AC7','工作'],
+    ['wyy','网易云音乐','music.163.com','W','#C2336B','影音'], ['qqm','QQ音乐','y.qq.com','Q','#3BAA3B','影音'],
+    ['gh','GitHub','github.com','G','#8E3BBF','工具'], ['figma','Figma','figma.com','F','#B5336B','工具'],
+    ['ds','DeepSeek','chat.deepseek.com','D','#3BAA3B','工具'], ['claude','Claude','claude.ai','C','#B8612E','工具'],
+    ['xhs','小红书','xiaohongshu.com','X','#C2336B','常用'], ['zhihu','知乎','zhihu.com','Z','#3D6AC7','学习'],
+    ['yt','YouTube','youtube.com','Y','#A43FC4','影音'], ['notion','Notion','notion.so','N','#C2336B','工具'],
+    ['wxmp','微信公众平台','mp.weixin.qq.com','W','#3BAA3B','工作'], ['wxopen','微信开放平台','open.weixin.qq.com','W','#3BAA3B','工作'],
+    ['taobao','淘宝','taobao.com','T','#C0562B','购物'], ['jd','京东','jd.com','J','#C2336B','购物'],
+    ['bili','哔哩哔哩','bilibili.com','B','#3D9BD8','影音'], ['bdmap','百度地图','map.baidu.com','B','#3D6AC7','常用'],
+    ['mj','Midjourney','midjourney.com','M','#B5336B','工具'], ['sspai','少数派','sspai.com','S','#B5336B','学习']
+  ],
+  en: [
+    ['drive','Google Drive','drive.google.com','G','#3D6AC7','Daily'], ['docs','Google Docs','docs.google.com','G','#3D6AC7','Work'],
+    ['ytm','YouTube Music','music.youtube.com','Y','#C2336B','Media'], ['am','Apple Music','music.apple.com','A','#C2336B','Media'],
+    ['gh','GitHub','github.com','G','#8E3BBF','Tools'], ['figma','Figma','figma.com','F','#B5336B','Tools'],
+    ['gpt','ChatGPT','chatgpt.com','C','#202124','Tools'], ['claude','Claude','claude.ai','C','#B8612E','Tools'],
+    ['reddit','Reddit','reddit.com','R','#C0562B','Daily'], ['wiki','Wikipedia','wikipedia.org','W','#5F6368','Reading'],
+    ['yt','YouTube','youtube.com','Y','#A43FC4','Media'], ['notion','Notion','notion.so','N','#C2336B','Tools'],
+    ['gmail','Gmail','mail.google.com','G','#C5221F','Work'], ['cal','Google Calendar','calendar.google.com','G','#3D6AC7','Work'],
+    ['amazon','Amazon','amazon.com','A','#C0662B','Shopping'], ['ebay','eBay','ebay.com','E','#3D6AC7','Shopping'],
+    ['li','LinkedIn','linkedin.com','L','#0A66C2','Work'], ['maps','Google Maps','maps.google.com','G','#3BAA3B','Daily'],
+    ['mj','Midjourney','midjourney.com','M','#B5336B','Tools'], ['hn','Hacker News','news.ycombinator.com','H','#C0662B','Reading']
+  ]
 };
-
-Object.assign(ZH, {
-  af2:'网页预览卡片', af2d:'滚动时按需加载；可在设置 → 网页预览关闭成纯文字',
-  af6:'极简页多选', af6d:'勾选 / 全选，移动、分类、删除；删除可撤销',
-  af13:'新标签页接管', af13d:'打开新标签页就是书签墙，可在设置里开或关',
-  af15:'键盘 + 地址栏', af15d:'↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回；地址栏 bm 搜书签',
-  af16:'极简书签墙', af16d:'一页看完常用、所有、最近和分类，不需要侧边栏',
-  af17:'拼音 / 简繁搜索', af17d:'全拼、首字母、混合、模糊拼音和简繁读音',
-  af18:'键盘导航', af18d:'↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回',
-  af19:'地址栏 bm', af19d:'地址栏输入 bm + 关键词，直接搜书签'
-});
-// 安装菜单：点外面 / Esc 关闭
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.install-menu')) {
-    document.querySelectorAll('.install-menu[open]').forEach(d => { d.open = false; });
-  }
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.install-menu[open]').forEach(d => { d.open = false; });
-  }
-});
-document.querySelectorAll('.install-pop a').forEach(a => {
-  a.addEventListener('click', () => {
-    const d = a.closest('details');
-    if (d) d.open = false;
-  });
-});
-
-
-const HERO_VIEWS = ['hero-shot.jpg', 'search-shot.jpg', 'preview-hero.jpg'];
-document.querySelectorAll('.hero-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    const img = document.querySelector('#heroShot');
-    if (!img) return;
-    document.querySelectorAll('.hero-tab').forEach(t => {
-      const on = t === tab;
-      t.classList.toggle('active', on);
-      t.setAttribute('aria-pressed', String(on));
-    });
-    img.classList.add('switching');
-    const pre = new Image();
-    pre.onload = () => {
-      img.src = tab.dataset.src;
-      img.alt = tab.dataset.alt || img.alt;
-      requestAnimationFrame(() => img.classList.remove('switching'));
-    };
-    pre.onerror = () => img.classList.remove('switching');
-    pre.src = tab.dataset.src;
-  });
-});
-HERO_VIEWS.slice(1).forEach(src => { const i = new Image(); i.src = src; });
-
-const EN = {
-  brand:'Bookmark Manager', brand_full:'Bookmark Manager Pro',
-  nav_features:'Features', nav_all:'All features', nav_privacy:'Privacy', nav_faq:'FAQ', nav_cta:'Add to Chrome, free',
-  hero_eyebrow:'CHROME EXTENSION · FREE',
-  hero_h1:'Your bookmarks,<br><span class="hl">organized for you</span>',
-  hero_sub:'Chrome’s bookmark menu has no search, and new saves sink to the bottom. This adds it: type a keyword to find any bookmark, auto-sorted, with one-click cleanup of dead links and duplicates.',
-  hero_cta:'Add to Chrome, free', hero_edge:'Edge Add-on', hero_cta2:'See how it looks',
-  edge_cta:'Edge Add-on', foot_edge:'Edge Add-on',
-  trust1:'Core data stays local', trust2:'No account needed', trust3:'English + Chinese (Simplified & Traditional)', trust4:'Zero learning curve',
-  win_url:'New Tab · Bookmark grid',
-  hero_alt:'The Bookmark Manager grid: auto-sorted categories on the left, a grid of bookmarks with website previews on the right',
-  float_b:'Auto-filed under “AI Tools”', float_s:'No folders to build, nothing to drag',
-  f_h2:'Chrome bookmarks, finally <span class="hl">searchable</span>',
-  f6_p:'Click the toolbar icon, type a keyword, hit Enter: titles, URLs and folders are searched together, with matches highlighted. This is the number-one reason this extension exists: find any bookmark in three seconds.',
-  f6_l1:'Search from <b>both the popup and the grid view</b>, without leaving your page',
-  f6_l2:'Press <b>/</b> to focus search, <b>Esc</b> to back out step by step',
-  f6_l3:'“Frequent” ranks bookmarks by <b>visit count</b> and recency',
-  demo_label:'Search sample bookmarks', demo_ph:'Try led, quote, figma',
-  demo_note:'↑ Go ahead and type · ↑↓ to select · Enter to open',
-  demo_count:'{n} results', demo_empty:'This demo only has 10 sample bookmarks. Once installed, it searches all of yours.',
-  why_h2:'Still <span class="hl">digging through</span> Chrome’s bookmark menu every day?',
-  cm_title:'Chrome › Bookmarks',
-  cm1:'Frontend framework docs', cm2:'2023 supplier price list (still needed?)', cm3:'A tutorial saved ages ago',
-  cm4:'Design inspiration collection', cm5:'This link is 404 by now', cm6:'Same site, saved three times',
-  cm7:'A page you forgot why you saved', cm8:'Saved yesterday? It’s at the very bottom', cm_more:'↓ 600 more, keep scrolling…',
-  pain1:'<b>No search box</b>: hundreds of bookmarks, scanned line by line with your eyes',
-  pain2:'<b>New bookmarks always land at the bottom</b>, yet the ones you just saved are the ones you need most',
-  pain3:'<b>The dropdown has no scrollbar</b>: inch down with the mouse wheel, every single time',
-  pain_good:'After installing: click the icon → type a keyword → hit Enter. Three seconds, done.',
-  origin:'This isn’t a big-company product. It was built by a trade professional who digs through hundreds of bookmarks every day and finally had enough of Chrome. Every feature comes from a real moment of frustration, not a product meeting.',
-  fz_h:'Nothing about <span class="hl">saving</span> changes',
-  fz_p:'We deliberately didn’t build our own “add bookmark” button: you keep saving with the star in the address bar, the one you’ve clicked for years. The extension reads and writes Chrome’s own bookmarks directly, a better shell over your native bookmarks. No migration, no relearning.',
-  fz_star:'↑ Still the same star, saving works exactly as before',
-  fz_saved:'Midjourney saved', fz_cat:'Auto-filed under “AI Tools”',
-  fz_l1:'Click Chrome’s native <b>★</b> to save → it appears here, <b>auto-categorized</b>',
-  fz_l2:'<b>Fully interoperable</b> with Chrome bookmarks; your folder structure stays intact',
-  fz_l3:'Syncs with your Chrome account as usual; <b>uninstalling loses nothing</b>',
-  bento_h2:'Beyond search: a whole <span class="hl">bookmark workbench</span>',
-  bento_p:'The popup handles the four things you do most; the grid view handles tidying and health checks.',
-  t0:'01 · Popup', t1:'02 · Auto-sort', t2:'03 · Previews', t3:'04 · Dead links', t4:'05 · Bulk tidy', t5:'06 · Undo',
-  f0_h:'Open it, and it’s a search box. Nothing extra',
-  f0_p:'The popup does only the four things you do most: search, jump to top, jump to bottom, and recent-first. The cursor is already in the search box when it opens: type, press Enter, and the top match opens. Finding a bookmark never needs the mouse.',
-  f0_l1:'Hover any bookmark and pin it to the top in one click',
-  f0_l3:'Drag to reorder; right-click to open, edit or delete',
-  pop_search:'Search bookmarks…', pop_top:'Top', pop_bottom:'Bottom', pop_recent:'Recent', pop_nav:'Grid',
-  pop_r1:'AI tool saved last night', pop_r2:'Client site saved this morning', pop_new:'NEW', pop_pin:'Pin',
-  f1_h:'Saved, and already sorted',
-  f1_p:'Bookmarks are auto-filed into 8 categories (Design, Code, AI, Business and more) by domain and keywords. No folders to build, nothing to drag. Wrong guess? Right-click to reassign once; it remembers forever.',
-  f1_l1:'Domain + keyword matching',
-  f1_l2:'Manual overrides win: your call always beats the rules',
-  f1_l3:'Empty categories hide themselves and reappear the moment they have bookmarks',
-  c_design:'Design', c_code:'Code', c_ai:'AI Tools', c_biz:'Business', c_prod:'Productivity', c_read:'Reading', c_social:'Social', c_video:'Video',
-  ctx1:'Open', ctx2:'Edit', ctx3:'Move to category…',
-  f2_h:'You recognize pictures faster than words',
-  f2_p:'Wherever you scroll, those bookmarks get on-demand website screenshots, cached on this device. Can’t recall the title? One glance tells you which site it is.',
-  f2_l1:'Comfortable / compact density, open anytime with <b>Alt+B</b>',
-  f2_l2:'Dark / light / system themes',
-  f2_l3:'Previews are on by default; the header’s “Preview: On / Off” switches them anytime',
-  f2_c1:'Comfortable', f2_c2:'Compact', f2_c3:'Dark mode',
-  f3_h:'Why keep bookmarks that won’t open?',
-  f3_p:'Scan your list in one click: true 404s get a “dead” badge, slow responders get “timeout”. Bulk cleanup only deletes confirmed-dead links, never a slow site.',
-  f3_l1:'Scan just the current category: faster, lighter',
-  f3_l2:'Only 404/410 from both HEAD and GET counts as dead; network errors are never auto-deleted',
-  f3_l3:'Deletion is undoable, like everything else',
-  f3_scan:'Scan complete: 9 dead links found', b_dead:'Dead', b_timeout:'Timeout', b_keep:'Kept',
-  f3_btn:'Delete all dead (timeouts excluded)',
-  f4_h:'Three years of bookmarks, tidied in ten minutes',
-  f4_p:'In multi-select mode, click or Shift-select a whole range, then move, categorize or delete in one go. Saved the same page twice? “Clean duplicates” keeps the newest of each group.',
-  f4_l1:'Shift + click range selection, select-all on filtered results',
-  f4_l2:'Duplicates matched by normalized URL (with or without www)',
-  f4_l3:'Drag to reorder, pin to top, edit title and URL',
-  f4_dup1:'Supplier directory (dup)', f4_dup2:'Supplier directory (dup)', f4_keep:'Supplier directory',
-  f4_sel:'23 selected', f4_b1:'Move to…', f4_b2:'Set category', f4_b3:'Delete selected',
-  f5_h:'Slipped? Just hit “Undo”',
-  f5_p:'Other tools interrupt you with “Are you sure?”, and once deleted, it’s gone. This works the other way: delete freely, and every deletion (even a bulk sweep of dozens) goes back to its original folder and position with one click.',
-  f5_l1:'Single, bulk, dedupe, dead-link cleanup: all undoable',
-  f5_l2:'Restore brings back manual categories too',
-  f5_toast:'Deleted 23 bookmarks', f5_undo:'Undo',
-  nt_eyebrow:'New tab takeover',
-  nt_h:'Every new tab opens to your <span class="hl">bookmark wall</span>',
-  nt_p:'A new tab is no longer a blank page: your bookmark grid, with a web search bar (your default engine) front and center. Research or revisit, everything starts here. Not your thing? Turn it off with one click in the header.',
-  nt_c1:'Live right after install', nt_c2:'Toggle on / off in the header', nt_c3:'Preview, categories and search all work',
-  nt_url:'New Tab', nt_alt:'New tab page: a web search bar in the middle, the bookmark grid below',
-  mid_cta_note:'Free · No sign-up · Installed in 30 seconds',
-  all_h2:'Every feature, <span class="hl">one list</span>',
-  af1:'Smart auto-categorization', af1d:'Domain + keyword rules, 8 categories out of the box; empty ones hide themselves',
-  af2:'Visual preview cards', af2d:'Screenshot grid, loaded on scroll, can be turned off',
-  af3:'Frequent bookmarks', af3d:'Ranked by visit count and recency',
-  af4:'Dead link detection', af4d:'Only double-confirmed 404s count; timeouts and unconfirmed links are never deleted',
-  af5:'One-click dedupe', af5d:'Normalized-URL matching, keeps the newest',
-  af6:'Bulk operations', af6d:'Multi-select and Shift range; move / categorize / delete',
-  af7:'Undoable deletes', af7d:'Single and bulk deletes restore in place',
-  af8:'Bookmark editing', af8d:'Rename, change URL, pin to top from the context menu',
-  af9:'Instant search', af9d:'Titles, URLs and folders together, multiple keywords, highlighted hits',
-  af10:'Themes, density, language', af10d:'Dark/light, comfortable/compact, 13 interface languages',
-  af11:'Import & export', af11d:'HTML / JSON export, category data portable',
-  af12:'Zero learning curve', af12d:'Save with Chrome’s native ★. No migration, fully interoperable',
-  af13:'New-tab dashboard', af13d:'Every new tab opens your grid plus a web search bar; one click to turn off',
-  af14:'Four sort orders', af14d:'Default, recently added, name A-Z, most visited',
-  af15:'Keyboard shortcuts', af15d:'/ to focus search, Esc to back out, Alt+B for the grid view',
-  p_h2:'Your bookmarks <br><span class="hl">belong to you</span>',
-  p_sub:'Core data stays local. The only external request is for preview screenshots, and you can switch it off with one click.',
-  p_more:'Full permission-by-permission details in the <a href="privacy.html">Privacy Policy</a>.',
-  p1_h:'Core data stays local', p1_p:'Chrome manages your bookmarks; categories and preferences stay in local storage. We have no backend server and cannot access this data.',
-  p2_h:'No account, no tracking', p2_p:'No sign-up, no analytics scripts, no ad SDKs. Install and go; uninstall and it’s gone.',
-  p3_h:'Previews can be turned off', p3_p:'Screenshots come from a third-party service (your bookmark URLs are sent to it). Flip the header switch to “Preview: Off” for text-only cards with zero external requests.',
-  q_h2:'Frequently asked questions',
-  q1:'Will it mess with my existing bookmarks?',
-  a1:'No. It reads and writes Chrome’s own bookmarks directly: no migration, no copies. Anything you organize here (move, delete, reorder) is a normal Chrome bookmark operation and syncs with your Google account as usual. Smart categories are a display layer and never change your folder structure. Adding new bookmarks works the same as always: click the ★ in the address bar, and both stay in sync in real time.',
-  q2:'Is my bookmark data uploaded anywhere?',
-  a2:'The developer has no backend: bookmarks and categories are not uploaded to us. The only external request is for preview screenshots (bookmark URLs are sent to the screenshot service); click “Preview: Off” in the grid header to stop it.',
-  q3:'What if the auto-categorization gets it wrong?',
-  a3:'Right-click the bookmark → “Move to category” and pick one. Manual choices are permanent and always override the rules. You can also multi-select and set a category in bulk.',
-  q4:'Can I recover something I deleted by mistake?',
-  a4:'Yes. Every delete (including bulk delete, dedupe and dead-link cleanup) shows an “Undo” button that restores everything to its original place, manual categories included.',
-  q5:'Which browsers? Is it free?',
-  a5:'Completely free. Built for Chrome; Chromium-based browsers like Edge can usually install it too. The interface follows your browser language: English, Simplified Chinese or Traditional Chinese.',
-  q6:'I have tens of thousands of bookmarks. Will it lag?',
-  a6:'No. Tested with 50,000 bookmarks, results update within 20 ms of each keystroke; previews load and cache only near the visible area.',
-  q7:'Does it replace my new tab page? How do I turn that off?',
-  a7:'Yes, on by default: new tabs open your bookmark grid with a web search bar. If you’d rather not, click “New Tab: Off” in the grid header; new tabs will then open your default search engine’s homepage. (A Chrome limitation: once an extension overrides the new tab page, the native Chrome new tab can no longer be shown.)',
-  cta_h2:'The bookmark you save today,<br><span class="hl">findable</span> three years from now',
-  cta_p:'Now on the Chrome Web Store and Microsoft Edge Add-ons. One click to install, completely free.',
-  cta_btn:'Add to Chrome, free',
-  foot_privacy:'Privacy Policy', foot_contact:'Contact'
+const QUERIES = {
+  zh: [
+    { q: 'bdwp', hits: { bdwp: '百度网盘' } },
+    { q: '音乐', hits: { wyy: '音乐', qqm: '音乐' } },
+    { q: 'git', hits: { gh: 'Git' } },
+    { q: '微信 平台', hits: { wxmp: ['微信', '平台'], wxopen: ['微信', '平台'] } }
+  ],
+  en: [
+    { q: 'dri', hits: { drive: 'Dri' } },
+    { q: 'music', hits: { ytm: 'Music', am: 'Music' } },
+    { q: 'git', hits: { gh: 'Git' } },
+    { q: 'google cal', hits: { cal: ['Google', 'Cal'] } }
+  ]
 };
-
-
-Object.assign(EN, {
-  hero_eyebrow:'CHROME / EDGE EXTENSION · FREE',
-  hero_h1:'Bookmarks, finally<br><span class="hl">searchable and visible</span>',
-  hero_sub:'Turn Chrome / Edge bookmarks into one minimal wall: search by pinyin, initials, fuzzy or Simplified/Traditional; frequent, recent, categories, previews and one-click pin all live on one page.',
-  hero_alt:'Bookmark Manager Pro’s minimal bookmark wall: search box, category pills and preview cards',
-  win_url:'New Tab · Minimal Wall',
-  float_b:'Pinyin search too', float_s:'khgl → Customer management',
-  trust1:'One minimal page', trust2:'Pinyin / Chinese search', trust3:'Chrome + Edge stores', trust4:'Local, no account',
-  f6_p:'The minimal page is the search box: titles, URLs, folders and pinyin together. Type khgl to find “Customer management”; ↑↓ to choose, Enter to open, Cmd/Ctrl+Enter for a new tab, Esc to go back.',
-  f6_l1:'One search across the minimal page and popup — pinyin, initials, Simplified/Traditional, fuzzy',
-  f6_l2:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back',
-  f6_l3:'Type bm plus a keyword in the address bar to search bookmarks',
-  f6_l4:'One search box: it looks for bookmarks first; if nothing matches, press Enter to search the web with your default engine',
-  pain_good:'Now: your new tab is the wall. Type Chinese, pinyin or initials; find it in three seconds.',
-  fz_p:'Saving still uses the star in the address bar; bookmarks go straight into native Chrome bookmarks and stay in sync with the bookmarks bar and Chrome manager. No migration; one-click pin just moves it to the first slot.',
-  bento_h2:'More than search: a set of <span class="hl">lightweight tools</span>',
-  bento_p:'The popup handles frequent actions; the minimal page handles browsing and tidying. No sidebar, no dashboard.',
-  f0_h:'Open it and search — the frequent actions are there',
-  f0_p:'Click the toolbar icon: search, top, bottom, recent and the wall are all there; hover a bookmark to pin it. The cursor starts in the search box; type and press Enter.',
-  f0_l1:'Pin to the first slot of Chrome’s bookmarks bar', f0_l2:'Recent additions / Bookmark wall, one click', f0_l3:'Right-click to open, edit or delete',
-  pop_search:'Search title/URL…', pop_nav:'Wall',
-  f2_p:'Previews load near the viewport and cache locally; turn them off in Settings for text-only cards.',
-  f2_l1:'Comfortable / compact, Alt+B returns anytime',
-  f2_l3:'Settings → Page previews to turn off; cards become text-only',
-  f4_h:'Years of bookmarks, tidied in minutes',
-  f4_p:'On the minimal page, select or select all, then move, categorize or delete in one go. Duplicates? One-click dedupe keeps the newest in each group.',
-  f4_l1:'Select or select all current results; use the bottom bulk bar',
-  f4_l3:'Set category / move / delete; every delete is undoable',
-  nt_p:'No sidebar, no dashboard: search, categories, frequent/recent and bookmark cards all on one page. Turn new-tab takeover on or off in Settings; previews, density and theme live there too.',
-  nt_c1:'Only search and a few actions on top', nt_c2:'Toggle new-tab takeover in Settings', nt_c3:'Pinyin, keyboard, previews and pin all work',
-  nt_url:'New Tab · Bookmark Wall',
-  nt_alt:'Bookmark Manager Pro’s minimal new tab: search, category pills, frequent wall and preview cards',
-  cm_title:'Bookmark Manager Pro · Popup search',
-  pain1:'<b>Folders only</b>: no frequent, recent or auto categories',
-  pain3:'<b>To find one, you have to open folders one by one</b>',
-  demo_note:'Real interface: type git to hit GitHub',
-  p_sub:'Core data stays local: categories, search learning and UI preferences on this device; the only external request is page previews, which you can turn off in Settings.',
-  p1_p:'Chrome manages your bookmarks; categories, search learning and UI preferences stay local. No backend server, so we cannot read them.',
-  p3_p:'Screenshots come from a third-party service (bookmark URLs are sent). Settings → Page previews turns them off; cards become text-only with no external requests.',
-  a2:'The developer has no backend: bookmarks, categories and search learning are not uploaded. The only external request is preview screenshots (bookmark URLs are sent); turn it off in Settings → Page previews.',
-  a3:'Right-click → Move to category; manual categories win. You can also multi-select on the minimal page and set a category.',
-  a5:'Free. Available on the Chrome Web Store and Microsoft Edge Add-ons; UI in 13 languages (English, Simplified and Traditional Chinese, Japanese, Korean, Spanish, Portuguese, French, German, Russian, Italian, Vietnamese, Indonesian), following the browser.',
-  a7:'Yes, on by default: new tabs open the minimal wall. To turn it off, Settings → New tab takeover; new tabs then open your default search engine homepage. (Chrome limitation: once an extension overrides the new tab, the native one cannot be shown.)',
-  q8:'Does it support pinyin search?',
-  a8:'Yes. Chinese titles match full pinyin, initials, mixed and fuzzy pinyin, and Simplified/Traditional input; e.g. 客户管理系统 matches khgl or kehuguanli.',
-  q9:'Why is there no sidebar or full bookmark wall page?',
-  a9:'By design: the wall lives in the new tab, so frequent, all, recent and categories are on one page; the popup handles search and pinning; Settings holds cleanup, duplicates, dead links and previews. No second full UI.',
-  af2:'Visual preview cards', af2d:'Loaded on scroll; turn off in Settings → Page previews for text-only cards',
-  af6:'Minimal-page multi-select', af6d:'Select or select all; move, categorize, delete; deletes are undoable',
-  af13:'New-tab takeover', af13d:'Every new tab is the bookmark wall; turn it on/off in Settings',
-  af15:'Keyboard + address bar', af15d:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back; type bm in the address bar',
-  af16:'Minimal bookmark wall', af16d:'Frequent, all, recent and categories on one page; no sidebar needed',
-  af17:'Pinyin / Chinese search', af17d:'Full pinyin, initials, mixed, fuzzy, and Simplified/Traditional readings',
-  af18:'Keyboard navigation', af18d:'↑↓ choose, Enter open, Cmd/Ctrl+Enter new tab, Esc back',
-  af19:'Address bar bm', af19d:'Type bm plus a keyword in the address bar to search bookmarks'
-});
-
-Object.assign(EN, {
-  nav_install:'Install free',
-  heroTabWall:'Wall', heroTabSearch:'Pinyin search', heroTabPreview:'Previews',
-  install_chrome:'Chrome Web Store',
-  install_chrome_note:'Chrome / Edge and other Chromium browsers',
-  install_edge:'Microsoft Edge Add-ons',
-  install_edge_note:'Official Edge add-ons store'
-});
-
-/* ── 全部功能清单 ─────────────────────────────────────────────────── */
-const ALL_FEATURES = ['af16','af17','af18','af19','af13','af9','af1','af2','af3','af4','af5','af6','af7','af8','af14','af15','af10','af11','af12'];
-document.getElementById('allGrid').innerHTML = ALL_FEATURES.map(k =>
-  `<div class="all-item"><span class="ck" aria-hidden="true">✓</span><div><b data-i18n="${k}"></b><div data-i18n="${k}d"></div></div></div>`).join('');
-
-/* ── 语言切换 ─────────────────────────────────────────────────────── */
-const zhDict = Object.assign({}, ZH);
-document.querySelectorAll('[data-i18n]').forEach(el => {
-  const k = el.getAttribute('data-i18n');
-  if (ZH[k] !== undefined && !el.innerHTML.trim()) el.innerHTML = ZH[k];
-  zhDict[k] = el.innerHTML;
-});
-document.querySelectorAll('[data-i18n-ph]').forEach(el => { zhDict[el.getAttribute('data-i18n-ph')] = el.placeholder; });
-document.querySelectorAll('[data-i18n-alt]').forEach(el => { zhDict[el.getAttribute('data-i18n-alt')] = el.alt; });
+const CHIPS = {
+  zh: ['常用书签','所有书签','最近添加','设计资源','编程开发','AI 工具','商务','效率工具','阅读学习'],
+  en: ['Frequent','All','Recent','Design','Code','AI Tools','Business','Productivity','Reading']
+};
+const TXT = {
+  zh: { ph: '搜索书签标题、网址或网页…', freq: '常用书签', n: n => `${n} 个书签`, search: q => `搜索「${q}」` },
+  en: { ph: 'Search bookmark titles, URLs or the web…', freq: 'Frequent', n: n => `${n} bookmark${n === 1 ? '' : 's'}`, search: q => `Search “${q}”` }
+};
+const ALL = {
+  zh: [
+    ['极简书签墙','一页看完常用、所有、最近和分类，不需要侧边栏'],['拼音 / 简繁搜索','全拼、首字母、混合、模糊拼音和简繁读音'],
+    ['键盘导航','↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回'],['地址栏 bm','地址栏输入 bm + 关键词，直接搜书签'],
+    ['新标签页接管','打开新标签页就是书签墙，可在设置里开或关'],['秒级搜索','标题、网址、文件夹一起检索，多个关键词，命中高亮'],
+    ['智能自动分类','域名 + 关键词识别，8 个分类开箱即用，空分类自动隐藏'],['网页预览卡片','滚动时按需加载；可在设置 → 网页预览关闭成纯文字'],
+    ['常用书签','按访问次数与最近打开时间排序'],['失效链接检测','404 双重确认才判失效，超时和未确认不参与删除'],
+    ['重复一键清理','URL 归一化识别，每组保留最新'],['极简页多选','勾选 / 全选，移动、分类、删除；删除可撤销'],
+    ['删除可撤销','单个和批量删除都能一键原位恢复'],['书签编辑','右键改标题、改网址、置顶'],
+    ['四种排序','默认、最近添加、名称 A-Z、访问热度'],['键盘快捷键','/ 聚焦搜索、Esc 逐级退出、Alt+B 打开导航页'],
+    ['主题、密度、多语言','深浅色 / 舒适紧凑 / 13 种界面语言'],['导入导出','HTML / JSON 导出，分类数据可迁移'],
+    ['零学习成本','用 Chrome 原生 ★ 收藏，无迁移、完全互通']
+  ],
+  en: [
+    ['Bookmark wall','Frequent, all, recent and categories on one page, no sidebar'],['Pinyin & Chinese search','Full pinyin, initials, fuzzy pinyin, Simplified and Traditional'],
+    ['Keyboard navigation','↑↓ select, Enter open, Cmd/Ctrl+Enter new tab, Esc back'],['Address bar “bm”','Type bm + a keyword in the address bar to search bookmarks'],
+    ['New tab takeover','Every new tab opens your wall; switch it on or off in Settings'],['Instant search','Titles, URLs and folders together, multiple keywords, highlighted hits'],
+    ['Smart auto-sorting','Domain + keyword rules, 8 categories out of the box; empty ones hide'],['Web preview cards','Loaded as you scroll; switch to text-only in Settings → Web previews'],
+    ['Frequent bookmarks','Ranked by visit count and recency'],['Dead link detection','Only double-confirmed 404s count; timeouts are never deleted'],
+    ['One-click dedupe','Normalized-URL matching, keeps the newest of each group'],['Multi-select','Select some or all; move, categorize, delete, all undoable'],
+    ['Undoable deletes','Single and bulk deletes restore in place'],['Bookmark editing','Rename, change URL or pin from the right-click menu'],
+    ['Four sort orders','Default, recently added, name A-Z, most visited'],['Keyboard shortcuts','/ to focus search, Esc to back out, Alt+B for the wall'],
+    ['Themes, density, languages','Dark / light, comfortable / compact, 13 interface languages'],['Import & export','HTML / JSON export, categories included'],
+    ['Zero learning curve','Save with Chrome’s native ★; no migration, fully in sync']
+  ]
+};
 
 let lang = 'zh';
-try { lang = localStorage.getItem('bmpro-lang') || ''; } catch (e) { lang = ''; }
-if (lang !== 'zh' && lang !== 'en') lang = /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
-const langBtn = document.getElementById('langBtn');
-const t = k => (lang === 'en' ? EN : zhDict)[k];
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[ch]));
+const card = (b, mark, extra = '') => {
+  const t = mark ? [].concat(mark).reduce((x, m) => x.replace(m, `<mark>${m}</mark>`), esc(b[1])) : esc(b[1]);
+  return `<div class="bm ${extra}"><span class="av" style="--c:${b[4]}">${b[3]}</span><b>${t}</b><small>${b[2]}${mark ? ' · ' + b[5] : ''}</small></div>`;
+};
+const chipsHtml = on => CHIPS[lang].map((c, i) => `<span class="chip${i === on ? ' on' : ''}">${c}</span>`).join('');
 
+/* ── 首屏演示：逐字输入，书签随之筛选 ── */
+const grid = document.getElementById('demoGrid'), qEl = document.getElementById('demoQ'), box = document.getElementById('demoBox');
+const title = document.getElementById('demoTitle'), count = document.getElementById('demoCount'), chips = document.getElementById('demoChips');
+const segBtns = document.querySelectorAll('#demoSeg button');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function showAll() {
+  grid.innerHTML = BM[lang].slice(0, 12).map(b => card(b)).join('');
+  title.textContent = TXT[lang].freq; count.textContent = TXT[lang].n(12);
+  chips.innerHTML = chipsHtml(0); chips.style.display = '';
+  qEl.textContent = TXT[lang].ph; box.classList.remove('focus');
+}
+function showHits(item) {
+  const hits = BM[lang].filter(b => item.hits[b[0]]);
+  chips.style.display = 'none';
+  title.textContent = TXT[lang].search(item.q); count.textContent = TXT[lang].n(hits.length);
+  grid.innerHTML = hits.map((b, k) => card(b, item.hits[b[0]], 'pop-in' + (k === 0 ? ' hit' : ''))).join('');
+}
+let run = 0;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function play(i) {
+  const my = ++run, item = QUERIES[lang][i];
+  segBtns.forEach((b, k) => b.classList.toggle('on', k === i));
+  if (reduce) { box.classList.add('focus'); qEl.textContent = item.q; showHits(item); return; }
+  showAll(); await sleep(900); if (my !== run) return;
+  box.classList.add('focus');
+  for (let n = 1; n <= item.q.length; n++) {
+    qEl.innerHTML = esc(item.q.slice(0, n)) + '<span class="caret"></span>';
+    await sleep(170); if (my !== run) return;
+  }
+  showHits(item);
+  await sleep(2600); if (my !== run) return;
+  play((i + 1) % QUERIES[lang].length);
+}
+segBtns.forEach(b => b.addEventListener('click', () => play(+b.dataset.i)));
+
+/* ── 新标签页：主题 / 密度切换 ── */
+const themeNt = document.getElementById('themeNt');
+document.querySelectorAll('#themeSeg button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#themeSeg button').forEach(x => x.classList.toggle('on', x === b));
+  themeNt.className = 'nt ' + b.dataset.m;
+}));
+
+function renderLists() {
+  document.getElementById('themeGrid').innerHTML = BM[lang].slice(0, 16).map(b => card(b)).join('');
+  document.getElementById('themeChips').innerHTML = chipsHtml(1);
+  document.getElementById('allGrid').innerHTML = ALL[lang].map(([t, d]) =>
+    `<div><span class="i"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><b>${t}</b><span>${d}</span></div>`).join('') +
+    `<div class="go"><b>${lang === 'en' ? 'All free,<br>installed in 30 seconds' : '全部免费，<br>30 秒装好'}</b><a class="btn btn-dark btn-sm" style="margin-top:16px;align-self:flex-start" href="${STORE_URL}" target="_blank" rel="noopener">${lang === 'en' ? 'Add to Chrome, free' : '免费添加至 Chrome'}</a></div>`;
+}
+
+/* ── 语言切换：中文写在页面里，英文在 data-en；默认跟随浏览器 ── */
+const i18nEls = [...document.querySelectorAll('[data-en]')];
+i18nEls.forEach(el => { el.dataset.zh = el.innerHTML; });
+const ariaEls = [...document.querySelectorAll('[data-en-aria]')];
+ariaEls.forEach(el => { el.dataset.zhAria = el.getAttribute('aria-label'); });
 function setLang(l, persist) {
   lang = l;
-  const dict = l === 'en' ? EN : zhDict;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.getAttribute('data-i18n');
-    if (dict[k] !== undefined) el.innerHTML = dict[k];
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const v = dict[el.getAttribute('data-i18n-ph')]; if (v !== undefined) el.placeholder = v; });
-  document.querySelectorAll('[data-i18n-alt]').forEach(el => { const v = dict[el.getAttribute('data-i18n-alt')]; if (v !== undefined) el.alt = v; });
+  i18nEls.forEach(el => { el.innerHTML = l === 'en' ? el.dataset.en : el.dataset.zh; });
+  ariaEls.forEach(el => el.setAttribute('aria-label', l === 'en' ? el.dataset.enAria : el.dataset.zhAria));
   document.documentElement.lang = l === 'en' ? 'en' : 'zh-CN';
   document.title = l === 'en'
-    ? 'Bookmark Manager Pro: Chrome bookmarks, a searchable minimal new tab'
+    ? 'Bookmark Manager Pro: Chrome bookmarks you can finally search and see'
     : '书签管理器 Pro：Chrome 书签，变成能拼音搜索的极简新标签页';
-  langBtn.textContent = l === 'en' ? '中' : 'EN';
-  document.getElementById('toTop').setAttribute('aria-label', l === 'en' ? 'Back to top' : '回到顶部');
+  document.getElementById('langLabel').textContent = l === 'en' ? '中文' : 'EN';
+  document.querySelectorAll('.copy [data-lang]').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
   if (persist) { try { localStorage.setItem('bmpro-lang', l); } catch (e) {} }
-  renderDemo();
+  renderLists();
+  play(0);
 }
-langBtn.addEventListener('click', () => setLang(lang === 'en' ? 'zh' : 'en', true));
-
-/* ── 搜索演示：多关键词 AND，标题 + 网址 + 文件夹一起匹配 ──────────── */
-const DEMO = [
-  { zh:'LED 显示屏行业展会日历', en:'LED display industry expo calendar', u:'ledexpo.cn/calendar', fz:'商务', fe:'Business', c:'#E8710A' },
-  { zh:'Shenzhen LED Supplier Hub', en:'Shenzhen LED Supplier Hub', u:'led-display.com/catalog', fz:'商务', fe:'Business', c:'#1A73E8' },
-  { zh:'2026 供应商报价表', en:'2026 supplier quote sheet', u:'docs.google.com/spreadsheets', fz:'商务', fe:'Business', c:'#8A4FB0' },
-  { zh:'客户报价模板（英文）', en:'Client quote template', u:'notion.so/quote-template', fz:'效率工具', fe:'Productivity', c:'#B0652F' },
-  { zh:'Figma — 产品手册排版', en:'Figma — product catalog layout', u:'figma.com/file/catalog', fz:'设计资源', fe:'Design', c:'#B0652F' },
-  { zh:'Gamma 演示文稿', en:'Gamma presentations', u:'gamma.app', fz:'AI 工具', fe:'AI Tools', c:'#8A4FB0' },
-  { zh:'MDN Web Docs', en:'MDN Web Docs', u:'developer.mozilla.org', fz:'编程开发', fe:'Code', c:'#1A73E8' },
-  { zh:'Midjourney', en:'Midjourney', u:'midjourney.com', fz:'AI 工具', fe:'AI Tools', c:'#3D8A5A' },
-  { zh:'Alibaba 询盘后台', en:'Alibaba inquiry inbox', u:'message.alibaba.com', fz:'商务', fe:'Business', c:'#B0652F' },
-  { zh:'Notion — 周计划', en:'Notion — weekly plan', u:'notion.so/weekly', fz:'效率工具', fe:'Productivity', c:'#666C78' }
-];
-const demoInput = document.getElementById('demoInput');
-const demoList = document.getElementById('demoList');
-const demoCount = document.getElementById('demoCount');
-const esc = s => s.replace(/[&<>"]/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[ch]));
-
-function highlight(text, toks) {
-  const low = text.toLowerCase();
-  const mark = new Array(text.length).fill(false);
-  toks.forEach(k => { let i = low.indexOf(k); while (i >= 0) { for (let j = i; j < i + k.length; j++) mark[j] = true; i = low.indexOf(k, i + 1); } });
-  let out = '', open = false;
-  for (let i = 0; i < text.length; i++) {
-    if (mark[i] !== open) { out += mark[i] ? '<mark>' : '</mark>'; open = mark[i]; }
-    out += esc(text[i]);
-  }
-  return out + (open ? '</mark>' : '');
-}
-function renderDemo() {
-  const toks = demoInput.value.toLowerCase().split(/\s+/).filter(Boolean);
-  const rows = DEMO.map(b => ({ t: lang === 'en' ? b.en : b.zh, f: lang === 'en' ? b.fe : b.fz, u: b.u, c: b.c }))
-    .filter(b => toks.every(k => (b.t + ' ' + b.u + ' ' + b.f).toLowerCase().includes(k)))
-    .slice(0, 5);
-  demoList.innerHTML = rows.length
-    ? rows.map((b, i) => `<li class="${i === 0 && toks.length ? 'first' : ''}"><span class="av" style="background:${b.c}">${esc(b.t.charAt(0).toUpperCase())}</span><span class="r-txt"><span class="r-t">${highlight(b.t, toks)}</span><span class="r-u">${esc(b.u)} · ${esc(b.f)}</span></span></li>`).join('')
-    : `<li class="empty">${t('demo_empty')}</li>`;
-  demoCount.textContent = toks.length ? t('demo_count').replace('{n}', rows.length) : '';
-}
-demoInput.addEventListener('input', renderDemo);
-
+try { lang = localStorage.getItem('bmpro-lang') || ''; } catch (e) { lang = ''; }
+if (lang !== 'zh' && lang !== 'en') lang = /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+document.getElementById('langBtn').addEventListener('click', () => setLang(lang === 'en' ? 'zh' : 'en', true));
+document.querySelectorAll('.copy [data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang, true)));
 setLang(lang, false);
 
-/* ── 顶栏分隔线 + 回到顶部（环形进度随阅读画满） ─────────────────── */
-const nav = document.getElementById('nav');
-const toTop = document.getElementById('toTop');
-const ttBar = document.getElementById('ttBar');
-const TTC = 2 * Math.PI * 24;
-ttBar.style.strokeDasharray = TTC;
-ttBar.style.strokeDashoffset = TTC;
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(() => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-    ttBar.style.strokeDashoffset = TTC * (1 - p);
-    nav.classList.toggle('scrolled', window.scrollY > 8);
-    toTop.classList.toggle('show', window.scrollY > window.innerHeight * .8);
-    ticking = false;
-  });
-}, { passive: true });
-toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+/* 预览开关：来回拨动示意 */
+const pvSw = document.getElementById('pvSw');
+if (!reduce) setInterval(() => pvSw.classList.toggle('on'), 1800);
 
-/* ── 滚动渐入 ─────────────────────────────────────────────────────── */
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { rootMargin: '0px 0px -60px 0px' });
+/* ── 滚动渐入 + 返回顶部 ── */
+if ('IntersectionObserver' in window && !reduce) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 } else {
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
 }
+const toTop = document.getElementById('toTop');
+addEventListener('scroll', () => toTop.classList.toggle('show', scrollY > 700), { passive: true });
+toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
 </script>
 </body>
 </html>
