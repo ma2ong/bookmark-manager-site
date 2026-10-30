@@ -234,17 +234,21 @@ mark{background:#FCE7A6;color:inherit;border-radius:2px;padding:0 1px}
 .keys span{font-size:12.5px;color:#4A4F57;background:#fff;border:1px solid #E6E8EC;border-radius:8px;padding:3px 10px}
 kbd{font:inherit;font-size:11.5px;font-weight:700;border:1px solid #D5D8DD;border-bottom-width:2px;border-radius:5px;padding:0 5px;background:#fff;color:var(--ink2)}
 
-/* 前后对比：同一块点阵画布里左右并排，和首屏同一套语言 */
-.vs{display:grid;grid-template-columns:1fr 64px 1fr;align-items:start;margin-top:56px;padding:44px 44px 48px}
+/* 前后对比：左灰右蓝两张卡，中间一个小箭头 */
+.vs{display:grid;grid-template-columns:1fr 64px 1fr;align-items:stretch;margin-top:56px}
+.vs .tile{padding:28px 30px 32px}
+.vs .old{background:linear-gradient(180deg,#F6F6F7,#F0F0F2)}
+.vs .new{background:linear-gradient(180deg,#F1F6FF,#E9F0FE);border-color:#DCE6FA}
 .vs-col{min-width:0}
-.vs .badge{font-weight:600}
+.vs .badge{font-weight:600;align-self:flex-start}
 .vs .badge i.off{background:#B0B4BA;box-shadow:0 0 0 3px rgba(150,155,165,.18)}
 .vs-h{font-size:24px;font-weight:800;line-height:1.35;margin:14px 0 22px}
-.vs-h.old{color:#6B7078}
+.vs-h.dim{color:#6B7078}
 .vs-h em{font-style:normal;background:linear-gradient(90deg,#1A73E8,#7B61FF);-webkit-background-clip:text;background-clip:text;color:transparent}
-.vs-show{height:330px;display:flex;justify-content:center;align-items:flex-start}
-.vs-show .win{width:100%}
-.vs-mid{align-self:center;justify-self:center;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#4A4F57;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border:1px solid rgba(20,30,50,.08);box-shadow:0 8px 24px -14px rgba(20,30,60,.35);margin-top:60px}
+.vs-show{height:330px;display:flex;justify-content:center}
+.vs-show>.win{width:100%;height:100%}
+.vs-show>.pop{height:100%}
+.vs-mid{align-self:center;justify-self:center;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#4A4F57;background:#fff;border:1px solid rgba(20,30,50,.08);box-shadow:0 8px 24px -14px rgba(20,30,60,.35)}
 .vs-list{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px;align-content:start}
 .vs-list li{display:flex;gap:10px;font-size:15px;line-height:1.55;color:#6B7078}
 .vs-list li i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;margin-top:2px;background:#EEF0F3;color:#8A8F98}
@@ -359,8 +363,10 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
   .nt{padding:20px 14px 28px}
   .grid,.nt.compact .grid{grid-template-columns:repeat(2,1fr)}
   .bento,.split,.feats,.pcards,.faq{grid-template-columns:1fr}
-  .vs{grid-template-columns:1fr;padding:24px 16px 28px;gap:20px}
-  .vs-mid{transform:rotate(90deg);margin:0 auto}
+  .vs{grid-template-columns:1fr;gap:16px}
+  .vs .tile{padding:22px 16px 26px}
+  .vs-show>.win,.vs-show>.pop{height:auto}
+  .vs-mid{transform:rotate(90deg)}
   .vs-show{height:auto}
   .vs-h{font-size:20px}
   .split{gap:36px}
@@ -493,10 +499,10 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
     <div class="center reveal">
       <h2 class="h2" data-en="Still digging through Chrome’s bookmarks every day?">你也每天在 Chrome 里翻书签吗？</h2>
     </div>
-    <div class="vs art reveal">
-      <div class="vs-col">
+    <div class="vs">
+      <div class="tile old vs-col reveal">
         <span class="badge"><i class="off"></i><span data-en="Before · Chrome’s own">以前 · Chrome 自带</span></span>
-        <h3 class="vs-h old" data-en="Four folder levels, opened one by one">4 层文件夹，一层层点开</h3>
+        <h3 class="vs-h dim" data-en="Four folder levels, opened one by one">4 层文件夹，一层层点开</h3>
         <div class="vs-show">
           <div class="win">
             <div class="win-bar"><i></i><i></i><i></i><span data-en="Chrome Bookmark Manager">Chrome 书签管理器</span></div>
@@ -519,7 +525,7 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
         </ul>
       </div>
       <div class="vs-mid" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <div class="vs-col">
+      <div class="tile new vs-col reveal">
         <span class="badge"><i></i><span data-en="Now · Bookmark Manager Pro">现在 · 书签管理器 Pro</span></span>
         <h3 class="vs-h" data-en="Type <em>two letters</em>, press Enter">输入 <em>2 个字母</em>，回车就到</h3>
         <div class="vs-show">
@@ -530,6 +536,9 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
               <div class="hov"><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Drive"><mark>百度</mark>网盘</span><span class="pinbtn">Enter</span></div>
               <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Maps"><mark>百度</mark>地图</span></div>
               <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Translate"><mark>百度</mark>翻译</span></div>
+              <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Docs"><mark>百度</mark>文库</span></div>
+              <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Calendar"><mark>百度</mark>百科</span></div>
+              <div><span class="av" style="--c:#3D6AC7" data-en="G">B</span><span data-en="<mark>Go</mark>ogle Photos"><mark>百度</mark>贴吧</span></div>
             </div>
           </div>
         </div>
