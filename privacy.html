@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>隐私政策 · Privacy Policy — 书签管理器 Pro</title>
-<meta name="description" content="书签管理器 Pro 隐私政策：核心数据本地存储、无账号、无追踪；网页预览截图为唯一外部请求，可一键关闭。Privacy policy for Bookmark Manager Pro.">
+<meta name="description" content="书签管理器 Pro 隐私政策：核心数据本地存储、无账号、无追踪；网页预览默认关闭，打开后才会请求截图。Privacy policy for Bookmark Manager Pro.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234285f4'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3Cpath d='M8 5h8a1 1 0 0 1 1 1v13l-5-3-5 3V6a1 1 0 0 1 1-1z' fill='%23fff'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -59,7 +59,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
 <!-- ══ 中文 ══════════════════════════════════════════════════════════ -->
 <section class="wrap">
   <span class="tag">简体中文</span>
-  <p><b>一句话总结：书签管理器 Pro（下称"本扩展"）是一个本地优先工具。开发者没有后端服务器、账号系统或分析服务；唯一的外部请求是生成网页预览截图（可一键关闭），以及你主动点击"检测失效链接"时的检测请求。</b></p>
+  <p><b>一句话总结：书签管理器 Pro（下称"本扩展"）是一个本地优先工具。开发者没有后端服务器、账号系统或分析服务；唯一的外部请求是生成网页预览截图（默认关闭，你在设置里打开后才会发生），以及你主动点击"检测失效链接"时的检测请求。</b></p>
 
   <h2>1. 本地保存的数据</h2>
   <p>开发者不收集这些数据。本扩展没有后端服务器，开发者无法读取以下仅保存在<b>你自己浏览器本地存储</b>（chrome.storage 与 localStorage）中的信息：</p>
@@ -84,8 +84,8 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
   </table>
 
   <h2>3. 第三方服务：网页预览截图</h2>
-  <p>网页预览<b>默认开启</b>。当书签卡片接近可视区域时，<b>对应书签网址</b>会发送给 WordPress.com 的公开截图服务 mShots（域名 s0.wp.com，由 Automattic 运营）以生成截图；结果缓存在你的浏览器本地。该服务受 <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic 隐私政策</a>约束。</p>
-  <p>如果你不希望发送任何书签网址：在设置 → 网页预览里把它关闭即可完全停用，卡片变为纯文字。之后只有你另行主动启动"检测失效链接"时，扩展才会访问书签网址。</p>
+  <p>网页预览<b>默认关闭</b>。只有你在设置 → 网页预览里打开后，当书签卡片接近可视区域时，<b>对应书签网址</b>会发送给 WordPress.com 的公开截图服务 mShots（域名 s0.wp.com，由 Automattic 运营）以生成截图；结果缓存在你的浏览器本地。该服务受 <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic 隐私政策</a>约束。</p>
+  <p>如果你不希望发送任何书签网址：保持关闭即可（打开过也可以随时在设置 → 网页预览里关掉），卡片为纯文字。之后只有你另行主动启动"检测失效链接"时，扩展才会访问书签网址。</p>
 
   <h2>4. 我们不做的事</h2>
   <ul>
@@ -108,7 +108,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
 <!-- ══ English ═══════════════════════════════════════════════════════ -->
 <section class="wrap">
   <span class="tag">ENGLISH</span>
-  <p><b>In one sentence: Bookmark Manager Pro ("the Extension") is local-first. The developer has no backend, account system, or analytics service. The only external requests are preview screenshots (which you can switch off with one click) and the checks you start yourself with "Check dead links".</b></p>
+  <p><b>In one sentence: Bookmark Manager Pro ("the Extension") is local-first. The developer has no backend, account system, or analytics service. The only external requests are preview screenshots (off by default; they happen only if you turn previews on in Settings) and the checks you start yourself with "Check dead links".</b></p>
 
   <h2>1. Data stored locally</h2>
   <p>The developer does not collect this data. The Extension has no backend, so the developer cannot access the following information stored <b>only in your browser's local storage</b> (chrome.storage and localStorage):</p>
@@ -127,13 +127,13 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:28px 0;font-size
     <tr><td>favicon</td><td>Show site icons from Chrome's local favicon cache — zero network requests.</td></tr>
     <tr><td>history</td><td>Read visit counts from the last 30 days to rank "Frequent" bookmarks — so opens from Chrome's bookmarks bar, the address bar, or this extension all count; and to recognize the default search engine you set in Chrome from your recent searches, so the search bar can show its icon and open its homepage. The query runs locally on your machine and is <b>used only for these two things: nothing is stored, uploaded, or sent to any server</b> (the Extension has no server).</td></tr>
     <tr><td>search</td><td>Send what you type into the grid's web search bar to the default search engine you set in Chrome (same as searching from the address bar). The Extension does not read or keep your searches.</td></tr>
-    <tr><td>chrome_url_overrides (new tab)</td><td>Replace the new tab page with the bookmark navigation page. On by default; one click in the grid header turns it off (new tabs then open your default search engine's homepage).</td></tr>
+    <tr><td>chrome_url_overrides (new tab)</td><td>Replace the new tab page with the bookmark navigation page. On by default; turn it off in Settings → New tab takeover (new tabs then open your default search engine's homepage).</td></tr>
     <tr><td>Optional: all sites</td><td>Requested only when you click "Check dead links", so the Extension can request each bookmarked URL to verify it still works. The Extension explains why before asking, and removes the permission as soon as the check ends. If you never use that feature, this permission is never requested.</td></tr>
   </table>
 
   <h2>3. Third-party service: preview screenshots</h2>
-  <p>Page previews are <b>on by default</b>. As a bookmark card approaches the visible area, its <b>URL</b> is sent to WordPress.com's public mShots screenshot service (s0.wp.com, operated by Automattic) to generate the screenshot; the result is cached locally in your browser. The service is governed by <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic's privacy policy</a>.</p>
-  <p>If you'd rather send no bookmark URLs at all, click <b>"Preview: On"</b> in the grid header to switch it to "Preview: Off" — screenshot requests stop entirely and cards become text-only. The Extension will then contact bookmarked sites only if you separately start a dead-link scan.</p>
+  <p>Page previews are <b>off by default</b>. Only after you turn them on in Settings → Web previews, as a bookmark card approaches the visible area, its <b>URL</b> is sent to WordPress.com's public mShots screenshot service (s0.wp.com, operated by Automattic) to generate the screenshot; the result is cached locally in your browser. The service is governed by <a href="https://automattic.com/privacy/" target="_blank" rel="noopener">Automattic's privacy policy</a>.</p>
+  <p>If you'd rather send no bookmark URLs at all, just leave previews off (or turn them off again in Settings → Web previews) — no screenshot requests are made and cards are text-only. The Extension will then contact bookmarked sites only if you separately start a dead-link scan.</p>
 
   <h2>4. What we never do</h2>
   <ul>

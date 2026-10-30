@@ -645,7 +645,7 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
         <div class="txt">
           <span class="num" data-en="03 · Previews">03 · 网页预览</span>
           <h3 data-en="Pictures are faster than words">认图比认字快</h3>
-          <ul class="dots"><li data-en="Comfortable / compact density; <b>Alt+B</b> brings you back anytime">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时回来</li><li data-en="Dark / light / system themes">深色 / 浅色 / 跟随系统三种主题</li><li data-en="Settings → Web previews turns them off for text-only cards">设置 → 网页预览，一键关闭，卡片变纯文字</li></ul>
+          <ul class="dots"><li data-en="Comfortable / compact density; <b>Alt+B</b> brings you back anytime">舒适 / 紧凑两档密度，按 <b>Alt+B</b> 随时回来</li><li data-en="Dark / light / system themes">深色 / 浅色 / 跟随系统三种主题</li><li data-en="Off by default; turn on in Settings → Web previews">默认关闭，在设置 → 网页预览里打开</li></ul>
         </div>
       </article>
       <article class="tile feat reveal">
@@ -739,7 +739,7 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
     <div class="priv-head reveal">
       <div>
         <h2 class="h2" data-en="Your bookmarks belong to you">你的书签，只属于你</h2>
-        <p class="lead" data-en="Core data stays on your device: categories, search learning and preferences. The only external request is for web preview screenshots, and you can switch that off in Settings.">核心数据保存在本地：分类、搜索学习、界面偏好都在本机；唯一的外部请求是网页预览截图，可在设置里一键关闭。</p>
+        <p class="lead" data-en="Core data stays on your device: categories, search learning and preferences. Web previews are off by default; only if you turn them on are preview screenshots requested.">核心数据保存在本地：分类、搜索学习、界面偏好都在本机；网页预览默认关闭，只有你打开后才会请求预览截图。</p>
         <div class="browsers"><i style="background:conic-gradient(#EA4335 0 33%,#FBBC05 0 66%,#34A853 0)"></i><i style="background:linear-gradient(135deg,#0C59A4,#36C3A5)"></i><span data-en="Works in Chrome, Edge and other Chromium browsers">适用于 Chrome、Edge 等 Chromium 浏览器</span></div>
       </div>
       <a class="btn btn-light btn-sm" href="privacy.html" data-en="Privacy Policy: every permission explained →">隐私政策：权限逐项说明 →</a>
@@ -762,10 +762,10 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
         </div>
       </div>
       <div class="tile reveal">
-        <div class="txt"><h3 data-en="Previews can be turned off">预览可随时关闭</h3><p data-en="Screenshots come from a third-party service (your bookmark URLs are sent to it). Settings → Web previews: switch it off for text-only cards and zero external requests.">截图由第三方服务生成（会把书签网址发给它）。设置 → 网页预览，一键关闭后卡片变纯文字，不再发出任何外部请求。</p></div>
+        <div class="txt"><h3 data-en="Web previews are off by default">网页预览默认关闭</h3><p data-en="Screenshots come from a third-party service (your bookmark URLs are sent to it), so they stay off until you turn them on in Settings → Web previews. Off means text-only cards and zero external requests.">截图由第三方服务生成（会把书签网址发给它），所以默认关闭；想要时在设置 → 网页预览里打开。关着就是纯文字卡片，不发出任何外部请求。</p></div>
         <div class="show">
           <div class="setting" style="width:100%;border-radius:12px 12px 0 0">
-            <div class="r"><span><b data-en="Web previews">网页预览</b><small data-en="Off: cards are text only">关闭后卡片为纯文字</small></span><span class="sw" id="pvSw"></span></div>
+            <div class="r"><span><b data-en="Web previews">网页预览</b><small data-en="Off by default">默认关闭</small></span><span class="sw" id="pvSw"></span></div>
             <div class="r"><span><b data-en="New tab takeover">新标签页接管</b><small data-en="Off: opens your default search engine">关闭后打开默认搜索引擎首页</small></span><span class="sw on"></span></div>
             <div class="r"><span><b data-en="Language">语言</b></span><span style="font-size:12px;color:#3C4043" data-en="System default">跟随系统</span></div>
           </div>
@@ -785,7 +785,7 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
     </div>
     <div class="reveal">
       <details open><summary data-en="Will it mess with my existing bookmarks?">它会动我现有的书签吗？</summary><p data-en="No. It reads and writes Chrome’s own bookmarks directly: no migration, no copies. Anything you organize here (move, delete, reorder) is a normal Chrome bookmark operation and syncs with your Chrome account as usual. Smart categories are only a display layer and never change your folder structure. Saving works the same as always: click the ★ in the address bar, and both stay in sync in real time.">不会。它直接读写 Chrome 自带的书签，不做迁移、不建副本。你在这里做的整理（移动、删除、排序）就是对 Chrome 书签本身的操作，随 Chrome 账号正常同步；智能分类只是展示层，不改变你的文件夹结构。添加新书签也照旧：点地址栏的 ★ 星标就行，两边实时互通。</p></details>
-      <details><summary data-en="Is my bookmark data uploaded anywhere?">我的书签数据会被上传吗？</summary><p data-en="The developer has no backend: bookmarks, categories and search learning are never uploaded. The only external request is for preview screenshots (bookmark URLs are sent to the screenshot service); turn it off in Settings → Web previews.">开发者没有后端服务器，书签、分类和搜索学习记录不会上传。唯一的外部请求是生成网页预览截图（把书签网址发给截图服务），在设置 → 网页预览里关掉即可停用。</p></details>
+      <details><summary data-en="Is my bookmark data uploaded anywhere?">我的书签数据会被上传吗？</summary><p data-en="The developer has no backend: bookmarks, categories and search learning are never uploaded. Web previews are off by default; if you turn them on, bookmark URLs are sent to a screenshot service to make the previews.">开发者没有后端服务器，书签、分类和搜索学习记录不会上传。网页预览默认关闭；只有你在设置里打开后，才会把书签网址发给截图服务生成预览图。</p></details>
       <details><summary data-en="What if auto-sorting gets it wrong?">自动分类分错了怎么办？</summary><p data-en="Right-click the bookmark → “Move to category” and pick one. Manual choices are permanent and always beat the rules. You can also multi-select on the new tab page and set a category in bulk.">右键书签 →「移动到分类」手动指定，手动分类永久生效、优先于自动规则；也可以在极简页多选后批量设置分类。</p></details>
       <details><summary data-en="Can I recover something I deleted by mistake?">删错了能恢复吗？</summary><p data-en="Yes. Every delete (including bulk delete, dedupe and dead-link cleanup) shows an “Undo” button that restores everything to its original place, manual categories included.">能。所有删除操作（包括批量删除、清理重复、清理失效链接）完成后都会出现「撤销」按钮，点击即原位恢复，手动分类一起还原。</p></details>
       <details><summary data-en="Which browsers? Is it free?">支持哪些浏览器？收费吗？</summary><p data-en="Completely free. It’s on the Chrome Web Store and Microsoft Edge Add-ons. The interface comes in 13 languages (English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Spanish, Portuguese, French, German, Russian, Italian, Vietnamese and Indonesian); it follows your browser by default, and you can switch it in Settings.">完全免费。Chrome 应用商店和 Microsoft Edge 加载项都已上架；界面支持 13 种语言（简体中文、繁体中文、英语、日语、韩语、西班牙语、葡萄牙语、法语、德语、俄语、意大利语、越南语、印尼语），默认跟随浏览器语言，也可以在设置里手动切换。</p></details>
@@ -893,7 +893,7 @@ const ALL = {
     ['极简书签墙','一页看完常用、所有、最近和分类，不需要侧边栏'],['拼音 / 简繁搜索','全拼、首字母、混合、模糊拼音和简繁读音'],
     ['键盘导航','↑↓ 选择、Enter 打开、Cmd/Ctrl+Enter 新标签、Esc 返回'],['地址栏 bm','地址栏输入 bm + 关键词，直接搜书签'],
     ['新标签页接管','打开新标签页就是书签墙，可在设置里开或关'],['秒级搜索','标题、网址、文件夹一起检索，多个关键词，命中高亮'],
-    ['智能自动分类','域名 + 关键词识别，8 个分类开箱即用，空分类自动隐藏'],['网页预览卡片','滚动时按需加载；可在设置 → 网页预览关闭成纯文字'],
+    ['智能自动分类','域名 + 关键词识别，8 个分类开箱即用，空分类自动隐藏'],['网页预览卡片','默认关闭；在设置 → 网页预览打开，滚动时按需加载'],
     ['常用书签','按访问次数与最近打开时间排序'],['失效链接检测','404 双重确认才判失效，超时和未确认不参与删除'],
     ['重复一键清理','URL 归一化识别，每组保留最新'],['极简页多选','勾选 / 全选，移动、分类、删除；删除可撤销'],
     ['删除可撤销','单个和批量删除都能一键原位恢复'],['书签编辑','右键改标题、改网址、置顶'],
@@ -905,7 +905,7 @@ const ALL = {
     ['Bookmark wall','Frequent, all, recent and categories on one page, no sidebar'],['Pinyin & Chinese search','Full pinyin, initials, fuzzy pinyin, Simplified and Traditional'],
     ['Keyboard navigation','↑↓ select, Enter open, Cmd/Ctrl+Enter new tab, Esc back'],['Address bar “bm”','Type bm + a keyword in the address bar to search bookmarks'],
     ['New tab takeover','Every new tab opens your wall; switch it on or off in Settings'],['Instant search','Titles, URLs and folders together, multiple keywords, highlighted hits'],
-    ['Smart auto-sorting','Domain + keyword rules, 8 categories out of the box; empty ones hide'],['Web preview cards','Loaded as you scroll; switch to text-only in Settings → Web previews'],
+    ['Smart auto-sorting','Domain + keyword rules, 8 categories out of the box; empty ones hide'],['Web preview cards','Off by default; turn on in Settings → Web previews, loaded as you scroll'],
     ['Frequent bookmarks','Ranked by visit count and recency'],['Dead link detection','Only double-confirmed 404s count; timeouts are never deleted'],
     ['One-click dedupe','Normalized-URL matching, keeps the newest of each group'],['Multi-select','Select some or all; move, categorize, delete, all undoable'],
     ['Undoable deletes','Single and bulk deletes restore in place'],['Bookmark editing','Rename, change URL or pin from the right-click menu'],
