@@ -197,7 +197,7 @@ mark{background:#FCE7A6;color:inherit;border-radius:2px;padding:0 1px}
 .tree svg{color:#8A8F98;flex:none}
 .tree .d1{padding-left:18px}.tree .d2{padding-left:36px}.tree .d3{padding-left:54px}.tree .d4{padding-left:72px}
 .tree .lost{color:#B0B4BA}
-.tree .where{color:var(--red);font-weight:600}
+.tree .where{color:#5F6368;font-weight:600}
 
 /* 对话框 / 提示 / 批量条 / 设置 */
 .dlg{background:#fff;border-radius:14px;box-shadow:0 30px 60px -24px rgba(10,40,100,.5),0 0 0 1px rgba(20,40,90,.05);font-size:12.5px;color:#3C4043;padding:16px 18px 14px;text-align:left}
@@ -234,27 +234,22 @@ mark{background:#FCE7A6;color:inherit;border-radius:2px;padding:0 1px}
 .keys span{font-size:12.5px;color:#4A4F57;background:#fff;border:1px solid #E6E8EC;border-radius:8px;padding:3px 10px}
 kbd{font:inherit;font-size:11.5px;font-weight:700;border:1px solid #D5D8DD;border-bottom-width:2px;border-radius:5px;padding:0 5px;background:#fff;color:var(--ink2)}
 
-/* 前后对比：一眼看出差别 */
-.vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
-.vs .tile .show{min-height:330px;align-items:flex-start}
-.vs .old{background:linear-gradient(180deg,#F6F6F7,#EFEFF1)}
-.vs .old .show{filter:grayscale(1)}
-.vs .new{background:linear-gradient(180deg,#F1F6FF,#E6EEFD);border:2px solid #9DBDF5;box-shadow:0 30px 60px -36px rgba(26,115,232,.55)}
-.vs-head{display:flex;align-items:center;gap:12px;padding:22px 26px 0}
-.vs-tag{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 14px 6px 8px;font-size:14px;font-weight:700;white-space:nowrap}
-.vs-tag i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;color:#fff}
-.vs-tag.bad{background:#FCE8E6;color:#B3261E}.vs-tag.bad i{background:var(--red)}
-.vs-tag.ok{background:#E6F4EA;color:#137333}.vs-tag.ok i{background:#1E8E3E}
-.vs-big{font-size:26px;font-weight:800;line-height:1.3;padding:16px 26px 0}
-.vs .old .vs-big{color:#5F6368}
-.vs .new .vs-big{color:#1967D2}
-.vs-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.vs-list li{display:flex;gap:10px;font-size:15px;line-height:1.55;color:#4A4F57}
-.vs-list li i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;margin-top:2px}
-.vs .old .vs-list i{background:#FCE8E6;color:var(--red)}
-.vs .new .vs-list i{background:#E6F4EA;color:#1E8E3E}
-.vs .new .vs-list li{color:#24324A}
-.vs-arrow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:64px;height:64px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 8px #fff,0 16px 30px -10px rgba(26,115,232,.7)}
+/* 前后对比：同一块点阵画布里左右并排，和首屏同一套语言 */
+.vs{display:grid;grid-template-columns:1fr 64px 1fr;align-items:start;margin-top:56px;padding:44px 44px 48px}
+.vs-col{min-width:0}
+.vs .badge{font-weight:600}
+.vs .badge i.off{background:#B0B4BA;box-shadow:0 0 0 3px rgba(150,155,165,.18)}
+.vs-h{font-size:24px;font-weight:800;line-height:1.35;margin:14px 0 22px}
+.vs-h.old{color:#6B7078}
+.vs-h em{font-style:normal;background:linear-gradient(90deg,#1A73E8,#7B61FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vs-show{height:330px;display:flex;justify-content:center;align-items:flex-start}
+.vs-show .win{width:100%}
+.vs-mid{align-self:center;justify-self:center;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#4A4F57;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border:1px solid rgba(20,30,50,.08);box-shadow:0 8px 24px -14px rgba(20,30,60,.35);margin-top:60px}
+.vs-list{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px;align-content:start}
+.vs-list li{display:flex;gap:10px;font-size:15px;line-height:1.55;color:#6B7078}
+.vs-list li i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;margin-top:2px;background:#EEF0F3;color:#8A8F98}
+.vs-list.yes li{color:#3E434B}
+.vs-list.yes li i{background:#E8F0FE;color:var(--blue)}
 .origin{max-width:760px;margin:48px auto 0;text-align:center;font-size:16px;line-height:1.9;color:var(--muted)}
 .origin::before{content:"“";display:block;font:700 54px/0.6 Georgia,serif;color:#C9D6EE;margin-bottom:10px}
 
@@ -363,9 +358,11 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
   .stage .seg{max-width:calc(100% - 20px);overflow-x:auto}
   .nt{padding:20px 14px 28px}
   .grid,.nt.compact .grid{grid-template-columns:repeat(2,1fr)}
-  .bento,.vs,.split,.feats,.pcards,.faq{grid-template-columns:1fr}
-  .vs{gap:44px}
-  .vs-big{font-size:21px}
+  .bento,.split,.feats,.pcards,.faq{grid-template-columns:1fr}
+  .vs{grid-template-columns:1fr;padding:24px 16px 28px;gap:20px}
+  .vs-mid{transform:rotate(90deg);margin:0 auto}
+  .vs-show{height:auto}
+  .vs-h{font-size:20px}
   .split{gap:36px}
   .all{grid-template-columns:1fr}
   .all>div{border-right:0!important;border-bottom:1px solid var(--line)!important}
@@ -496,12 +493,12 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
     <div class="center reveal">
       <h2 class="h2" data-en="Still digging through Chrome’s bookmarks every day?">你也每天在 Chrome 里翻书签吗？</h2>
     </div>
-    <div class="vs">
-      <div class="tile old reveal">
-        <div class="vs-head"><span class="vs-tag bad"><i>✕</i><span data-en="Before · Chrome’s own">以前 · Chrome 自带</span></span></div>
-        <p class="vs-big" data-en="Four folder levels, opened one by one">4 层文件夹，一层层点开</p>
-        <div class="show">
-          <div class="win" style="width:100%">
+    <div class="vs art reveal">
+      <div class="vs-col">
+        <span class="badge"><i class="off"></i><span data-en="Before · Chrome’s own">以前 · Chrome 自带</span></span>
+        <h3 class="vs-h old" data-en="Four folder levels, opened one by one">4 层文件夹，一层层点开</h3>
+        <div class="vs-show">
+          <div class="win">
             <div class="win-bar"><i></i><i></i><i></i><span data-en="Chrome Bookmark Manager">Chrome 书签管理器</span></div>
             <div class="tree" style="padding:14px 18px 18px">
               <div><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-en="Bookmarks bar">书签栏</span></div>
@@ -515,19 +512,17 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
             </div>
           </div>
         </div>
-        <div class="txt">
-          <ul class="vs-list">
-            <li><i>✕</i><span data-en="<b>Folders only</b>: no frequent, recent or auto-sorted view"><b>只有文件夹层级</b>：没有常用、最近、自动分类</span></li>
-            <li><i>✕</i><span data-en="<b>New bookmarks land at the bottom</b>, yet the ones you just saved are the ones you need most"><b>新存的书签永远在最底下</b>，偏偏刚存的才是最常用的</span></li>
-            <li><i>✕</i><span data-en="<b>To find one, you open folder after folder</b>"><b>想找书签，只能在文件夹里一层层展开</b></span></li>
-          </ul>
-        </div>
+        <ul class="vs-list">
+          <li><i>✕</i><span data-en="<b>Folders only</b>: no frequent, recent or auto-sorted view"><b>只有文件夹层级</b>：没有常用、最近、自动分类</span></li>
+          <li><i>✕</i><span data-en="<b>New bookmarks land at the bottom</b>, yet the ones you just saved are the ones you need most"><b>新存的书签永远在最底下</b>，偏偏刚存的才是最常用的</span></li>
+          <li><i>✕</i><span data-en="<b>To find one, you open folder after folder</b>"><b>想找书签，只能在文件夹里一层层展开</b></span></li>
+        </ul>
       </div>
-      <div class="vs-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <div class="tile new reveal">
-        <div class="vs-head"><span class="vs-tag ok"><i>✓</i><span data-en="Now · Bookmark Manager Pro">现在 · 书签管理器 Pro</span></span></div>
-        <p class="vs-big" data-en="Type two letters, press Enter">输入 2 个字母，回车就到</p>
-        <div class="show" style="justify-content:center">
+      <div class="vs-mid" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="vs-col">
+        <span class="badge"><i></i><span data-en="Now · Bookmark Manager Pro">现在 · 书签管理器 Pro</span></span>
+        <h3 class="vs-h" data-en="Type <em>two letters</em>, press Enter">输入 <em>2 个字母</em>，回车就到</h3>
+        <div class="vs-show">
           <div class="pop">
             <div class="pop-h"><span class="nt-logo"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span><span data-en="Bookmark Manager">书签管理器</span><span class="pro">PRO</span></div>
             <div class="pop-s focus"><span data-en="go">bd</span><span class="caret"></span></div>
@@ -538,13 +533,11 @@ footer{margin-top:100px;border-top:1px solid var(--line);padding:56px 0 36px}
             </div>
           </div>
         </div>
-        <div class="txt">
-          <ul class="vs-list">
-            <li><i>✓</i><span data-en="<b>Frequent, recent and auto-sorted categories</b> on one page"><b>常用、最近、自动分类</b>，一页看全</span></li>
-            <li><i>✓</i><span data-en="<b>Recently added comes first</b>, so new saves are right there"><b>最近添加排最前</b>，刚存的马上找到</span></li>
-            <li><i>✓</i><span data-en="<b>Type a few letters</b> and find any bookmark in three seconds"><b>输入中文、拼音或首字母</b>，三秒找到</span></li>
-          </ul>
-        </div>
+        <ul class="vs-list yes">
+          <li><i>✓</i><span data-en="<b>Frequent, recent and auto-sorted categories</b> on one page"><b>常用、最近、自动分类</b>，一页看全</span></li>
+          <li><i>✓</i><span data-en="<b>Recently added comes first</b>, so new saves are right there"><b>最近添加排最前</b>，刚存的马上找到</span></li>
+          <li><i>✓</i><span data-en="<b>Type a few letters</b> and find any bookmark in three seconds"><b>输入中文、拼音或首字母</b>，三秒找到</span></li>
+        </ul>
       </div>
     </div>
     <p class="origin reveal" data-en="This isn’t a big-company product. It was built by someone who digs through hundreds of bookmarks every day and finally had enough of Chrome. Every feature comes from a real moment of frustration, not a product meeting.">这不是大厂产品：它是一个每天要在几百个书签里找东西的外贸人，被 Chrome 逼出来的作品。所以每个功能都来自真实的抓狂瞬间，而不是产品会议。</p>
